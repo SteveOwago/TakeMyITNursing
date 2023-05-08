@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Auth::routes(['register' => true]);
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::post('/post', [App\Http\Controllers\PostController::class, 'store'])->name('post');
