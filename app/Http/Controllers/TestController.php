@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Test;
 use App\Http\Requests\StoreTestRequest;
 use App\Http\Requests\UpdateTestRequest;
+use App\Models\SubjectDomain;
 
 class TestController extends Controller
 {
@@ -25,7 +26,9 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+        $subjectDomains = SubjectDomain::all();
+
+        return view('admin.tests.create', compact('subjectDomains'));
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ApiDataController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,15 @@ Auth::routes(['register' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 Route::post('/post', [App\Http\Controllers\PostController::class, 'store'])->name('post');
 Route::delete('/posts/{id}', [App\Http\Controllers\PostController::class, 'destroy']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/fetch/subject/subcategories',[ApiDataController::class,'fetchSubjectCategories'])->name('fetch.subjects.categories');
+});
+
+
+//Defining Admin ROutes
+
+Route::group([['middleware'=>'auth'],'prefix'=>'admin','as'=>'admin.'], function(){
+    Route::get('test/create', [TestController::class, 'create'])->name('tests.create');
+    Route::post('test/store', [TestController::class, 'store'])->name('tests.store');
+});
