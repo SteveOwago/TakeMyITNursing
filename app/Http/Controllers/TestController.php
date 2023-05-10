@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Test;
 use App\Http\Requests\StoreTestRequest;
 use App\Http\Requests\UpdateTestRequest;
+use Illuminate\Http\Request;
 use App\Models\SubjectDomain;
+use Yajra\DataTables\Facades\DataTables;
+use DB;
 
 class TestController extends Controller
 {
@@ -14,9 +17,53 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $query = Test::with(['subjectCategory']);
+
+            $table = Datatables::of($query);
+
+
+            $table->editColumn('id', function ($row) {
+                return  $row->id ?? 'Not Set';
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ?? 'Not Set';
+            });
+            $table->editColumn('subjectCategory', function ($row) {
+                return $row->subjectCategory->name ?? 'No Name';
+            });
+            $table->editColumn('created_at', function ($row) {
+                return $row->created_at ?? '';
+            });
+            $table->addColumn('actions', '&nbsp;');
+            $table->editColumn('actions', function ($row) {
+                //Set the values to 1 to be viewable on display
+                $view = 1;
+                $edit = 1;
+                $delete = 0;
+                $routePart = 'admin.tests';
+
+                return view('layouts.partials.utilities.datatablesActions', compact(
+                    'view',
+                    'edit',
+                    'delete',
+                    'routePart',
+                    'row'
+                ));
+            });
+
+            $table->rawColumns(['id', 'name', 'subjectCategory', 'created_at','actions']);
+
+            return $table->make(true);
+        }
+        return view('admin.tests.index');
     }
 
     /**
@@ -39,7 +86,15 @@ class TestController extends Controller
      */
     public function store(StoreTestRequest $request)
     {
-        //
+        $test = Test::create([
+            'name' => $request->name,
+            'subject_category_id' => $request->subject_category_id,
+            'max_number_of_questions' => $request->max_number_of_questions,
+            'test_duration' => $request->test_duration,
+            'description' => $request->description,
+        ]);
+
+        return back()->with('success','Test ('.$test->name.') is Created Successfully!');
     }
 
     /**
@@ -50,7 +105,7 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-        //
+        return view('admin.tests.show',compact('test'));
     }
 
     /**
@@ -61,7 +116,8 @@ class TestController extends Controller
      */
     public function edit(Test $test)
     {
-        //
+        $subjectDomains = SubjectDomain::all();
+        return view('admin.tests.edit',compact('test','subjectDomains'));
     }
 
     /**
@@ -73,7 +129,14 @@ class TestController extends Controller
      */
     public function update(UpdateTestRequest $request, Test $test)
     {
-        //
+        $test->update([
+            'name' => $request->name,
+            'subject_category_id' => $request->subject_category_id,
+            'max_number_of_questions' => $request->max_number_of_questions,
+            'test_duration' => $request->test_duration,
+            'description' => $request->description,
+        ]);
+        return back()->with('success','Test ('.$test->name.') is Updated Successfully!');
     }
 
     /**

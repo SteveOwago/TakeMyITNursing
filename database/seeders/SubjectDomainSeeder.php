@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\SubjectDomain;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class SubjectDomainSeeder extends Seeder
@@ -13,6 +15,20 @@ class SubjectDomainSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $subjectDomains = [
+            [
+                'id' => '1',
+                'name' => 'Medical Courses',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id' => '2',
+                'name' => 'IT & Programming Courses',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ];
+        SubjectDomain::insert($subjectDomains);
     }
 }

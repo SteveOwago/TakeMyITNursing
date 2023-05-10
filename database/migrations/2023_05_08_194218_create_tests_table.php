@@ -19,6 +19,8 @@ class CreateTestsTable extends Migration
             $table->string('name')->nullable();
             $table->foreignIdFor(SubjectCategory::class,'subject_category_id')->nullable()->constrained();
             $table->string('max_number_of_questions')->nullable();
+            $table->integer('test_duration')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

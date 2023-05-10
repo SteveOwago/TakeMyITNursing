@@ -11,14 +11,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Create Test Exams</h3>
+                    <h3>Edit question</h3>
                     <p class="text-subtitle text-muted">Select Domain and Subject Category</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Create Test Exam</li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Question </li>
                         </ol>
                     </nav>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Create Test Examination</h4>
+                            <h4 class="card-title">Edit question Examination</h4>
                             {{-- <a href="{{ route('export.get-bulk-messages-excel') }}"
                                 class="btn btn-primary float-start float-lg-end">
                                 <i class="bi bi-download"></i> Get Excel Import File
@@ -39,9 +39,10 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form" action="{{route('admin.tests.store')}}" method="POST"
+                                <form class="form" action="{{route('admin.questions.update',[$question])}}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
+                                    @method('PUT')
                                     <div class="row">
                                         <div class="col-md-6 col-12">
                                             <label for="first-name-column">Select Subject Domain</label>
@@ -74,31 +75,31 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="first-name-column">Test Name</label>
+                                                <label for="first-name-column">question Name</label>
                                                 <input type="text" id="first-name-column" class="form-control"
-                                                    placeholder="Test Name" name="name">
+                                                    placeholder="question Name" name="name" value="{{$question->name}}">
                                             </div>
                                             @error('name')<p class="text-danger">{{ $message }}</p>@enderror
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="first-name-column">Maximum No of Questions Per Test</label>
+                                                <label for="first-name-column">Maximum No of Questions Per question</label>
                                                 <input type="number" id="first-name-column" class="form-control"
-                                                    placeholder="e.g 60" name="max_number_of_questions">
+                                                    placeholder="e.g 60" name="max_number_of_questions" value="{{$question->max_number_of_questions}}">
                                             </div>
                                             @error('max_number_of_questions')<p class="text-danger">{{ $message }}</p>@enderror
                                         </div>
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
-                                                <label for="first-name-column">Test Duration (Minutes)</label>
+                                                <label for="first-name-column">question Duration (Minutes)</label>
                                                 <input type="number" id="first-name-column" class="form-control"
-                                                    placeholder="e.g 60" name="test_duration">
+                                                    placeholder="e.g 60" name="question_duration" value="{{$question->question_duration}}">
                                             </div>
                                             @error('max_number_of_questions')<p class="text-danger">{{ $message }}</p>@enderror
                                         </div>
                                         <div class="col-md-12 form-group">
                                             <label>Description</label>
-                                            <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor" name="description"></textarea>
+                                            <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor" name="description">{{$question->description}}</textarea>
                                             <div id="informationchar"></div>
                                             {{-- <div id="informationword"></div> --}}
                                             <div id="informationparagraphs"></div>

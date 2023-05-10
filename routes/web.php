@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiDataController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 
@@ -33,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
 //Defining Admin ROutes
 
 Route::group([['middleware'=>'auth'],'prefix'=>'admin','as'=>'admin.'], function(){
-    Route::get('test/create', [TestController::class, 'create'])->name('tests.create');
-    Route::post('test/store', [TestController::class, 'store'])->name('tests.store');
+    //Tests
+    Route::resource('tests',TestController::class);
+    // Questions
+    Route::resource('questions',QuestionController::class);
 });

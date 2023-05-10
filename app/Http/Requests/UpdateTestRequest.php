@@ -13,7 +13,8 @@ class UpdateTestRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(!(auth()->user()->can('admin_management')|| auth()->user()->hasrole('Admin')),403);
+        return true;
     }
 
     /**
@@ -24,7 +25,10 @@ class UpdateTestRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'subject_category_id' => 'required|integer',
+            'max_number_of_questions' => 'required',
+            'test_duration' => 'required|integer',
         ];
     }
 }

@@ -51,187 +51,41 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-{{--                @if (auth()->user()->hasrole('Admin') ||--}}
-{{--                auth()->user()->can('users_management'))--}}
-                <li class="sidebar-title">User Management</li>
+               @if (auth()->user()->hasrole('Admin') ||
+               auth()->user()->can('admin_management'))
+                <li class="sidebar-title">Test Management</li>
 
-{{--                <li class="sidebar-item  has-sub">--}}
-{{--                    <a href="{{ route('clients.index') }}" class='sidebar-link'>--}}
-{{--                        <i class="bi bi-people"></i>--}}
-{{--                        <span>Users</span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="submenu ">--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('users.index') }}">All Users</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('users.create') }}">Add Users</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                @endif--}}
-{{--                @if (auth()->user()->hasrole('Admin') ||--}}
-{{--                auth()->user()->can('clients_management'))--}}
-                <li class="sidebar-title">Client Management</li>
+                <li class="sidebar-item  has-sub">
+                    <a href="{{ route('admin.tests.index') }}" class='sidebar-link'>
+                        <i class='bi bi-journal-plus'></i>
+                        <span>Tests</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('admin.tests.index') }}">All Test</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('admin.tests.create') }}">Add Test</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-title">Question Management</li>
 
-{{--                <li class="sidebar-item  has-sub">--}}
-{{--                    <a href="{{ route('clients.index') }}" class='sidebar-link'>--}}
-{{--                        <i class="bi bi-people"></i>--}}
-{{--                        <span>Clients</span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="submenu ">--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('clients.index') }}">All Clients</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('clients.create') }}">Add Client</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('brands.index') }}">Brands</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('clients.departments.index') }}">Departments</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('campaigns.index') }}">Campaigns</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                @endif--}}
-
-                <li class="sidebar-title">Contacts Management</li>
-
-{{--                <li class="sidebar-item  has-sub">--}}
-{{--                    <a href="{{ route('contacts.index') }}" class='sidebar-link'>--}}
-{{--                        <i class="bi bi-phone"></i>--}}
-{{--                        <span>Contacts</span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="submenu ">--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('phonebooks.index') }}">Phone Book</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('contacts.index') }}">All Contacts</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('contacts.blacklists.index') }}">Blacklist</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-                <li class="sidebar-title">Bulk SMS Management</li>
-
-{{--                <li class="sidebar-item  has-sub">--}}
-{{--                    <a href="{{ route('messages.index') }}" class='sidebar-link'>--}}
-{{--                        <i class="bi bi-envelope"></i>--}}
-{{--                        <span>SMS Service</span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="submenu ">--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('messages.index') }}">All SMS Messages</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('messages.create') }}">Send SMS (Import Excel)</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('messages.templates.index') }}">Message Templates</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('messages.message.quicksend') }}">Quick Send (SMS)</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('messages.message.phonebook.create') }}">Send SMS To PhoneBook</a>--}}
-{{--                        </li>--}}
-
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('messages.index') }}">All SMS</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('messages.message.delivery.index') }}">SMS Delivery Status</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-
-                <li class="sidebar-title">Scheduling Management</li>
-
-{{--                <li class="sidebar-item  has-sub">--}}
-{{--                    <a href="{{ route('messages.index') }}" class='sidebar-link'>--}}
-{{--                        <span class="bi bi-calendar"></span>--}}
-{{--                        <span>Scheduling Service</span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="submenu ">--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('schedules.index') }}">All Schedules</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('schedules.create') }}">Add Schedule</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-
-{{--                @if (auth()->user()->hasrole('Admin') ||--}}
-{{--                    auth()->user()->can('sender_name_management'))--}}
-                    <li class="sidebar-title">Sender Names Management</li>
-
-{{--                    <li class="sidebar-item  has-sub">--}}
-{{--                        <a href="{{ route('sendernames.index') }}" class='sidebar-link'>--}}
-{{--                            <i class="bi bi-chat"></i>--}}
-{{--                            <span>Sender Names</span>--}}
-{{--                        </a>--}}
-{{--                        <ul class="submenu ">--}}
-{{--                            <li class="submenu-item ">--}}
-{{--                                <a href="{{ route('sendernames.index') }}">All Sender Names</a>--}}
-{{--                            </li>--}}
-{{--                            <li class="submenu-item ">--}}
-{{--                                <a href="{{ route('sendernames.create') }}">Create Sender Names</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-{{--                @endif--}}
-
-
-                <li class="sidebar-title">Transaction Management</li>
-
-{{--                <li class="sidebar-item  has-sub">--}}
-{{--                    <a href="{{ route('transactions.index') }}" class='sidebar-link'>--}}
-{{--                        <i class="bi bi-wallet"></i>--}}
-{{--                        <span>All Transactions</span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="submenu ">--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('transactions.index') }}">All Transactions</a>--}}
-{{--                        </li>--}}
-{{--                        <li class="submenu-item ">--}}
-{{--                            <a href="{{ route('transactions.create') }}">Buy Bulk SMS</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                @if (auth()->user()->hasrole('Admin') ||--}}
-{{--                    auth()->user()->can('transaction_customers_management'))--}}
-                    <li class="sidebar-title">Customers Transactions</li>
-
-{{--                    <li class="sidebar-item  has-sub">--}}
-{{--                        <a href="{{ route('transactions.customers.index') }}" class='sidebar-link'>--}}
-{{--                            <i class="bi bi-cash-stack"></i>--}}
-{{--                            <span>Customer Transactions</span>--}}
-{{--                        </a>--}}
-{{--                        <ul class="submenu ">--}}
-{{--                            <li class="submenu-item ">--}}
-{{--                                <a href="{{ route('transactions.customers.index') }}">Customers Transactions</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
-{{--                @endif--}}
-{{--                @if (auth()->user()->hasrole('Admin') ||--}}
-{{--                    auth()->user()->can('system_settings_permissions'))--}}
-                    <li class="sidebar-title">System Settings Management</li>
-
-{{--                    <li class="sidebar-item">--}}
-{{--                        <a href="{{ route('system.settings.index') }}" class='sidebar-link'>--}}
-{{--                            <i class="bi bi-tools"></i>--}}
-{{--                            <span>System Settings</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @endif--}}
+                <li class="sidebar-item  has-sub">
+                    <a href="{{ route('admin.questions.index') }}" class='sidebar-link'>
+                        <i class="bi bi-question-circle-fill"></i>
+                        <span>Questions</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('admin.questions.index') }}">All Questions</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('admin.questions.create') }}">Add Questions</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
                 <li class="sidebar-item  ">
                     <div class="mx-3">
                         <form id="logoutform" action="{{ route('logout') }}" method="POST">

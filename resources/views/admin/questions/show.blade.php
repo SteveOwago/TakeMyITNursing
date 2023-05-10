@@ -11,14 +11,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Test Details</h3>
-                    <p class="text-subtitle text-muted">Click on Test Name to View Entire Details</p>
+                    <h3>question Details</h3>
+                    <p class="text-subtitle text-muted">Click on question Name to View Entire Details</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Test</li>
+                            <li class="breadcrumb-item active" aria-current="page">question</li>
                         </ol>
                     </nav>
                 </div>
@@ -27,23 +27,23 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <h3>Test: {{ $test->name}} Questions: {{$test->questions->count()}}</h3>
+                    <h3>question: {{ $question->name}} Questions: {{$question->questions->count()}}</h3>
                     <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
                         Questions</a>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-10 offset-1">
-                               <h4>Test Description</h4>
-                                {!!$test->description!!}
+                               <h4>question Description</h4>
+                                {!!$question->description!!}
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="col-6">Max Number of Questions Per Test : {{ $test->max_number_of_questions}}</div>
-                            <div class="col-6">Test Duration: {{$test->test_duration}}</div>
+                            <div class="col-6">Max Number of Questions Per question : {{ $question->max_number_of_questions}}</div>
+                            <div class="col-6">question Duration: {{$question->question_duration}}</div>
                         </div>
                     </div>
                 </div>
@@ -54,8 +54,8 @@
             <div class="card">
                 <div class="card-header">
                     Messages
-                    <a href="{{ route('admin.tests.create') }}" class="btn btn-primary float-start float-lg-end">Add
-                        Tests</a>
+                    <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
+                        questions</a>
                 </div>
                 <div class="card-body">
                     <table border="0" cellspacing="5" cellpadding="5">
@@ -98,7 +98,7 @@
                     processing: true,
                     method: 'GET',
                     serverSide: true,
-                    ajax: "{{ route('admin.tests.index') }}",
+                    ajax: "{{ route('admin.questions.index') }}",
                     columns: [{
                             data: 'id',
                             name: 'id'

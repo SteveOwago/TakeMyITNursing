@@ -1,10 +1,10 @@
 CKEDITOR.replace('editor', {
     extraPlugins: 'wordcount',
     wordcount: {
-        showWordCount: false,
-        showCharCount: true,
-       // maxWordCount: 4,
-        maxCharCount: 160,
+        showWordCount: true,
+        showCharCount: false,
+        maxWordCount: 200,
+        //maxCharCount: 160,
         paragraphsCountGreaterThanMaxLengthEvent: function(currentLength, maxLength) {
             $("#informationparagraphs").css("background-color", "crimson").css("color", "white").text(
                 currentLength + "/" + maxLength + " - paragraphs").show();
