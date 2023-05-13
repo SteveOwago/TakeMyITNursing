@@ -20,16 +20,19 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create(['name' => 'admin_management']);
         Permission::create(['name' => 'transactions_management']);
+        Permission::create(['name' => 'test_management']);
         Permission::create(['name' => 'has_student_permissions']);
         Permission::create(['name' => 'users_management']);
 
         $roleAdmin = Role::create(['name' => 'Admin']);
         $roleStudent = Role::create(['name' => 'Student']);
         $roleAccountant = Role::create(['name' => 'Accountant']);
+        $roleExaminer = Role::create(['name' => 'Examiner']);
 
         $roleAdmin->givePermissionTo(Permission::all());
         $roleAccountant->givePermissionTo(['transactions_management']);
         $roleStudent->givePermissionTo(['has_student_permissions']);
+        $roleExaminer->givePermissionTo(['test_management']);
     }
 }
 

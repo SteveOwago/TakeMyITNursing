@@ -13,7 +13,8 @@ class StoreQuestionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        abort_if(!(auth()->user()->can('test_management') || auth()->user()->hasrole('Admin')), 403);
+        return true;
     }
 
     /**
@@ -24,7 +25,11 @@ class StoreQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'question' => 'required',
+            'answer' => 'required',
+            'short_answer' => 'required',
+            'full_answer' => 'required',
+            'answer_resource' => 'required',
         ];
     }
 }

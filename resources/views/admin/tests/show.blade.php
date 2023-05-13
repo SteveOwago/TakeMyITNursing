@@ -53,9 +53,9 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    Messages
-                    <a href="{{ route('admin.tests.create') }}" class="btn btn-primary float-start float-lg-end">Add
-                        Tests</a>
+                    Questions
+                    <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
+                        Question</a>
                 </div>
                 <div class="card-body">
                     <table border="0" cellspacing="5" cellpadding="5">
@@ -74,9 +74,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Subject Category</th>
-                                <th>Date Created</th>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Short Answer Explanation</th>
+                                <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -98,18 +99,22 @@
                     processing: true,
                     method: 'GET',
                     serverSide: true,
-                    ajax: "{{ route('admin.tests.index') }}",
+                    ajax: "{{ route('admin.tests.show',$test->id) }}",
                     columns: [{
                             data: 'id',
                             name: 'id'
                         },
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: 'question',
+                            name: 'question'
                         },
                         {
-                            data: 'subjectCategory',
-                            name: 'subjectCategory'
+                            data: 'answer',
+                            name: 'answer'
+                        },
+                        {
+                            data: 'short_answer',
+                            name: 'short_answer'
                         },
                         {
                             data: 'created_at',

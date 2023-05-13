@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateTestRequest;
 use Illuminate\Http\Request;
 use App\Models\SubjectDomain;
 use Yajra\DataTables\Facades\DataTables;
-use DB;
+use App\Models\Question;
 
 class TestController extends Controller
 {
@@ -103,8 +103,50 @@ class TestController extends Controller
      * @param  \App\Models\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function show(Test $test)
+    public function show(Request $request,Test $test)
     {
+        if ($request->ajax()) {
+            $query = Question::where('test_id',$test->id);
+
+            $table = Datatables::of($query);
+
+
+            $table->editColumn('id', function ($row) {
+                return  $row->id ?? 'Not Set';
+            });
+            $table->editColumn('question', function ($row) {
+                return $row->name ?? 'Not Set';
+            });
+            $table->editColumn('answer', function ($row) {
+                return $row->answer ?? 'No Name';
+            });
+            $table->editColumn('short_answer', function ($row) {
+                return $row->short_answer ?? '';
+            });
+            $table->editColumn('created_at', function ($row) {
+                return $row->created_at ?? '';
+            });
+            $table->addColumn('actions', '&nbsp;');
+            $table->editColumn('actions', function ($row) {
+                //Set the values to 1 to be viewable on display
+                $view = 1;
+                $edit = 1;
+                $delete = 1;
+                $routePart = 'admin.questions';
+
+                return view('layouts.partials.utilities.datatablesActions', compact(
+                    'view',
+                    'edit',
+                    'delete',
+                    'routePart',
+                    'row'
+                ));
+            });
+
+            $table->rawColumns(['id', 'question', 'answer', 'short_answer','created_at', 'actions']);
+
+            return $table->make(true);
+        }
         return view('admin.tests.show',compact('test'));
     }
 

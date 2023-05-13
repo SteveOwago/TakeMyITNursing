@@ -29,7 +29,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    Messages
+                    TESTS
                     <a href="{{ route('admin.tests.create') }}" class="btn btn-primary float-start float-lg-end">Add
                         Tests</a>
                 </div>

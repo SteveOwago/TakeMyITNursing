@@ -1,4 +1,9 @@
 @if ($view == 1)
+    {{-- @if ($routePart == 'admin.tests')
+        <a class="btn btn-xs btn-primary" href="{{ route($routePart . '.show', $row->id) }}">
+            <i class="bi-eye"></i>
+        </a>
+    @endif --}}
     <a class="btn btn-xs btn-primary" href="{{ route($routePart . '.show', $row->id) }}">
         <i class="bi-eye"></i>
     </a>
@@ -8,8 +13,8 @@
         <i class="bi-pencil"></i>
     </a>
 @endif
-@if($delete == 1)
-    <form action="{{ route($routePart .'.destroy', $row->id) }}" method="POST"
+@if ($delete == 1)
+    <form action="{{ route($routePart . '.destroy', $row->id) }}" method="POST"
         onsubmit="return confirm('Are You Sure You Want To Delete?');" style="display: inline-block;">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
