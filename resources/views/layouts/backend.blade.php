@@ -13,45 +13,47 @@
 
     <link rel="stylesheet" href="{{ asset('backendIT/assets/css/shared/iconly.css') }}">
     @yield('styles')
+    @livewireStyles
 </head>
 
 <body>
-<div id="app">
-    @include('layouts.partials.sidebar')
-    <div id="main">
-        <header class="mb-3">
-            <a href="#" class="burger-btn d-block d-xl-none">
-                <i class="bi bi-justify fs-3"></i>
-            </a>
-        </header>
-        @if ($errors->count() > 0)
-            @foreach ($errors as $error)
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ $error->message }}
+    <div id="app">
+        @include('layouts.partials.sidebar')
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+            @if ($errors->count() > 0)
+                @foreach ($errors as $error)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ $error->message }}
+                    </div>
+                @endforeach
+            @endif
+            @if (\Session::has('success'))
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <ul>
+                        <li>{!! \Session::get('success') !!}</li>
+                    </ul>
                 </div>
-            @endforeach
-        @endif
-        @if (\Session::has('success'))
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                <ul>
-                    <li>{!! \Session::get('success') !!}</li>
-                </ul>
-            </div>
-        @endif
-        @if (\Session::has('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <ul>
-                    <li>{!! \Session::get('error') !!}</li>
-                </ul>
-            </div>
-        @endif
-        @yield('content')
+            @endif
+            @if (\Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul>
+                        <li>{!! \Session::get('error') !!}</li>
+                    </ul>
+                </div>
+            @endif
+            @yield('content')
 
-        @include('layouts.partials.footer')
+            @include('layouts.partials.footer')
+        </div>
     </div>
-</div>
-@include('layouts.partials.scripts')
-@yield('scripts')
+    @include('layouts.partials.scripts')
+    @yield('scripts')
+    @livewireScripts
 </body>
 
 </html>

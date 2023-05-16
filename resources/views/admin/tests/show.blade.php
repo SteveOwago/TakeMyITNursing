@@ -28,8 +28,8 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Test: {{ $test->name}} Questions: {{$test->questions->count()}}</h3>
-                    <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
-                        Questions</a>
+                    <a href="{{ route('admin.take.exam',[$test->id]) }}" class="btn btn-success float-start float-lg-end">Take
+                        Exams</a>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -54,7 +54,7 @@
             <div class="card">
                 <div class="card-header">
                     Questions
-                    <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
+                    <a href="{{ route('admin.tests.question.create',[$test->id]) }}" class="btn btn-primary float-start float-lg-end">Add
                         Question</a>
                 </div>
                 <div class="card-body">

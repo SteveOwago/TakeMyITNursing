@@ -191,4 +191,8 @@ class TestController extends Controller
     {
         //
     }
+
+    public function takeExam(Test $test){
+        return view('admin.tests.take-test',compact('test'));
+    }
 }

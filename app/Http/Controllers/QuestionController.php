@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\AnswerChoice;
 use App\Models\Test;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class QuestionController extends Controller
 {
@@ -19,7 +20,7 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Question::with(['subjectCategory']);
+            $query = Question::all();
 
             $table = Datatables::of($query);
 
@@ -27,11 +28,14 @@ class QuestionController extends Controller
             $table->editColumn('id', function ($row) {
                 return  $row->id ?? 'Not Set';
             });
-            $table->editColumn('name', function ($row) {
+            $table->editColumn('question', function ($row) {
                 return $row->name ?? 'Not Set';
             });
-            $table->editColumn('subjectCategory', function ($row) {
-                return $row->subjectCategory->name ?? 'No Name';
+            $table->editColumn('answer', function ($row) {
+                return $row->answer ?? 'No Name';
+            });
+            $table->editColumn('short_answer', function ($row) {
+                return $row->short_answer ?? '';
             });
             $table->editColumn('created_at', function ($row) {
                 return $row->created_at ?? '';
@@ -53,7 +57,7 @@ class QuestionController extends Controller
                 ));
             });
 
-            $table->rawColumns(['id', 'name', 'subjectCategory', 'created_at', 'actions']);
+            $table->rawColumns(['id', 'question', 'answer', 'short_answer','created_at', 'actions']);
 
             return $table->make(true);
         }
@@ -153,10 +157,10 @@ class QuestionController extends Controller
 
     public function createTestQuestion($testID)
     {
-        $tests = Test::all();
+        $test = Test::findOrFail($testID);
         $answers = AnswerChoice::all();
 
-        return view('admin.questions.create', compact('tests','answers'));
+        return view('admin.questions.test-questions', compact('test','answers'));
     }
 
     /**

@@ -11,53 +11,31 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Question Details</h3>
-                    <p class="text-subtitle text-muted">Click on Question Name to View Entire Details</p>
+                    <h3>Test Details</h3>
+                    <p class="text-subtitle text-muted">Click on Test Name to View Entire Details</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Question</li>
+                            <li class="breadcrumb-item active" aria-current="page">Take Test</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
+
+        <!-- Basic Tables start -->
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <h4>Question: {!! $question->question!!} </h4>
-                    <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
-                        Questions</a>
+                    <h4>Test: {{ $test->name}} <span class="float-start float-lg-end">Number of Questions: {{$test->questions->count()}}</span> </h4>
                 </div>
-                {{-- Choice Section --}}
-
-
-
-
-                {{-- Select Answer Section. --}}
-
-
-
-
-
-                {{-- <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-10 offset-1">
-                               <h4>Question Description</h4>
-                                {!!$question->description!!}
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <livewire:test-exam />
                 </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="col-6">Max Number of Questions Per question : {{ $question->max_number_of_questions}}</div>
-                            <div class="col-6">question Duration: {{$question->question_duration}}</div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
+
         </section>
+        <!-- Basic Tables end -->
     @endsection

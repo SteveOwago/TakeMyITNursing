@@ -31,7 +31,7 @@
                 <div class="card-header">
                     Questions
                     <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
-                        questions</a>
+                        Question</a>
                 </div>
                 <div class="card-body">
                     <table border="0" cellspacing="5" cellpadding="5">
@@ -50,9 +50,10 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Subject Category</th>
-                                <th>Date Created</th>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Short Answer Explanation</th>
+                                <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -80,12 +81,16 @@
                             name: 'id'
                         },
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: 'question',
+                            name: 'question'
                         },
                         {
-                            data: 'subjectCategory',
-                            name: 'subjectCategory'
+                            data: 'answer',
+                            name: 'answer'
+                        },
+                        {
+                            data: 'short_answer',
+                            name: 'short_answer'
                         },
                         {
                             data: 'created_at',

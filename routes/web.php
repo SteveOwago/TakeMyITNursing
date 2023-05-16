@@ -35,7 +35,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::group([['middleware'=>'auth'],'prefix'=>'admin','as'=>'admin.'], function(){
     //Tests
+Route::get('take/exams/{test}',[TestController::class,'takeExam'])->name('take.exam');
     Route::resource('tests',TestController::class);
     // Questions
+    Route::get('questions/test_questions/{testID}',[QuestionController::class,'createTestQuestion'])->name('tests.question.create');
+
     Route::resource('questions',QuestionController::class);
 });
