@@ -4,6 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Question;
+use App\Models\QuestionTestResult;
+use App\Models\StudentResult;
+use App\Models\Test;
 
 class TestExam extends Component
 {
@@ -11,11 +14,23 @@ class TestExam extends Component
     public $currentStep = 1;
     public $questions = [];
     public $answers = [];
+    public $studentTestID;
+    public $testID;
 
-    public function mount()
+    public function mount($id)
     {
         // Retrieve questions from the database
-        $this->questions = Question::all();
+        $test = Test::findOrFail($id);
+        $studentTestID = StudentResult::create([
+            'test_id' => $test->id ?? null,
+            'user_id' => auth()->user()->id ?? null,
+        ]);
+        $this->studentTestID = $studentTestID->id;
+        $this->questions = Question::where('test_id', $test->id)
+            ->inRandomOrder()
+            ->take($test->max_number_of_questions)
+            ->get();
+        $this->testID = $id;
     }
 
     public function render()
@@ -23,10 +38,49 @@ class TestExam extends Component
         return view('livewire.test-exam');
     }
 
-    public function submit()
+    public function submit($questions, $studentTestID)
     {
-        // Save the answers to the database or perform any other necessary action
+
+        $testsQuestionsResults = [];
+        foreach ($questions as $question) {
+            $choice = 'wrong';
+            foreach ($this->answers as $key => $answer) {
+                if ($key == $question['id']) {
+                    $choice = str_replace('choice_', '', $answer);
+                }
+                // $choice = 'wrong';
+            }
+            $testStudent =  QuestionTestResult::create([
+                'question_id' => $question['id'] ?? null,
+                'test_id' => $question['test_id'] ?? null,
+                'user_id' => auth()->user()->id ?? null,
+                'student_result_id' => $studentTestID,
+                'answer' => $choice == $question['answer'] ? 'correct' : 'wrong',
+            ]);
+            $testsQuestionsResults[] = $testStudent;
+        }
+        $numberQuestions = count($questions);
+        $score = 0;
+
+
+        foreach ($testsQuestionsResults as $result) {
+            info($result['answer']);
+            if ($result['answer'] == 'correct') {
+                $score += 1;
+            }
+            continue;
+        }
+
+
+
+        //Save test scores
+        $studentTestResult = StudentResult::findOrFail($studentTestID);
+        $studentTestResult->update([
+            'score' => $score . ' out of ' . $numberQuestions . ' => ' . number_format((($score / $numberQuestions) * 100), 2) . '%',
+        ]);
         // You can access the submitted answers using $this->answers array
+        $this->answers = [];
+        $this->currentStep = $numberQuestions + 1;
     }
 
     public function updated($propertyName)
