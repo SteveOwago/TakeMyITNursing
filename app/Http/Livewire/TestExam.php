@@ -19,17 +19,32 @@ class TestExam extends Component
 
     public function mount($id)
     {
-        // Retrieve questions from the database
-        $test = Test::findOrFail($id);
-        $studentTestID = StudentResult::create([
-            'test_id' => $test->id ?? null,
-            'user_id' => auth()->user()->id ?? null,
-        ]);
-        $this->studentTestID = $studentTestID->id;
+        // // Retrieve questions from the database
+         $test = Test::findOrFail($id);
+
+       // Session Test to on page Refresh
+        if (session()->has('student_test_id')) {
+            $studentTestID = session('student_test_id');
+        } else {
+            // Create a new StudentResult
+            $studentTestID = StudentResult::create([
+                'test_id' => $test->id ?? null,
+                'user_id' => auth()->user()->id ?? null,
+            ])->id;
+
+            // Store the StudentResult ID in the session
+            session(['student_test_id' => $studentTestID]);
+        }
+
+        // Assign the StudentResult ID to the component property
+        $this->studentTestID = $studentTestID;
+
+        // Retrieve the questions for the test
         $this->questions = Question::where('test_id', $test->id)
             ->inRandomOrder()
             ->take($test->max_number_of_questions)
             ->get();
+
         $this->testID = $id;
     }
 
@@ -48,7 +63,6 @@ class TestExam extends Component
                 if ($key == $question['id']) {
                     $choice = str_replace('choice_', '', $answer);
                 }
-                // $choice = 'wrong';
             }
             $testStudent =  QuestionTestResult::create([
                 'question_id' => $question['id'] ?? null,
@@ -64,7 +78,6 @@ class TestExam extends Component
 
 
         foreach ($testsQuestionsResults as $result) {
-            info($result['answer']);
             if ($result['answer'] == 'correct') {
                 $score += 1;
             }
@@ -78,9 +91,12 @@ class TestExam extends Component
         $studentTestResult->update([
             'score' => $score . ' out of ' . $numberQuestions . ' => ' . number_format((($score / $numberQuestions) * 100), 2) . '%',
         ]);
+
         // You can access the submitted answers using $this->answers array
         $this->answers = [];
         $this->currentStep = $numberQuestions + 1;
+        //Destroy Session After Submitting
+        session()->forget('student_test_id');
     }
 
     public function updated($propertyName)

@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
 //Defining Admin ROutes
 
-Route::group([['middleware'=>'auth'],'prefix'=>'admin','as'=>'admin.'], function(){
+Route::group(['middleware'=>'auth','prefix'=>'admin','as'=>'admin.'], function(){
     //Tests
 Route::get('take/exams/{test}',[TestController::class,'takeExam'])->name('take.exam');
     Route::resource('tests',TestController::class);

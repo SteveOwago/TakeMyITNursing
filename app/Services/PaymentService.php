@@ -7,5 +7,5 @@ namespace App\Services;
  */
 class PaymentService
 {
-
+    //Get User Account Subscription type.
 }

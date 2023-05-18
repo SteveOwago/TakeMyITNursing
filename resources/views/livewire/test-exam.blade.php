@@ -20,7 +20,7 @@
                                 <li>
                                     <div class="form-group">
                                         <label>
-                                            <input type="radio" name="choices" value="{{ $key }}" wire:model="answers.{{ $questions[$currentStep - 1]->id }}">
+                                           {{str_replace('choice_', '', $key)}}&nbsp;:&nbsp; <input type="radio" name="choices" value="{{ $key }}" wire:model="answers.{{ $questions[$currentStep - 1]->id }}">
                                             {{ $value }}
                                         </label>
                                     </div>
@@ -69,12 +69,12 @@
                         @if ($currentStep > 1)
                             <button class="btn btn-secondary"
                                 wire:click="$set('currentStep', {{ $currentStep }} - 1)"><i
-                                    class="bi bi-chevron-double-left"></i> Previous</button>
+                                    class="bi bi-chevron-double-left"></i> Previous</button>&nbsp;
                         @endif
                         @if ($currentStep < count($questions))
                             <button class="btn btn-primary"
                                 wire:click="$set('currentStep', {{ $currentStep }} + 1)">Next <i
-                                    class="bi bi-chevron-double-right"></i></button>
+                                    class="bi bi-chevron-double-right"></i></button>&nbsp;
                         @endif
                         @if ($currentStep == count($questions))
                             <button class="btn btn-success" wire:click="submit({{ $questions }},{{$studentTestID}})">Submit</button>
