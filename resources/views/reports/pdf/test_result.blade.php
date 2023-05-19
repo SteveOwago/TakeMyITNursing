@@ -1,721 +1,358 @@
-<style>
-    /*
-    Import the desired font from Google fonts.
-    */
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+<!DOCTYPE html>
+<html lang="en">
 
-    /*
-    Define all colors used in this template
-    */
-    :root {
-        --highlight-color-one: #1FC2DE;
-        --highlight-color-one-transparent: #1FC2DEB3;
-        --text-color: #303E48;
-        --table-row-separator-color: #CEC3BA;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
-    @page {
-        /*
-      This CSS highlights how page sizes and margin boxes are set.
-      https://docraptor.com/documentation/article/1067959-size-dimensions-orientation
-      Within the page margin boxes content from running elements is used instead of a
-      standard content string. The name which is passed in the element() function can
-      be found in the CSS code below in a position property and is defined there by
-      the running() function.
-
-      On the bottom right page margin box we also add the current page number and
-      in the @footnote rule we define the style of the footnote area.
-      */
-        size: A4;
-        margin: 2cm 2cm 2.5cm 2cm;
-        counter-reset: footnote;
-
-        @top-left {
-            content: element(header);
+        :root {
+            --highlight-color-one: #1FC2DE;
+            --highlight-color-one-transparent: #1FC2DEB3;
+            --text-color: #303E48;
+            --table-row-separator-color: #CEC3BA;
         }
 
-        @bottom-left {
-            width: 100%;
-            content: element(footer);
+        @page {
+            /*
+            This CSS highlights how page sizes and margin boxes are set.
+            https://docraptor.com/documentation/article/1067959-size-dimensions-orientation
+            Within the page margin boxes content from running elements is used instead of a
+            standard content string. The name which is passed in the element() function can
+            be found in the CSS code below in a position property and is defined there by
+            the running() function.
+
+            On the bottom right page margin box we also add the current page number and
+            in the @footnote rule we define the style of the footnote area.
+            */
+            size: A4;
+            margin: 2cm 2cm 2.5cm 2cm;
+            counter-reset: footnote;
+
+            @top-left {
+                content: element(header);
+            }
+
+            @bottom-left {
+                width: 100%;
+                content: element(footer);
+            }
+
+            @bottom-right {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 8pt;
+                font-weight: bold;
+                color: var(--highlight-color-one);
+                content: counter(page, decimal-leading-zero);
+            }
+
+            @footnote {
+                border-top: .125mm solid var(--table-row-separator-color);
+                padding-top: 2mm;
+            }
+
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+            border: 0.5cm solid rgba(0, 0, 0, 0.5);
         }
 
-        @bottom-right {
+
+        @page bibliography {
+            @bottom-left {
+                width: 100%;
+                content: element(footerBibliography);
+            }
+        }
+
+        @page: first {
+            /*
+            This CSS highlights how the margin, background and page margin boxes are set
+            only for the first page of the PDF.
+
+            As the first or cover page should not get the header and footer like all other
+            pages, we set the content of these page margin boxes to empty.
+            */
+            margin: 0;
+            background-size: cover;
+            background-image: url(https://images.unsplash.com/photo-1497250681960-ef046c08a56e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1834&q=80);
+
+            @top-left {
+                content: "";
+            }
+
+            @bottom-left {
+                content: "";
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10pt;
+            counter-reset: chapters;
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        hr {
+            height: 0;
+            border: 0;
+            border-top: .75mm solid var(--highlight-color-one);
+            margin: 1cm 0 1cm 0;
+        }
+
+        header {
+            position: running(header);
+            height: 2cm;
+            border-bottom: .5mm solid var(--table-row-separator-color);
+        }
+
+
+        .pageBreak {
+            page-break-before: always;
+            height: 1cm;
+        }
+
+        .coverPage {
+            color: white;
+            margin: 2cm;
+        }
+
+        .coverPage h1 {
+            margin-top: 6cm;
+            font-size: 64pt;
+        }
+
+
+        .coverPage .coverFooter {
+            text-transform: uppercase;
+            font-size: 8pt;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            bottom: 1cm;
+            width: calc(100% - 4cm);
+        }
+
+        .coverPage .coverFooter a:first-of-type {
+            font-weight: bold;
+        }
+
+
+        .coverPage .coverFooter hr {
+            height: .5mm;
+            background-color: white;
+            border-top: 0;
+            width: 40%;
+        }
+
+        .bibliographyPage {
+            page: bibliography;
+        }
+
+        .chapterPage h1,
+        .tocPage h1,
+        .bibliographyPage h1 {
+            margin-top: 1cm;
+            text-transform: uppercase;
+        }
+
+        .chapterPage h1::before,
+        .bibliographyPage h1::before {
+            counter-increment: chapters;
+            content: counter(chapters, decimal-leading-zero) " ";
+        }
+
+        .imageContainer {
+            max-height: 9cm;
+            overflow: hidden;
+        }
+
+        .imageContainer img {
+            max-width: 100%;
+        }
+
+        .imageContainerColumns {
+            overflow: hidden;
+            max-height: 180mm;
+        }
+
+        .imageContainerColumns img {
+            max-height: 100%;
+        }
+
+        .twoColumns,
+        .threeColumns {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            margin: 1cm 0 1cm 0;
+        }
+
+        .twoColumns>* {
+            width: 48%;
+        }
+
+        .threeColumns>* {
+            width: 30%;
+        }
+
+        .twoTextColumns {
+            margin: 1cm 0 1cm 0;
+            column-count: 2;
+            column-gap: 1cm;
+        }
+
+        dl,
+        .highlight,
+        .highlightLight {
+            color: var(--highlight-color-one);
+        }
+
+        .highlight {
+            font-weight: bold;
+            font-size: 14pt;
+        }
+
+        .imageContainer+.highlight {
+            margin-top: 1cm;
+        }
+
+        h4 {
+            font-size: 10pt;
+            margin: 0;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        dt {
+            font-size: 16pt;
+        }
+
+        dd {
+            margin: 0 0 .5cm 0;
+        }
+
+        .footnote {
+            float: footnote;
+            margin-bottom: 2mm;
+            color: var(--text-color);
             font-family: 'Montserrat', sans-serif;
             font-size: 8pt;
-            font-weight: bold;
+            font-weight: normal;
+            footnote-style-position: inside;
+        }
+
+        .footerStandard,
+        .footerBibliography {
+            position: running(footer);
             color: var(--highlight-color-one);
-            content: counter(page, decimal-leading-zero);
+            display: flex;
+            align-items: center;
+            font-size: 8pt;
+            text-transform: uppercase;
         }
 
-        @footnote {
-            border-top: .125mm solid var(--table-row-separator-color);
-            padding-top: 2mm;
-        }
-    }
-
-
-    /*
-    The bibliography page has a different HTML element as footer content so instead of
-    the running element "footer" we add the running element "footerBibliography" here.
-    */
-    @page bibliography {
-        @bottom-left {
-            width: 100%;
-            content: element(footerBibliography);
-        }
-    }
-
-    @page: first {
-        /*
-      This CSS highlights how the margin, background and page margin boxes are set
-      only for the first page of the PDF.
-
-      As the first or cover page should not get the header and footer like all other
-      pages, we set the content of these page margin boxes to empty.
-      */
-        margin: 0;
-        background-size: cover;
-        background-image: url(https://images.unsplash.com/photo-1497250681960-ef046c08a56e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1834&q=80);
-
-        @top-left {
-            content: "";
+        footer a:first-of-type {
+            font-weight: bold;
         }
 
-        @bottom-left {
-            content: "";
+        footer hr {
+            margin: 0 3% 0 3%;
+            height: .5mm;
+            background-color: var(--highlight-color-one);
+            border-top: 0;
+            width: 70%;
+            display: inline-block;
         }
-    }
 
-    /*
-    The body itself has no margin or padding.
-    Additionally the default font family, size and color for the document is defined
-    here.
+        .footerBibliography {
+            position: running(footerBibliography);
+        }
+    </style>
+</head>
 
-    Also we define the counter for the chapter numbers here with the property counter-reset.
-    */
-    body {
-        margin: 0;
-        padding: 0;
-        color: var(--text-color);
-        font-family: 'Montserrat', sans-serif;
-        font-size: 10pt;
-        counter-reset: chapters;
-    }
-
-    /*
-    The links in the document should not be highlighted by an different color and underline
-    instead we use the color value inherit to get the current texts color.
-    */
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    /*
-    Any HR HTML element should get the highlight color.
-    */
-    hr {
-        height: 0;
-        border: 0;
-        border-top: .75mm solid var(--highlight-color-one);
-        margin: 1cm 0 1cm 0;
-    }
-
-    /*
-    The page header in our document uses the HTML HEADER element, we define a height
-    of 2cm and a border on the bottom of half a millimeter.
-    As mentioned above in the comment for the @page the position property with the
-    value running(header) makes this HTML element float into the top left page margin
-    box. This page margin box repeats on every page in case we would have a multi-page
-    book.
-    */
-    header {
-        position: running(header);
-        height: 2cm;
-        border-bottom: .5mm solid var(--table-row-separator-color);
-    }
-
-    /*
-    Anything after the cover, toc and chapter elements should start on a new page so we do
-    set a page break of always after these elements.
-    */
-    .coverPage,
-    .tocPage,
-    .chapterPage {
-        page-break-after: always;
-    }
-
-    /*
-    For the pageBreak elements we also set a height of 1cm to get some spacing between the header
-    line and the content.
-    */
-    .pageBreak {
-        page-break-before: always;
-        height: 1cm;
-    }
-
-    /*
-    On the cover page the text color needs to be white as we have a background image on the whole
-    page. Also we set a margin of 2cm.
-    */
-    .coverPage {
-        color: white;
-        margin: 2cm;
-    }
-
-    /*
-    The book title should have a margin to the top of 6cm and also a font size of 64pt.
-    */
-    .coverPage h1 {
-        margin-top: 6cm;
-        font-size: 64pt;
-    }
-
-    /*
-    The footer on the cover page containing the website, email, phone number and line need
-    to be on the bottom of the page so we set the position to absolute, bottom 1cm. Also
-    the items should be aligned in the center so the line is in the vertical center of the text.
-    */
-    .coverPage .coverFooter {
-        text-transform: uppercase;
-        font-size: 8pt;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: absolute;
-        bottom: 1cm;
-        width: calc(100% - 4cm);
-    }
-
-    /*
-    The first link in the cover page footer (the like to the website) should be bold.
-    */
-    .coverPage .coverFooter a:first-of-type {
-        font-weight: bold;
-    }
-
-    /*
-    The line in the footer has a height of 0.5mm and white as a background color.
-    */
-    .coverPage .coverFooter hr {
-        height: .5mm;
-        background-color: white;
-        border-top: 0;
-        width: 40%;
-    }
-
-    /*
-    To get another page footer on the bibliography we need to use the page property
-    and set a unique page name for which we defined a @page rule above.
-    */
-    .bibliographyPage {
-        page: bibliography;
-    }
-
-    /*
-    Most <h1> header elements (except cover page) get a margin top of 1cm and the
-    text is transformed to uppercase.
-    */
-    .chapterPage h1,
-    .tocPage h1,
-    .bibliographyPage h1 {
-        margin-top: 1cm;
-        text-transform: uppercase;
-    }
-
-    /*
-    The content chapter pages and the bibliography page get a "chapter" number
-    before their title. For this we use the chapters counter. The second parameter
-    in the counter() funtion allows us to add a leading 0 to chapter numbers below
-    10.
-    */
-    .chapterPage h1::before,
-    .bibliographyPage h1::before {
-        counter-increment: chapters;
-        content: counter(chapters, decimal-leading-zero) " ";
-    }
-
-    /*
-    To ensure images do not take too much space you could either take care that the
-    editors select images in the proper sizing or define a container where you set
-    a fixed height and hide anything which overflows.
-    */
-    .imageContainer {
-        max-height: 9cm;
-        overflow: hidden;
-    }
-
-    /*
-    In the image container all images should have a max width of 100% of the wrapping
-    element.
-    */
-    .imageContainer img {
-        max-width: 100%;
-    }
-
-    /*
-    In two colums layouts where one colum is a image we also use a container to ensure
-    a max size, in this case it is dependend on the max height instead of the width.
-    */
-    .imageContainerColumns {
-        overflow: hidden;
-        max-height: 180mm;
-    }
-
-    /*
-    In the tow column image container the image should not exceed 100% of the containers
-    height.
-    */
-    .imageContainerColumns img {
-        max-height: 100%;
-    }
-
-    /*
-    All two and three column content is done via flexbox.
-    */
-    .twoColumns,
-    .threeColumns {
-        display: flex;
-        align-items: stretch;
-        justify-content: space-between;
-        margin: 1cm 0 1cm 0;
-    }
-
-    /*
-    In two column content each column gets a width of 48% so
-    we get 4% of space between them.
-    */
-    .twoColumns>* {
-        width: 48%;
-    }
-
-    /*
-    In three column content each column gets a width of 30% so
-    between the columns we have 3.33% space.
-    */
-    .threeColumns>* {
-        width: 30%;
-    }
-
-    /*
-    If both columns are text only we use this class and simply set
-    a column gap of 1cm.
-    */
-    .twoTextColumns {
-        margin: 1cm 0 1cm 0;
-        column-count: 2;
-        column-gap: 1cm;
-    }
-
-    /*
-    The table of contents elements (<dl>) and all highlighted text should
-    get the color defined in the var --highlight-color-one.
-    */
-    dl,
-    .highlight,
-    .highlightLight {
-        color: var(--highlight-color-one);
-    }
-
-    /*
-    Additionally the main highlight text should be bold and larger than the others.
-    */
-    .highlight {
-        font-weight: bold;
-        font-size: 14pt;
-    }
-
-    /*
-    If a image container is followed by a highlight text there should be a gap of 1cm
-    between them.
-    */
-    .imageContainer+.highlight {
-        margin-top: 1cm;
-    }
-
-    /*
-    Within the texts we use a lot of <h4> headings and we want them to look the same
-    as the normal text, except their default bold style. So for that we set the text
-    size to 10pt and margin to 0 so there is no gap between the <h4> and <p> elements.
-    */
-    h4 {
-        font-size: 10pt;
-        margin: 0;
-    }
-
-    /*
-    As mentioned in the h4 class we do not want a gap between the <h4> and <p> elements.
-    So the margin top is set to 0.
-    */
-    p {
-        margin-top: 0;
-    }
-
-    /*
-    For the table of contents we use <dt> and <dd> elements, this <dt> elements should
-    be a little larger than the normal text so we set a font size of 16pt.
-    */
-    dt {
-        font-size: 16pt;
-    }
-
-    /*
-    After each table of contents entry we at a 0.5cm gap to the next entry.
-    */
-    dd {
-        margin: 0 0 .5cm 0;
-    }
-
-    /*
-    All footnote elements are getting the float "footnote" property to remove them
-    from the normal page flow and add them to the footnote area. The rest ensures
-    the style of the footnote is the same as the normal text, just a smaller font
-    size of 8pt.
-    */
-    .footnote {
-        float: footnote;
-        margin-bottom: 2mm;
-        color: var(--text-color);
-        font-family: 'Montserrat', sans-serif;
-        font-size: 8pt;
-        font-weight: normal;
-        footnote-style-position: inside;
-    }
-
-    /*
-    For the footer we use flexbox to align the items vertically.
-    */
-    .footerStandard,
-    .footerBibliography {
-        position: running(footer);
-        color: var(--highlight-color-one);
-        display: flex;
-        align-items: center;
-        font-size: 8pt;
-        text-transform: uppercase;
-    }
-
-    /*
-    The first link element (website link) in each footer should be bold.
-    */
-    footer a:first-of-type {
-        font-weight: bold;
-    }
-
-    /*
-    This is the style of the line in the footer, we give a fixed height of 0.5mm and
-    a relative size of 70%, the background color is the content of the CSS var --highlight-color-one.
-    */
-    footer hr {
-        margin: 0 3% 0 3%;
-        height: .5mm;
-        background-color: var(--highlight-color-one);
-        border-top: 0;
-        width: 70%;
-        display: inline-block;
-    }
-
-    /*
-    The only difference between the footer of the chapter pages and the bibliography
-    is that a different HTML element is used for the running position.
-    */
-    .footerBibliography {
-        position: running(footerBibliography);
-    }
-</style>
-/*
-<!-- The header of the content pages is only a line so we have no content here but add the line with our CSS. --> */
-<header>
-</header>
-/*
-<!-- The footer for all content pages contains the link to the website and a line next to it. --> */
-<footer class="footerStandard">
-    <a href="{{ url('/') }}">
-        {{ env('APP_NAME') }}
-    </a>
-    <hr />
-</footer>
-/*
-<!--
-        The footer for the bibliography contains more information then the footer pages of the standard pages,
-        it contains the website, email and phone number.
-    --> */
-<footer class="footerBibliography">
-    <div>
-        <a href="https://companywebsite.com">
-            companywebsite.com
-        </a>
-        <br />
-        <a href="mailto:email@website.com">
-            email@website.com
-        </a>
-        <br />
-        <span>
-            317.123.2345
-        </span>
+<body>
+    <header>
+    </header>
+    <div class="text-center">
+        <footer class="footerStandard">
+            <h2>{{ $test->name }} Revision</h2>
+            <a href="{{ url('/') }}">
+                {{ env('APP_NAME') }}
+            </a>
+        </footer>
+        <footer class="footerBibliography">
+            <div>
+                <a href="{{ url('/') }}">{{ url('/') }}</a>
+                <br />
+                <p>Talk to Us? <a href="mailto:info@takemyitclass.com">info@takemyitclass.com</a></p>
+            </div>
+        </footer>
     </div>
-    <hr />
-</footer>
-/*
-<!--
-        The cover page has a full page background image which we will set via CSS, the book title and a footer
-        with the website, email and phone number.
-    --> */
-<div class="coverPage">
-    <h1>Title of the Book Goes Here</h1>
-    <div class="coverFooter">
-        <span>
-            <a href="{{ url('/') }}">{{ url('/') }}</a> |
-            <a href="mailto:info@takemyitclass.com">info@takemyitclass.com</a> |
-            317.234.8765
-        </span>
-        <hr />
-    </div>
-</div>
-/*
-<!--
-        The table of contents contains a sample toc based on <dl> elements and a image at the bottom of the toc.
-    -->
-<!--
-        Each chapter of the book is wrapped by a <div> with the .chapterPage class.
-        Each chapter has a title <h1> element a line below and then some highlighted text.
-        In this chapter we also have light highlighted text (blue but not bold) and a two column text.
-    --> */
-<div class="chapterPage">
-    <h1>{{ $test->name }}</h1>
-    <hr />
-    <p class="highlight">
-        {{ $test->name }}
-    </p>
-    <p class="highlightLight">
-        Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat aliquam felis, sed porttitor
-        sapien porta et. Mauris vitae ipsum, sit amet euismod elit. Ut quis egestas libero. Duis vitae lacus dui. Ut
-        varius accumsan felis, quis consectetur arcu interdum eu. Nullam dapibus mattis egestas.
-    </p>
-    <div class="twoTextColumns">
-        <h4>PELLENTESQUE CURSUS</h4>
-        <p>Commodo iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus imperdiet
-            ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales
-            tempus.</p>
-        <h4>ALIQUAM ERAT VOLUTPAT</h4>
-        <p>Quisque ligula orci, ultrices nec dignissim id, pretium eu justo. Aliquam dignissim justo ante, nec accumsan
-            lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat
-            aliquam felis, sed porttitor sapien porta et. Mauris vitae ipsum, sit amet euismod elit. Ut quis egestas
-            libero. Duis vitae lacus dui.</p>
-        <p>Fusce faucibus imperdiet ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo
-            non ligula sodales tempus.</p>
-        <h4>DUIS ORNARE TURPIS</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu vulputate varius. Quisque ligula orci, ultrices
-            nec dignissim id, pretium eu justo.</p>
-        <h4>ALIQUAM DIGNISSIM JUSTO</h4>
-        <p>Ante, nec accumsan lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget.
-            Vestibulum consequat aliquam felis, sed porttitor sapien porta et. Mauris vitae condimentum ipsum, sit amet
-            euismod elit. Ut quis egestas libero. Duis vitae lacus dui. Ut varius accumsan felis, quis consectetur arcu
-            interdum eu. Nullam dapibus mattis egestas.</p>
-        <h4>PELLENTESQUE CURSUS COMMODO</h4>
-        <p>Iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus imperdiet
-            ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales
-            tempus.</p>
-        <h4>CLASS APTENT TACITI AD LITORA</h4>
-        <p>torquent per conubia nostra, per inceptos himenaeos. Nullam lacus turpis, iaculis quis mattis at, consequat
-            vel sapien. Pellentesque finibus ligula mauris, vitae rutrum metus ullamcorper at. Aliquam erat volutpat.
-            Vestibulum pulvinar dui sapien, mollis tempus tortor laoreet ac.</p>
-    </div>
-</div>
-/*
-<!--
-        The next chapter page has a highlighted paragraph, a two column text and an image below.
-        Further this chapter spreads over multiple pages and continues with a forced page break.
-        Then we get a page with a image on the top, followed by a two column text and a highlighted
-        sentence.
-        Another page break and again a highlighted text, two column text and a image.
-        The last pages of this chapter also contain footnotes, you can see the <span> elements with
-        the class .footnote below.
-    --> */
-<div class="chapterPage">
-    <h1>Name of Chapter</h1>
-    <hr />
-    <p class="highlight">
-        Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat aliquam felis, sed porttitor
-        sapien porta et.
-    </p>
-    <div class="twoColumns">
-        <div>
-            <h4>PELLENTESQUE CURSUS</h4>
-            <p>Commodo iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus
-                imperdiet ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non
-                ligula sodales tempus.</p>
-            <h4>ALIQUAM ERAT VOLUTPAT</h4>
-            <p>Quisque ligula orci, ultrices nec dignissim id, pretium eu justo. Aliquam dignissim justo ante, nec
-                accumsan lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget.
-                Vestibulum consequat aliquam felis, sed porttitor sapien porta et. Mauris vitae ipsum, sit amet euismod
-                elit. Ut quis egestas libero. Duis vitae lacus dui.</p>
-            <p>Fusce faucibus imperdiet ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae
-                justo non ligula sodales tempus.</p>
-            <h4>DUIS ORNARE TURPIS</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu vulputate varius. Quisque ligula orci,
-                ultrices nec dignissim id, pretium eu justo.</p>
-            <h4>ALIQUAM DIGNISSIM JUSTO</h4>
-            <p>Ante, nec accumsan lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare
-                eget. Vestibulum consequat aliquam felis, sed porttitor sapien porta et. Mauris vitae condimentum ipsum,
-                sit amet euismod elit. Ut quis egestas libero. Duis vitae lacus dui. Ut varius accumsan felis, quis
-                consectetur arcu interdum eu. Nullam dapibus mattis egestas.</p>
-        </div>
-        <div class="imageContainerColumns"><img
-                src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80" />
-        </div>
-    </div>
-    <div class="pageBreak"></div>
-    <div class="imageContainer"><img
-            src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80" />
-    </div>
-    <div class="twoTextColumns">
-        <h4>PELLENTESQUE CURSUS</h4>
-        <p>Commodo iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus imperdiet
-            ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales
-            tempus.</p>
-        <h4>ALIQUAM ERAT VOLUTPAT</h4>
-        <p>Quisque ligula orci, ultrices nec dignissim id, pretium eu justo. Aliquam dignissim justo ante, nec accumsan
-            lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat
-            aliquam felis, sed porttitor sapien porta et. Mauris vitae ipsum, sit amet euismod elit. Ut quis egestas
-            libero. Duis vitae lacus dui.</p>
-        <p>Fusce faucibus imperdiet ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo
-            non ligula sodales tempus.</p>
-        <h4>DUIS ORNARE TURPIS</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu vulputate varius. Quisque ligula orci, ultrices
-            nec dignissim id, pretium eu justo.</p>
-        <h4>ALIQUAM DIGNISSIM JUSTO</h4>
-        <p>Ante, nec accumsan lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget.
-            Vestibulum consequat aliquam felis, sed porttitor sapien porta et. Mauris vitae condimentum ipsum, sit amet
-            euismod elit. Ut quis egestas libero. Duis vitae lacus dui. Ut varius accumsan felis, quis consectetur arcu
-            interdum eu. Nullam dapibus mattis egestas.</p>
-        <h4>PELLENTESQUE CURSUS COMMODO</h4>
-        <p>Iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus imperdiet
-            ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales
-            tempus.</p>
-        <h4>CLASS APTENT TACITI AD LITORA</h4>
-        <p>torquent per conubia nostra, per inceptos himenaeos. Nullam lacus turpis, iaculis quis mattis at, consequat
-            vel sapien. Pellentesque finibus ligula mauris, vitae rutrum metus ullamcorper at. Aliquam erat volutpat.
-            Vestibulum pulvinar dui sapien, mollis tempus tortor laoreet ac.</p>
-    </div>
-    <p class="highlight">
-        Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat aliquam felis, sed porttitor
-        sapien porta et.
-    </p>
-    <div class="pageBreak"></div>
-    <p class="highlight">
-        Quisque ligula orci, ultrices nec dignissim id, pretium eu justo. Aliquam dignissim justo ante, nec accumsan
-        lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat
-        aliquam felis, sed sapien porta et.
-    </p>
-    <div class="twoTextColumns">
-        <h4>PELLENTESQUE CURSUS</h4>
-        <p>Commodo iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus imperdiet
-            ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales
-            tempus.</p>
-        <h4>ALIQUAM ERAT VOLUTPAT</h4>
-        <p>Quisque ligula orci, ultrices nec dignissim id, pretium eu justo. Aliquam dignissim justo ante, nec accumsan
-            lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat
-            aliquam felis, sed porttitor sapien porta et. Mauris vitae ipsum, sit amet euismod elit. Ut quis egestas
-            libero. Duis vitae lacus dui.</p>
-        <p>Fusce faucibus imperdiet ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo
-            non ligula sodales tempus.</p>
-        <h4>ALIQUAM DIGNISSIM JUSTO</h4>
-        <p>Ante, nec accumsan lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget.
-            Vestibulum consequat aliquam felis, sed porttitor sapien porta et. Mauris vitae condimentum ipsum, sit amet
-            euismod elit. Ut quis egestas libero. Duis vitae lacus dui. Ut varius accumsan felis, quis consectetur arcu
-            interdum eu. Nullam dapibus mattis egestas.</p>
-        <h4>PELLENTESQUE CURSUS COMMODO</h4>
-        <p>Iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus imperdiet
-            ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales
-            tempus.</p>
-    </div>
-    <div class="imageContainer"><img
-            src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80" />
-    </div>
-    <div class="pageBreak"></div>
-    <div class="imageContainer"><img
-            src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80" />
-    </div>
-    <p class="highlight">
-        Aenean convallis lorem diam, ut imperdiet lectus ornare<span class="footnote">Mary Shelley, Frankenstein; or,
-            the Modern Prometheus, ed. M.K. Joseph (Oxford: Oxford University Press, 1998), 91.</span> eget. Vestibulum
-        consequat<span class="footnote">Shelley, Frankenstein, 91.</span> aliquam felis, sed porttitor sapien porta et.
-    </p>
-    <div class="twoTextColumns">
-        <h4>ALIQUAM ERAT VOLUTPAT</h4>
-        <p>Quisque ligula orci, ultrices nec dignissim id, pretium eu justo. Aliquam dignissim justo ante, nec accumsan
-            lectus lobortis eleifend. Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat
-            aliquam felis, sed porttitor sapien porta et. Mauris vitae ipsum, sit amet euismod elit. Ut quis egestas
-            libero. Duis vitae lacus dui.</p>
-        <p>Fusce faucibus imperdiet ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo
-            non ligula sodales tempus.</p>
-        <h4>DUIS ORNARE TURPIS</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu vulputate varius. Quisque ligula orci, ultrices
-            nec dignissim id, pretium eu justo.</p>
-        <h4>PELLENTESQUE CURSUS COMMODO</h4>
-        <p>Iaculis. Aliquam erat volutpat. Donec vel ultricies quam, ac laoreet purus. Fusce faucibus imperdiet
-            ultrices. Fusce dictum lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales
-            tempus.</p>
-        <h4>CLASS APTENT TACITI AD LITORA</h4>
-        <p>torquent per conubia nostra, per inceptos himenaeos. Nullam lacus turpis, iaculis quis mattis at, consequat
-            vel sapien. Pellentesque finibus ligula mauris, vitae rutrum metus ullamcorper at. Aliquam erat volutpat.
-            Vestibulum pulvinar dui sapien, mollis tempus tortor laoreet ac.</p>
-    </div>
-    <div class="pageBreak"></div>
-    <div class="imageContainer">
-        <img
-            src="https://images.unsplash.com/photo-1587725835427-a9ff8e559dc3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" />
-    </div>
-    <div class="twoColumns">
-        <p class="highlight">
-            Aenean convallis lorem diam, ut imperdiet lectus ornare eget. Vestibulum consequat aliquam felis, sed
-            porttitor sapien porta et.
-        </p>
-        <div>
-            <h4>ALIQUAM ERAT VOLUTPAT</h4>
-            <p>Quisque ligula orci, ultrices nec dignissim<span class="footnote">Mary Shelley, Frankenstein; or, the
-                    Modern Prometheus, ed. M.K. Joseph (Oxford: Oxford University Press, 1998), 91.</span> id, pretium
-                eu justo. Aliquam dignissim justo ante, nec accumsan lectus lobortis eleifend. Aenean convallis lorem
-                diam, ut imperdiet lectus ornare eget. Vestibulum consequat aliquam felis, sed porttitor sapien porta
-                et. Mauris vitae ipsum, sit amet euismod elit. Ut quis egestas libero. Duis vitae lacus dui.</p>
-            <p>Fusce faucibus imperdiet ultrices. Fusce dictum<span class="footnote">Shelley, Frankenstein, 91.</span>
-                lacus augue, at volutpat ante ultricies quis. Nam vitae justo non ligula sodales tempus.</p>
-        </div>
-    </div>
-</div>
-/*
-The last page in our book is the bibliography page with one column text and one image. */
+    <br>
 
-<div class="bibliographyPage">
-    <h1>Bibliography</h1>
-    <hr />
-    <div class="twoColumns">
-        <div>
-            <h4>01</h4>
-            <p>Diaz, S. A., & Hall, R. A. (2020). Fighting fake news: Inspiring critical thinking with memorable
-                learning experiences. College & Research Libraries News. 81(5). <a
-                    href="https://doi.org/10.5860/crln.81.5.239">https://doi.org/10.5860/crln.81.5.239</a></p>
-            <h4>02</h4>
-            <p>Inskeep, S. (2016, December 11). A finders guide to facts. NPR. <a
-                    href="http://www.npr.org/2016/12/11/505154631/a-finders-guide-to-facts">http://www.npr.org/2016/12/11/505154631/a-finders-guide-to-facts</a>
-            </p>
-            <h4>03</h4>
-            <p>Kletter, M. (n.d.). The importance of critical thinking in the age of fake news. School Library Journal.
-                <a
-                    href="https://www.slj.com?detailStory=the-importance-of-critical-thinking-in-age-of-fake-news-webcast">https://www.slj.com?detailStory=the-importance-of-critical-thinking-in-age-of-fake-news-webcast</a>
-            </p>
-            <h4>04</h4>
-            <p>Kohnen, A. M. (2019). Teaching online research as a critical literacy skill. English Journal, 108(5),
-                25-30.</p>
-            <h4>05</h4>
-            <p>Machete P., Turpin M. (2020) The use of critical thinking to identify fake news: a systematic literature
-                review. In: M. Hattingh, M. Matthee, H. Smuts, I. Pappas, Y. Dwivedi, & M. Mäntymäki. (eds) Responsible
-                Design, Implementation and Use of Information and Communication Technology. Springer, Cham. <a
-                    href="https://doi-10.1007/978-3-030-45002-1_20">https://doi-10.1007/978-3-030-45002-1_20</a></p>
-        </div>
-        <div class="imageContainerColumns"><img
-                src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80" />
-        </div>
+    <div class="chapterPage">
+        @foreach ($questions as $question)
+            <div class="card mt-2">
+                <div class="card-body">
+                    <div class="row">
+                        <p class="highlight"><strong>Question:</strong> {!! $question->question ?? 'Question Not Set' !!}</p>
+                    </div>
+                    <div class="row">
+                        <div class="container">
+                            <div class="col md-6">
+                                <strong>Answer</strong>
+                                <div class="answer-area" id="answerArea">
+                                    <p class="highlightLight">{!! $question->answer !!}</p>
+                                </div>
+                                <br>
+                                <strong>Short Answer Explanation</strong>
+                                <div class="answer-area" id="shortAnswerArea">
+                                    <p class="highlightLight">{!! $question->short_answer !!}</p>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col md-6">
+                                <strong>Full Answer Explanation</strong>
+                                <div class="answer-area" id="fullAnswerArea">
+                                    <p class="highlightLight">{!! $question->full_answer !!}</p>
+                                </div>
+                                <br>
+                                <strong>Answer Resource Link</strong>
+                                <div class="answer-area" id="answerResourceArea">
+                                    <a href="{{ $question->answer_resource }}" target="_blank"
+                                        rel="noopener noreferrer">{{ $question->answer_resource }}</a>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        @endforeach
     </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

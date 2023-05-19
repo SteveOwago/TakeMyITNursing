@@ -51,6 +51,22 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-title">My Tests</li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="{{ route('student.tests.index') }}" class='sidebar-link'>
+                        <i class='bi bi-journal-plus'></i>
+                        <span>View Tests</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('student.tests.index') }}">All Tests</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('student.tests.take') }}">Take A Test</a>
+                        </li>
+                    </ul>
+                </li>
                @if (auth()->user()->hasrole('Admin') ||
                auth()->user()->can('admin_management'))
                 <li class="sidebar-title">Test Management</li>

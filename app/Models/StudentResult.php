@@ -17,4 +17,8 @@ class StudentResult extends Model
     public function test(){
         return $this->belongsTo(Test::class,'test_id');
     }
+
+    public function questions(){
+        return $this->hasMany(Question::class,);
+    }
 }

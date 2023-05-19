@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\StudentResult;
 use App\Http\Requests\StoreStudentResultRequest;
 use App\Http\Requests\UpdateStudentResultRequest;
+use App\Models\Test;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class StudentResultController extends Controller
 {
@@ -82,5 +85,15 @@ class StudentResultController extends Controller
     public function destroy(StudentResult $studentResult)
     {
         //
+    }
+
+    public function getStudentResults($studentResultID)
+    {
+        $report = new \App\Services\TestService();
+        $studentResult = StudentResult::findOrFail($studentResultID);
+        $test = $studentResult->test;
+        $data = $report->getResult($studentResult, $test);
+        $pdf = Pdf::loadView('reports.pdf.test_result', $data);
+        return $pdf->download($studentResult->user->name.'-'.$test->name.'-'.Carbon::now()->format('Y-m-d H:i').'.pdf');
     }
 }

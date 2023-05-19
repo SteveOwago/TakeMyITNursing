@@ -195,4 +195,47 @@ class TestController extends Controller
     public function takeExam(Test $test){
         return view('admin.tests.take-test',compact('test'));
     }
+
+    public function chooseTest(Request $request){
+        if ($request->ajax()) {
+            $query = Test::with(['subjectCategory']);
+
+            $table = Datatables::of($query);
+
+
+            $table->editColumn('id', function ($row) {
+                return  $row->id ?? 'Not Set';
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ?? 'Not Set';
+            });
+            $table->editColumn('subjectCategory', function ($row) {
+                return $row->subjectCategory->name ?? 'No Name';
+            });
+            $table->editColumn('created_at', function ($row) {
+                return $row->created_at ?? '';
+            });
+            $table->addColumn('actions', '&nbsp;');
+            $table->editColumn('actions', function ($row) {
+                //Set the values to 1 to be viewable on display
+                $view = 1;
+                $edit = 1;
+                $delete = 0;
+                $routePart = 'admin.tests';
+
+                return view('layouts.partials.utilities.datatablesActions', compact(
+                    'view',
+                    'edit',
+                    'delete',
+                    'routePart',
+                    'row'
+                ));
+            });
+
+            $table->rawColumns(['id', 'name', 'subjectCategory', 'created_at','actions']);
+
+            return $table->make(true);
+        }
+        return view('students.tests.choose-test');
+    }
 }

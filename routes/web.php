@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiDataController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\StudentResultController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 
@@ -35,10 +36,26 @@ Route::middleware(['auth'])->group(function () {
 
 Route::group(['middleware'=>'auth','prefix'=>'admin','as'=>'admin.'], function(){
     //Tests
-Route::get('take/exams/{test}',[TestController::class,'takeExam'])->name('take.exam');
+
+    Route::get('take/exams/{test}',[TestController::class,'takeExam'])->name('take.exam');
     Route::resource('tests',TestController::class);
     // Questions
     Route::get('questions/test_questions/{testID}',[QuestionController::class,'createTestQuestion'])->name('tests.question.create');
 
     Route::resource('questions',QuestionController::class);
 });
+
+//Student Route Groups
+Route::group(['middleware'=>'auth','prefix'=>'student','as'=>'student.'], function(){
+    //Tests
+    Route::get('tests/take',[TestController::class,'chooseTest'])->name('tests.take');
+    Route::get('take/exams/{test}',[TestController::class,'takeExam'])->name('take.exam');
+    Route::resource('tests',TestController::class);
+    // Questions
+    Route::get('questions/test_questions/{testID}',[QuestionController::class,'createTestQuestion'])->name('tests.question.create');
+
+    Route::resource('questions',QuestionController::class);
+});
+
+
+Route::get('get/test/result/{id}',[StudentResultController::class,'getStudentResults'])->name('tests.result');
