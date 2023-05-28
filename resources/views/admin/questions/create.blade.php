@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('backendIT/assets/css/pages/filepond.css') }}">
 @endsection
 @section('content')
+@if (auth()->user()->hasRole('Admin'))
     <div class="page-heading">
         <div class="page-title">
             <div class="row">
@@ -52,6 +53,25 @@
                                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                         @empty
                                                             <option disabled>No Test Added</option>
+                                                        @endforelse
+                                                    </select>
+                                                </fieldset>
+                                                @error('subject_domain_id')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-12 col-12">
+                                                <label for="first-name-column">Select Testing Topic</label>
+                                                <fieldset class="form-group">
+                                                    <select class="form-select dynamicSubjectDomain"
+                                                        id="dynamicSubjectDomain" name="topic_id"
+                                                        data-dependent="subject_category_id" data-campaign="sender-name"
+                                                        required>
+                                                        <option selected value="" disabled>Click Here</option>
+                                                        @forelse ($topics as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @empty
+                                                            <option disabled>No Topic Added</option>
                                                         @endforelse
                                                     </select>
                                                 </fieldset>
@@ -190,6 +210,7 @@
         </section>
         <!-- // Basic multiple Column Form section end -->
     </div>
+@endif
 @endsection
 @section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

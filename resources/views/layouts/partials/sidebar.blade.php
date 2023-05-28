@@ -67,40 +67,47 @@
                         </li>
                     </ul>
                 </li>
-               @if (auth()->user()->hasrole('Admin') ||
-               auth()->user()->can('admin_management'))
-                <li class="sidebar-title">Test Management</li>
+                @if (auth()->user()->hasrole('Admin') ||
+                        auth()->user()->can('admin_management'))
+                    <li class="sidebar-title">Test Management</li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="{{ route('admin.tests.index') }}" class='sidebar-link'>
-                        <i class='bi bi-journal-plus'></i>
-                        <span>Tests</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{ route('admin.tests.index') }}">All Test</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('admin.tests.create') }}">Add Test</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-title">Question Management</li>
+                    <li class="sidebar-item  has-sub">
+                        <a href="{{ route('admin.tests.index') }}" class='sidebar-link'>
+                            <i class='bi bi-journal-plus'></i>
+                            <span>Tests</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{ route('admin.tests.index') }}">All Test</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{ route('admin.tests.create') }}">Add Test</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-title">Topics & Question Management</li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="{{ route('admin.questions.index') }}" class='sidebar-link'>
-                        <i class="bi bi-question-circle-fill"></i>
-                        <span>Questions</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{ route('admin.questions.index') }}">All Questions</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('admin.questions.create') }}">Add Questions</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="sidebar-item  has-sub">
+                        <a href="{{ route('admin.questions.index') }}" class='sidebar-link'>
+                            <i class="bi bi-question-circle-fill"></i>
+                            <span>Topics & Questions</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{ route('admin.questions.index') }}">All Questions</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{ route('admin.questions.create') }}">Add Questions</a>
+                            </li>
+                            <hr>
+                            <li class="submenu-item ">
+                                <a href="{{ route('admin.topics.index') }}">All Topics</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{ route('admin.topics.create') }}">Add Topics</a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
                 <li class="sidebar-item  ">
                     <div class="mx-3">

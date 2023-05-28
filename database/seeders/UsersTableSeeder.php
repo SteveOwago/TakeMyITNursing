@@ -22,15 +22,33 @@ class UsersTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Admin IMS',
                 'email' => 'steveowago@gmail.com',
+                'subject_domain_id'=>null,
                 'created_at' => \Carbon\Carbon::now(),
                 'password'=> Hash::make('Owagostv@123'),
             ],
             [
                 'id' => 2,
-                'name' => 'Admin IMS',
+                'name' => 'Student TakeMyIT',
                 'email' => 'students@takemyitclass.com',
+                'subject_domain_id'=>1,
                 'created_at' => \Carbon\Carbon::now(),
-                'password'=> Hash::make('Owagostv@123'),
+                'password'=> Hash::make('student@123'),
+            ],
+            [
+                'id' => 3,
+                'name' => 'Student TakeMyIT',
+                'email' => 'students1@takemyitclass.com',
+                'subject_domain_id'=>2,
+                'created_at' => \Carbon\Carbon::now(),
+                'password'=> Hash::make('student@123'),
+            ],
+            [
+                'id' => 4,
+                'name' => 'Accountant TakeMyIT',
+                'email' => 'accounts@takemyitclass.com',
+                'subject_domain_id'=>null,
+                'created_at' => \Carbon\Carbon::now(),
+                'password'=> Hash::make('accounts@123'),
             ],
 
         ];
@@ -41,11 +59,12 @@ class UsersTableSeeder extends Seeder
         $user->assignRole('Admin');
         $user->syncPermissions(Permission::all());
 
-
+        //Asign User Student Role
         $student = User::findOrFail(2);
         $student->assignRole('Student');
 
-        $accountant = User::findOrFail(2);
+        //Assign the User Accountant Role
+        $accountant = User::findOrFail(3);
         $accountant->assignRole('Accountant');
     }
 }

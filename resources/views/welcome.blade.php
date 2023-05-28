@@ -114,7 +114,7 @@
                             <div class="slider_text">
                                 <div class="slider_text_inner">
                                     <h1>Take My Nursing and IT Class</h1>
-                                    
+
                                 </div>
                                 @if (\Session::has('message'))
                                     <div class="alert alert-success alert-block">
@@ -285,47 +285,47 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="single_it_work mb-4">
                         <div class="single_it_work_content pl-2 pr-2">
                             <div class="single_it_work_content_list pb-5">
                                 <span>1</span>
                             </div>
                             <div class="single_work_content_title pb-2">
-                                <h4>Initiate Chat and Submit Course/Assignment details</h4>
+                                <h4>Interact With Our Test</h4>
                             </div>
                             <div class="single_it_work_content_text pt-1">
-                                <p>Initiate Chat with our support team through the WhatsApp section below. Discuss the assignment, exams, online course details amd requirements with our Support Team</p>
+                                <p>Our System Creates a One-time Test with 30 Question from Within Your Selected Subject Area. The system will Give You a Summary of Your Score.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="single_it_work mb-4">
                         <div class="single_it_work_content pl-2 pr-2">
                             <div class="single_it_work_content_list pb-5">
                                 <span>2</span>
                             </div>
                             <div class="single_work_content_title pb-2">
-                                <h4>Agree and Pay Pocket Friendly Price</h4>
+                                <h4>Subscription To Service</h4>
                             </div>
                             <div class="single_it_work_content_text pt-1">
-                                <p>Based on your Assignment/task details, we agree with you on considerable and pocket friendly prices. Our team will share the Payment Details</p>
+                                <p>Our Service Packages are renewable with an Option of cancelling at any time. Click Here to View our Pricing Services Available.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="single_it_work mb-4">
                         <div class="single_it_work_content pl-2 pr-2">
                             <div class="single_it_work_content_list three pb-5">
                                 <span>3</span>
                             </div>
                             <div class="single_work_content_title pb-2">
-                                <h4>Communication and Deliver Result</h4>
+                                <h4>Enjoy the Service</h4>
                             </div>
                             <div class="single_it_work_content_text pt-1">
-                                <p>We will analyze your assignment and solve your solutions. We will keep you posted on the progress and result delivery through the chats.</p>
+                                <p>The system offers a wide range of Tests from Diferent Subject Areas. The Revision of the Tests Comes alongside with a Detailed</p>
                             </div>
                         </div>
                     </div>

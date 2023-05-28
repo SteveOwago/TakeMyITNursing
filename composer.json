@@ -17,6 +17,7 @@
         "livewire/livewire": "^2.12",
         "spatie/laravel-backup": "*",
         "spatie/laravel-permission": "^5.10",
+        "stripe/stripe-php": "*",
         "yajra/laravel-datatables-oracle": "*"
     },
     "require-dev": {

@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Question;
 use App\Models\Test;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionsTable extends Migration
+class CreateTopicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +15,10 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->text('question')->nullable();
-            $table->text('answer')->nullable();
-            $table->json('choices')->nullable();
-            $table->text('short_answer')->nullable();
-            $table->text('full_answer')->nullable();
-            $table->text('answer_resource')->nullable();
-            $table->string('question_image_path')->nullable();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->foreignIdFor(Test::class,'test_id')->nullable()->constrained();
             $table->timestamps();
         });
@@ -35,6 +31,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('topics');
     }
 }

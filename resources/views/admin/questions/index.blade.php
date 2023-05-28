@@ -30,8 +30,9 @@
             <div class="card">
                 <div class="card-header">
                     Questions
-                    <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
+                    @if (auth()->user()->hasRole('Admin')) <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
                         Question</a>
+                        @endif
                 </div>
                 <div class="card-body">
                     <table border="0" cellspacing="5" cellpadding="5">

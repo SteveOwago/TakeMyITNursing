@@ -28,8 +28,9 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Question: {!! $question->question!!} </h4>
-                    <a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
+                    @if (auth()->user()->hasRole('Admin'))<a href="{{ route('admin.questions.create') }}" class="btn btn-primary float-start float-lg-end">Add
                         Questions</a>
+                        @endif
                 </div>
                 {{-- Choice Section --}}
 

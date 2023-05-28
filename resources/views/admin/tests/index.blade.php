@@ -11,7 +11,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>All Tests</h3>
+                    <h3>All Available Tests</h3>
                     <p class="text-subtitle text-muted">Click on Test Name to View Entire Details</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
@@ -30,8 +30,10 @@
             <div class="card">
                 <div class="card-header">
                     TESTS
-                    <a href="{{ route('admin.tests.create') }}" class="btn btn-primary float-start float-lg-end">Add
-                        Tests</a>
+                    @if (auth()->user()->hasRole('Admin'))
+                        <a href="{{ route('admin.tests.create') }}" class="btn btn-primary float-start float-lg-end">Add
+                            Tests</a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <table border="0" cellspacing="5" cellpadding="5">

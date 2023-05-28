@@ -40,6 +40,25 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="subject_domain_id" class="col-md-4 col-form-label text-md-right">Select Subject Area</label>
+
+                            <div class="col-md-6">
+                                <select name="subject_domain_id" id="" class="form-control" required>
+                                    <option value="" selected disabled>Click to Select</option>
+                                    @foreach ($subjectDomains as $subjectDomain)
+                                        <option value="{{$subjectDomain->id}}">{{$subjectDomain->name}}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('subject_domain_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

@@ -11,14 +11,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>All Tests</h3>
-                    <p class="text-subtitle text-muted">Click on Test Name to View Entire Details</p>
+                    <h3>All Available Topics</h3>
+                    <p class="text-subtitle text-muted">Click on Topic Name to View Entire Details</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tests</li>
+                            <li class="breadcrumb-item active" aria-current="page">Topics</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,10 +29,10 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    TESTS
+                    TOPICS
                     @if (auth()->user()->hasRole('Admin'))
-                        <a href="{{ route('admin.tests.create') }}" class="btn btn-primary float-start float-lg-end">Add
-                            Tests</a>
+                        <a href="{{ route('admin.topics.create') }}" class="btn btn-primary float-start float-lg-end">Add
+                            topics</a>
                     @endif
                 </div>
                 <div class="card-body">
@@ -53,7 +53,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Subject Category</th>
+                                <th>Test</th>
                                 <th>Date Created</th>
                                 <th>Actions</th>
                             </tr>
@@ -76,7 +76,7 @@
                     processing: true,
                     method: 'GET',
                     serverSide: true,
-                    ajax: "{{ route('student.tests.take') }}",
+                    ajax: "{{ route('admin.topics.index') }}",
                     columns: [{
                             data: 'id',
                             name: 'id'
@@ -86,8 +86,8 @@
                             name: 'name'
                         },
                         {
-                            data: 'subjectCategory',
-                            name: 'subjectCategory'
+                            data: 'test',
+                            name: 'test.name'
                         },
                         {
                             data: 'created_at',

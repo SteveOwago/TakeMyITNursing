@@ -7,121 +7,231 @@
     <link rel="stylesheet" href="{{ asset('backendIT/assets/css/pages/filepond.css') }}">
 @endsection
 @section('content')
-    <div class="page-heading">
-        <div class="page-title">
-            <div class="row">
-                <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Edit question</h3>
-                    <p class="text-subtitle text-muted">Select Domain and Subject Category</p>
-                </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Question </li>
-                        </ol>
-                    </nav>
+    @if (auth()->user()->hasRole('Admin'))
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>Edit question</h3>
+                        <p class="text-subtitle text-muted">Select Domain and Subject Category</p>
+                    </div>
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Question </li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- // Basic multiple Column Form section start -->
-        <section id="multiple-column-form">
-            <div class="row match-height">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Edit question Examination</h4>
-                            {{-- <a href="{{ route('export.get-bulk-messages-excel') }}"
+            <!-- // Basic multiple Column Form section start -->
+            <section id="multiple-column-form">
+                <div class="row match-height">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Edit question Examination</h4>
+                                {{-- <a href="{{ route('export.get-bulk-messages-excel') }}"
                                 class="btn btn-primary float-start float-lg-end">
                                 <i class="bi bi-download"></i> Get Excel Import File
                             </a> --}}
-                        </div>
-                        <div class="card-content">
-                            <div class="card-body">
-                                <form class="form" action="{{route('admin.questions.update',[$question])}}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <label for="first-name-column">Select Subject Domain</label>
-                                            <fieldset class="form-group">
-                                                <select class="form-select dynamicSubjectDomain" id="dynamicSubjectDomain" name="subject_domain_id"
-                                                    data-dependent="subject_category_id" data-campaign="sender-name" required>
-                                                    <option selected value="" disabled>Click Here</option>
-                                                    @forelse ($subjectDomains as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                    @empty
-                                                        <option disabled>No Subject Domain Added</option>
-                                                    @endforelse
-                                                </select>
-                                            </fieldset>
-                                            @error('subject_domain_id')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <label for="first-name-column">Select Domain Subcategory</label>
-                                            <fieldset class="form-group">
-                                                <select class="form-select dynamicSubjectCategory" id="subject_category_id" name="subject_category_id"
-                                                    data-dependent="campaign_id" required>
-                                                    <option selected value="">Select Domain Subcategory</option>
-                                                </select>
-                                            </fieldset>
-                                            @error('subject_category_id')
-                                                <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-column">question Name</label>
-                                                <input type="text" id="first-name-column" class="form-control"
-                                                    placeholder="question Name" name="name" value="{{$question->name}}">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <form class="form" action="{{ route('admin.questions.update', [$question]) }}"
+                                        method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row">
+                                            <div class="col-md-10 offset-1">
+                                                <div class="col-md-12 col-12">
+                                                    <label for="first-name-column">Select Test</label>
+                                                    <fieldset class="form-group">
+                                                        <select class="form-select dynamicSubjectDomain"
+                                                            id="dynamicSubjectDomain" name="test_id"
+                                                            data-dependent="subject_category_id" data-campaign="sender-name"
+                                                            required>
+                                                            <option selected value="{{$question->test_id}}">{{ $question->test->name}}</option>
+                                                            @forelse ($tests as $item)
+                                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                                                </option>
+                                                            @empty
+                                                                <option disabled>No Test Added</option>
+                                                            @endforelse
+                                                        </select>
+                                                    </fieldset>
+                                                    @error('subject_domain_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-12 col-12">
+                                                    <label for="first-name-column">Select Testing Topic</label>
+                                                    <fieldset class="form-group">
+                                                        <select class="form-select dynamicSubjectDomain"
+                                                            id="dynamicSubjectDomain" name="topic_id"
+                                                            data-dependent="subject_category_id" data-campaign="sender-name"
+                                                            required>
+                                                            <option selected value="{{$question->topic_id}}">{{ $question->topic->name}}</option>
+                                                            @forelse ($topics as $item)
+                                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                                                </option>
+                                                            @empty
+                                                                <option disabled>No Topic Added</option>
+                                                            @endforelse
+                                                        </select>
+                                                    </fieldset>
+                                                    @error('topic_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label>Question</label>
+                                                    <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor" name="question">{{ $question->question }}</textarea>
+                                                    <div id="informationchar"></div>
+                                                    <div id="informationword"></div>
+                                                    {{-- <div id="informationparagraphs"></div> --}}
+                                                    @error('question')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                                <div class="row">
+                                                    <label for="">Choices</label>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="first-name-column">A</label>
+                                                            <input type="text" id="first-name-column"
+                                                                class="form-control" placeholder="A Answer" name="choice_A">
+                                                        </div>
+                                                        @error('choice_A')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="first-name-column">B</label>
+                                                            <input type="text" id="first-name-column"
+                                                                class="form-control" placeholder="A Answer" name="choice_B">
+                                                        </div>
+                                                        @error('choice_B')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="first-name-column">C</label>
+                                                            <input type="text" id="first-name-column"
+                                                                class="form-control" placeholder="A Answer" name="choice_C">
+                                                        </div>
+                                                        @error('choice_C')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="first-name-column">D</label>
+                                                            <input type="text" id="first-name-column"
+                                                                class="form-control" placeholder="D Answer"
+                                                                name="choice_D">
+                                                        </div>
+                                                        @error('choice_D')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="first-name-column">E</label>
+                                                            <input type="text" id="first-name-column"
+                                                                class="form-control" placeholder="E Answer"
+                                                                name="choice_E">
+                                                        </div>
+                                                        @error('choice_E')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <input type="hidden" name="choices" id="choices"
+                                                        value="{{ old('choices') ?? '{}' }}">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-12">
+                                                        <label for="first-name-column">Select Answer</label>
+                                                        <fieldset class="form-group">
+                                                            <select class="form-select" name="answer" required>
+                                                                <option selected value="" disabled>Click Here
+                                                                </option>
+                                                                @forelse ($answers as $item)
+                                                                    <option value="{{ $item->choice }}"
+                                                                        selected="@php if($item->choice == $question->answer){
+                                                                        echo 'true';
+                                                                    }else{
+                                                                       echo 'false';
+                                                                    } @endphp">
+                                                                        {{ $item->choice }}</option>
+                                                                @empty
+                                                                    <option disabled>No Choices Added</option>
+                                                                @endforelse
+                                                            </select>
+                                                        </fieldset>
+                                                        @error('answer')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="first-name-column">Answer Resource URL</label>
+                                                            <input type="text" id="first-name-column"
+                                                                class="form-control" placeholder="https://example.com"
+                                                                name="answer_resource"
+                                                                value="{{ $question->answer_resource }}">
+                                                        </div>
+                                                        @error('answer_resource')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label>Short Answer Explanation</label>
+                                                    <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor1"
+                                                        name="short_answer">{{ $question->short_answer }}</textarea>
+                                                    <div id="informationchar"></div>
+                                                    <div id="informationword"></div>
+                                                    {{-- <div id="informationparagraphs"></div> --}}
+                                                    @error('short_answer')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label>Full Answer Explanation</label>
+                                                    <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor2"
+                                                        name="full_answer">{{ $question->full_answer }}</textarea>
+                                                    <div id="informationchar"></div>
+                                                    {{-- <div id="informationword"></div> --}}
+                                                    <div id="informationparagraphs"></div>
+                                                    @error('full_answer')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end">
+                                                    <button type="submit"
+                                                        class="btn btn-primary me-1 mb-1">Submit</button>
+                                                    <button type="reset"
+                                                        class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                </div>
                                             </div>
-                                            @error('name')<p class="text-danger">{{ $message }}</p>@enderror
                                         </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-column">Maximum No of Questions Per question</label>
-                                                <input type="number" id="first-name-column" class="form-control"
-                                                    placeholder="e.g 60" name="max_number_of_questions" value="{{$question->max_number_of_questions}}">
-                                            </div>
-                                            @error('max_number_of_questions')<p class="text-danger">{{ $message }}</p>@enderror
-                                        </div>
-                                        <div class="col-md-12 col-12">
-                                            <div class="form-group">
-                                                <label for="first-name-column">question Duration (Minutes)</label>
-                                                <input type="number" id="first-name-column" class="form-control"
-                                                    placeholder="e.g 60" name="question_duration" value="{{$question->question_duration}}">
-                                            </div>
-                                            @error('max_number_of_questions')<p class="text-danger">{{ $message }}</p>@enderror
-                                        </div>
-                                        <div class="col-md-12 form-group">
-                                            <label>Description</label>
-                                            <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor" name="description">{{$question->description}}</textarea>
-                                            <div id="informationchar"></div>
-                                            {{-- <div id="informationword"></div> --}}
-                                            <div id="informationparagraphs"></div>
-                                        </div>
-                                        @error('description')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- // Basic multiple Column Form section end -->
-    </div>
+            </section>
+            <!-- // Basic multiple Column Form section end -->
+        </div>
+    @endif
 @endsection
+
 @section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type='text/javascript'>
@@ -156,6 +266,20 @@
                 $('.dynamicShortCode').val('');
             });
         });
+        // Listen for changes in the choice input fields
+        var choiceInputs = document.querySelectorAll('input[name^="choice_"]');
+        choiceInputs.forEach(function(input) {
+            input.addEventListener('input', updateChoices);
+        });
+
+        // Function to update the hidden input field with the JSON representation of the choices
+        function updateChoices() {
+            var choices = {};
+            choiceInputs.forEach(function(input) {
+                choices[input.name] = input.value;
+            });
+            document.getElementById('choices').value = JSON.stringify(choices);
+        }
     </script>
     <script src="{{ asset('backendIT/assets/extensions/filepond/filepond.js') }}"></script>
     <script src="{{ asset('backendIT/assets/extensions/toastify-js/src/toastify.js') }}"></script>
@@ -163,5 +287,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="{{ asset('backendIT/assets/js/pages/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('backendIT/assets/js/pages/ckeditor/plugins/wordcount/plugin.js') }}"></script>
-    <script src="{{ asset('backendIT/assets/js/pages/ckeditor.js')}}"></script>
+    <script src="{{ asset('backendIT/assets/js/pages/ckeditor.js') }}"></script>
 @endsection

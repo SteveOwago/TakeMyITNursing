@@ -12,4 +12,12 @@ class Question extends Model
     protected $casts = [
         'choices' => 'array',
     ];
+
+    public function topic(){
+        return $this->belongsTo(Topic::class, 'topic_id');
+    }
+
+    public function test(){
+        return $this->belongsTo(Test::class,'test_id');
+    }
 }

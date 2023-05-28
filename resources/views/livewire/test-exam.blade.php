@@ -1,8 +1,11 @@
 <div class="row">
     <div class="col-md-12">
         @if ($currentStep > count($questions))
-            <h1>Thank you for completing the Test!</h1>
-            <a href="{{ route('admin.take.exam',[$testID]) }}" wire:click="$set('currentStep', 1)" class="btn btn-success">Start Over</a>
+            <div class="text-center card col-md-8 offset-2">
+                <h2 class="text-center">Thank you for completing the Test!</h2>
+                <a href="{{ route('admin.take.exam', [$testID]) }}" wire:click="$set('currentStep', 1)"
+                    class="btn btn-sm btn-success">Start Over</a>
+            </div>
         @else
             <div class="card">
                 <div class="card-header">
@@ -20,7 +23,9 @@
                                 <li>
                                     <div class="form-group">
                                         <label>
-                                           {{str_replace('choice_', '', $key)}}&nbsp;:&nbsp; <input type="radio" name="choices" value="{{ $key }}" wire:model="answers.{{ $questions[$currentStep - 1]->id }}">
+                                            {{ str_replace('choice_', '', $key) }}&nbsp;:&nbsp; <input type="radio"
+                                                name="choices" value="{{ $key }}"
+                                                wire:model="answers.{{ $questions[$currentStep - 1]->id }}">
                                             {{ $value }}
                                         </label>
                                     </div>
@@ -35,13 +40,15 @@
                                 {!! $questions[$currentStep - 1]->answer !!}
                             </div>
                             <br>
-                            <button class="btn btn-sm btn-info show-indicator" onclick="showAnswer()">Click to show</button><br>
+                            <button class="btn btn-sm btn-info show-indicator" onclick="showAnswer()">Click to
+                                show</button><br>
                             <strong>Short Answer Explanation</strong>
                             <div class="answer-area" id="shortAnswerArea">
                                 {!! $questions[$currentStep - 1]->short_answer !!}
                             </div>
                             <br>
-                            <button class="btn btn-sm btn-warning show-indicator" onclick="showShortAnswer()">Click to show</button>
+                            <button class="btn btn-sm btn-warning show-indicator" onclick="showShortAnswer()">Click to
+                                show</button>
                         </div>
 
                         {{-- Check if user is premium user or is Admin or has test management permission --}}
@@ -51,14 +58,16 @@
                                 {!! $questions[$currentStep - 1]->full_answer !!}
                             </div>
                             <br>
-                            <button class="btn btn-sm btn-primary show-indicator" onclick="showFullAnswer()">Click to show</button><br>
+                            <button class="btn btn-sm btn-primary show-indicator" onclick="showFullAnswer()">Click to
+                                show</button><br>
                             <strong>Answer Resource Link</strong>
                             <div class="answer-area" id="answerResourceArea">
                                 <a href="{{ $questions[$currentStep - 1]->answer_resource }}" target="_blank"
                                     rel="noopener noreferrer">{{ $questions[$currentStep - 1]->answer_resource }}</a>
                             </div>
                             <br>
-                            <button class="btn btn-sm btn-success show-indicator" onclick="showAnswerResource()">Click to show</button>
+                            <button class="btn btn-sm btn-success show-indicator" onclick="showAnswerResource()">Click
+                                to show</button>
                         </div>
 
                     </div>
@@ -77,7 +86,8 @@
                                     class="bi bi-chevron-double-right"></i></button>&nbsp;
                         @endif
                         @if ($currentStep == count($questions))
-                            <button class="btn btn-success" wire:click="submit({{ $questions }},{{$studentTestID}})">Submit</button>
+                            <button class="btn btn-success"
+                                wire:click="submit({{ $questions }},{{ $studentTestID }})">Submit</button>
                         @endif
                     </div>
                 </div>

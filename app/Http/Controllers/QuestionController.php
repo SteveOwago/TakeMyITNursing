@@ -7,6 +7,7 @@ use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\AnswerChoice;
 use App\Models\Test;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -29,7 +30,7 @@ class QuestionController extends Controller
                 return  $row->id ?? 'Not Set';
             });
             $table->editColumn('question', function ($row) {
-                return $row->name ?? 'Not Set';
+                return $row->question ?? 'Not Set';
             });
             $table->editColumn('answer', function ($row) {
                 return $row->answer ?? 'No Name';
@@ -120,8 +121,9 @@ class QuestionController extends Controller
     {
         $tests = Test::all();
         $answers = AnswerChoice::all();
+        $topics = Topic::all();
 
-        return view('admin.questions.create', compact('tests','answers'));
+        return view('admin.questions.create', compact('tests','answers','topics'));
     }
 
     /**
@@ -145,6 +147,7 @@ class QuestionController extends Controller
             'short_answer' => $request->short_answer,
             'full_answer' => $request->full_answer,
             'test_id' => $request->test_id,
+            'topic_id' => $request->topic_id,
             'answer_resource' => $request->answer_resource,
             'question_image_path' => $request->question_image_path
         ]);
@@ -184,6 +187,7 @@ class QuestionController extends Controller
             'short_answer' => $request->short_answer,
             'full_answer' => $request->full_answer,
             'test_id' => $testID,
+            'topic_id' => $request->topic_id,
             'answer_resource' => $request->answer_resource,
             'question_image_path' => $request->question_image_path
         ]);
@@ -211,8 +215,10 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        $subjectDomains = Test::all();
-        return view('admin.questions.edit', compact('question', 'subjectDomains'));
+        $tests = Test::all();
+        $topics = Topic::all();
+        $answers = AnswerChoice::all();
+        return view('admin.questions.edit', compact('question', 'tests','topics','answers'));
     }
 
     /**
@@ -222,16 +228,21 @@ class QuestionController extends Controller
      * @param  \App\Models\question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatequestionRequest $request, Question $question)
+    public function update(UpdateQuestionRequest $request, Question $question)
     {
+        $choices = json_decode($request->input('choices'), true);
         $question->update([
-            'name' => $request->name,
-            'subject_category_id' => $request->subject_category_id,
-            'max_number_of_questions' => $request->max_number_of_questions,
-            'question_duration' => $request->question_duration,
-            'description' => $request->description,
+            'question' => $request->question,
+            'choices' => $choices,
+            'answer' => $request->answer,
+            'short_answer' => $request->short_answer,
+            'full_answer' => $request->full_answer,
+            'test_id' => $request->test_id,
+            'topic_id' => $request->topic_id,
+            'answer_resource' => $request->answer_resource,
+            'question_image_path' => $request->question_image_path
         ]);
-        return back()->with('success', 'question (' . $question->name . ') is Updated Successfully!');
+        return back()->with('success', 'Question  is Updated Successfully!');
     }
 
     /**

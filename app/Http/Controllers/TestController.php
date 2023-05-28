@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 use App\Models\SubjectDomain;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Question;
+use App\Models\SubjectCategory;
+use App\Services\SubjectDomainService;
 
 class TestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $subjectDomain;
+
+    public function __construct(SubjectDomainService $subjectDomain){
+        $this->subjectDomain = $subjectDomain;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +28,12 @@ class TestController extends Controller
     {
         if ($request->ajax()) {
             $query = Test::with(['subjectCategory']);
+            //User Is not Administrator
+            if (!auth()->user()->hasRole('Admin')) {
+                $categories = SubjectCategory::select('id')->where('subject_domain_id',$this->subjectDomain->getUserSubjectDomain())->cursor();
+                $query = Test::with(['subjectCategory'])->whereIn('subject_category_id',$categories);
+            }
+
 
             $table = Datatables::of($query);
 
@@ -46,9 +54,15 @@ class TestController extends Controller
             $table->editColumn('actions', function ($row) {
                 //Set the values to 1 to be viewable on display
                 $view = 1;
-                $edit = 1;
-                $delete = 0;
-                $routePart = 'admin.tests';
+                if (auth()->user()->hasrole('Admin') || auth()->user()->can('admin_management')) {
+                    $routePart = 'admin.tests';
+                    $edit = 1;
+                    $delete = 1;
+                } else {
+                    $routePart = 'student.tests';
+                    $edit = 0;
+                    $delete = 0;
+                }
 
                 return view('layouts.partials.utilities.datatablesActions', compact(
                     'view',
@@ -59,7 +73,7 @@ class TestController extends Controller
                 ));
             });
 
-            $table->rawColumns(['id', 'name', 'subjectCategory', 'created_at','actions']);
+            $table->rawColumns(['id', 'name', 'subjectCategory', 'created_at', 'actions']);
 
             return $table->make(true);
         }
@@ -94,7 +108,7 @@ class TestController extends Controller
             'description' => $request->description,
         ]);
 
-        return back()->with('success','Test ('.$test->name.') is Created Successfully!');
+        return back()->with('success', 'Test (' . $test->name . ') is Created Successfully!');
     }
 
     /**
@@ -103,10 +117,10 @@ class TestController extends Controller
      * @param  \App\Models\Test  $test
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,Test $test)
+    public function show(Request $request, Test $test)
     {
         if ($request->ajax()) {
-            $query = Question::where('test_id',$test->id);
+            $query = Question::where('test_id', $test->id);
 
             $table = Datatables::of($query);
 
@@ -130,9 +144,16 @@ class TestController extends Controller
             $table->editColumn('actions', function ($row) {
                 //Set the values to 1 to be viewable on display
                 $view = 1;
-                $edit = 1;
-                $delete = 1;
-                $routePart = 'admin.questions';
+                if (auth()->user()->hasrole('Admin') || auth()->user()->can('admin_management')) {
+                    $routePart = 'admin.questions';
+                    $edit = 1;
+                    $delete = 1;
+                } else {
+                    $routePart = 'student.questions';
+                    $edit = 0;
+                    $delete = 0;
+                }
+
 
                 return view('layouts.partials.utilities.datatablesActions', compact(
                     'view',
@@ -143,11 +164,11 @@ class TestController extends Controller
                 ));
             });
 
-            $table->rawColumns(['id', 'question', 'answer', 'short_answer','created_at', 'actions']);
+            $table->rawColumns(['id', 'question', 'answer', 'short_answer', 'created_at', 'actions']);
 
             return $table->make(true);
         }
-        return view('admin.tests.show',compact('test'));
+        return view('admin.tests.show', compact('test'));
     }
 
     /**
@@ -159,7 +180,7 @@ class TestController extends Controller
     public function edit(Test $test)
     {
         $subjectDomains = SubjectDomain::all();
-        return view('admin.tests.edit',compact('test','subjectDomains'));
+        return view('admin.tests.edit', compact('test', 'subjectDomains'));
     }
 
     /**
@@ -178,7 +199,7 @@ class TestController extends Controller
             'test_duration' => $request->test_duration,
             'description' => $request->description,
         ]);
-        return back()->with('success','Test ('.$test->name.') is Updated Successfully!');
+        return back()->with('success', 'Test (' . $test->name . ') is Updated Successfully!');
     }
 
     /**
@@ -192,11 +213,13 @@ class TestController extends Controller
         //
     }
 
-    public function takeExam(Test $test){
-        return view('admin.tests.take-test',compact('test'));
+    public function takeExam(Test $test)
+    {
+        return view('admin.tests.take-test', compact('test'));
     }
 
-    public function chooseTest(Request $request){
+    public function chooseTest(Request $request)
+    {
         if ($request->ajax()) {
             $query = Test::with(['subjectCategory']);
 
@@ -219,9 +242,15 @@ class TestController extends Controller
             $table->editColumn('actions', function ($row) {
                 //Set the values to 1 to be viewable on display
                 $view = 1;
-                $edit = 1;
-                $delete = 0;
-                $routePart = 'admin.tests';
+                if (auth()->user()->hasrole('Admin') || auth()->user()->can('admin_management')) {
+                    $routePart = 'admin.tests';
+                    $edit = 1;
+                    $delete = 1;
+                } else {
+                    $routePart = 'student.tests';
+                    $edit = 0;
+                    $delete = 0;
+                }
 
                 return view('layouts.partials.utilities.datatablesActions', compact(
                     'view',
@@ -232,7 +261,7 @@ class TestController extends Controller
                 ));
             });
 
-            $table->rawColumns(['id', 'name', 'subjectCategory', 'created_at','actions']);
+            $table->rawColumns(['id', 'name', 'subjectCategory', 'created_at', 'actions']);
 
             return $table->make(true);
         }

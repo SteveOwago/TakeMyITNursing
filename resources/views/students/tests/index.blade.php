@@ -11,8 +11,8 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>All Tests</h3>
-                    <p class="text-subtitle text-muted">Click on Test Name to View Entire Details</p>
+                    <h3>All Available Tests</h3>
+                    <p class="text-subtitle text-muted">Click on Action Buttons to View Entire Details</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -76,7 +76,7 @@
                     processing: true,
                     method: 'GET',
                     serverSide: true,
-                    ajax: "{{ route('student.tests.take') }}",
+                    ajax: "{{ route('admin.tests.index') }}",
                     columns: [{
                             data: 'id',
                             name: 'id'

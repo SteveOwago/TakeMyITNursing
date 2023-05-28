@@ -12,14 +12,14 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Edit Test Exams</h3>
+                        <h3>Edit Topic Exams</h3>
                         <p class="text-subtitle text-muted">Select Domain and Subject Category</p>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Edit Test Exam</li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Topic</li>
                             </ol>
                         </nav>
                     </div>
@@ -32,31 +32,27 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Edit Test Examination</h4>
-                                {{-- <a href="{{ route('export.get-bulk-messages-excel') }}"
-                                class="btn btn-primary float-start float-lg-end">
-                                <i class="bi bi-download"></i> Get Excel Import File
-                            </a> --}}
+                                <h4 class="card-title">Edit topic Examination</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form class="form" action="{{ route('admin.tests.update', [$test]) }}" method="POST"
+                                    <form class="form" action="{{ route('admin.topics.update', [$topic]) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <div class="row">
                                             <div class="col-md-6 col-12">
-                                                <label for="first-name-column">Select Subject Domain</label>
+                                                <label for="first-name-column">Select Test</label>
                                                 <fieldset class="form-group">
                                                     <select class="form-select dynamicSubjectDomain"
-                                                        id="dynamicSubjectDomain" name="subject_domain_id"
+                                                        id="dynamicSubjectDomain" name="test_id"
                                                         data-dependent="subject_category_id" data-campaign="sender-name"
                                                         required>
                                                         <option selected value="" disabled>Click Here</option>
-                                                        @forelse ($subjectDomains as $item)
+                                                        @forelse ($tests as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                         @empty
-                                                            <option disabled>No Subject Domain Added</option>
+                                                            <option disabled>No Tests Added</option>
                                                         @endforelse
                                                     </select>
                                                 </fieldset>
@@ -65,53 +61,18 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 col-12">
-                                                <label for="first-name-column">Select Domain Subcategory</label>
-                                                <fieldset class="form-group">
-                                                    <select class="form-select dynamicSubjectCategory"
-                                                        id="subject_category_id" name="subject_category_id"
-                                                        data-dependent="campaign_id" required>
-                                                        <option selected value="">Select Domain Subcategory</option>
-                                                    </select>
-                                                </fieldset>
-                                                @error('subject_category_id')
-                                                    <p class="text-danger">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <label for="first-name-column">Test Name</label>
+                                                    <label for="first-name-column">Topic Name</label>
                                                     <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Test Name" name="name" value="{{ $test->name }}">
+                                                        placeholder="Topic Name" name="name" value="{{ $topic->name }}">
                                                 </div>
                                                 @error('name')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="first-name-column">Maximum No of Questions Per Test</label>
-                                                    <input type="number" id="first-name-column" class="form-control"
-                                                        placeholder="e.g 60" name="max_number_of_questions"
-                                                        value="{{ $test->max_number_of_questions }}">
-                                                </div>
-                                                @error('max_number_of_questions')
-                                                    <p class="text-danger">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="col-md-12 col-12">
-                                                <div class="form-group">
-                                                    <label for="first-name-column">Test Duration (Minutes)</label>
-                                                    <input type="number" id="first-name-column" class="form-control"
-                                                        placeholder="e.g 60" name="test_duration"
-                                                        value="{{ $test->test_duration }}">
-                                                </div>
-                                                @error('max_number_of_questions')
-                                                    <p class="text-danger">{{ $message }}</p>
-                                                @enderror
-                                            </div>
                                             <div class="col-md-12 form-group">
                                                 <label>Description</label>
-                                                <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor" name="description">{{ $test->description }}</textarea>
+                                                <textarea rows="10" class="form-control" placeholder="Start Typing Here ..." id="editor" name="description">{{ $topic->description }}</textarea>
                                                 <div id="informationchar"></div>
                                                 {{-- <div id="informationword"></div> --}}
                                                 <div id="informationparagraphs"></div>
