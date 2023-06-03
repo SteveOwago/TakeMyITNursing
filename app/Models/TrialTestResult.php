@@ -9,4 +9,8 @@ class TrialTestResult extends Model
 {
     use HasFactory;
     protected $guarded =[];
+
+    public function test(){
+        return $this->belongsTo(Test::class,'test_trial_id');
+    }
 }

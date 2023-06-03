@@ -2,9 +2,17 @@
     <div class="col-md-12">
         @if ($currentStep > count($questions))
             <div class="text-center card col-md-8 offset-2">
-                <h2 class="text-center">Thank you for completing the Test!</h2>
+                <h2>Thank you for completing the Test!</h2>
+                <p><span class="text-success">Your Test Results have been Sent via Email Provided</span></p>
                 <a href="{{ route('admin.take.exam', [$testID]) }}" wire:click="$set('currentStep', 1)"
                     class="btn btn-sm btn-success">Start Over</a>
+            </div>
+        @elseif ($currentStep == -1)
+            <div class="text-center card col-md-8 offset-2">
+                <h2>Thank you. You have already completed a Test!</h2>
+                <p><span class="text-success">Test Aready Taken. Kindly Create an Acount to Take More Exiting and Challenging Test Questions</span></p>
+                <a href="{{ route('register') }}"
+                    class="btn btn-sm btn-success">Create Account</a>
             </div>
         @else
             <div class="card">
@@ -13,16 +21,16 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <p>{!! $questions[$currentStep - 1]->question ?? 'Question Not Set' !!}</p>
+                        <p><strong>Question:</strong>{!! $questions[$currentStep - 1]->question ?? 'Question Not Set' !!}</p>
                     </div>
-                    <div class="row">
+                    <div class="row ml-2">
                         @php $choices = $questions[$currentStep - 1]->choices; @endphp
                         {{-- <input type="text" wire:model="answers.{{ $questions[$currentStep - 1]->id }}"> --}}
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled text-primary">
                             @foreach ($choices as $key => $value)
                                 <li>
                                     <div class="form-group">
-                                        <label>
+                                        <label style="color: black;">
                                             {{ str_replace('choice_', '', $key) }}&nbsp;:&nbsp; <input type="radio"
                                                 name="choices" value="{{ $key }}"
                                                 wire:model="answers.{{ $questions[$currentStep - 1]->id }}">
@@ -87,7 +95,7 @@
                         @endif
                         @if ($currentStep == count($questions))
                             <button class="btn btn-success"
-                                wire:click="submit({{ $questions }},{{ $studentTestID }})">Submit</button>
+                                wire:click="submit({{ $questions }},{{ $studentTrialTestID }})">Submit</button>
                         @endif
                     </div>
                 </div>
@@ -108,4 +116,3 @@
     </div>
 
 </div>
-

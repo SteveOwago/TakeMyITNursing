@@ -12,9 +12,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     @include('layouts.partials.styles')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"
         integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    <style>
+        .answer-area {
+            display: none;
+        }
+
+        .show-indicator {
+            cursor: pointer;
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ asset('backendIT/assets/css/main/app.css') }}">
+    @livewireStyles
 </head>
 
 <body class="antialiased">
@@ -84,16 +97,16 @@
 
         <!-- Basic Tables start -->
         <section class="section">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Test: {{ $test['0']['name'] }} <span class="float-start float-lg-end">Expected Number of Questions:
-                            25</span> </h4>
-                </div>
-                <div class="card-body">
-                    <livewire:test-trial-exam :id="$test['0']['id']"/>
+            <div class="col-8 offset-2 justify-content">
+                <div class="card mt-2 mb-5">
+                    <div class="card-header">
+                        <h4>Test: {{ $test['0']['name'] }} <span class="float-start float-lg-end">Expected Number of Questions: 25</span></h4>
+                    </div>
+                    <div class="card-body mt-3 mb-3">
+                    @livewire('test-trial-exam', ['test_id' => $test[0]['id'], 'email' => request()->email,'ip'=>request()->ip()])
+                    </div>
                 </div>
             </div>
-
         </section>
         <div class="footer-middle bg-dark2 pt-95">
             <div class="container">
@@ -105,7 +118,8 @@
                                     alt="" />
                             </div>
                             <div class="company-info-desc">
-                                <p>We are a team of professional experts in the IT, and Software engineering industry who
+                                <p>We are a team of professional experts in the IT, and Software engineering industry
+                                    who
                                     are passionate and here to help you out to balance between work, online course and
                                     family time
                                 </p>
@@ -163,7 +177,8 @@
                                     <div class="recent-post-image mr-3">
                                         <a href="#">
                                             <img width="80" height="80"
-                                                src="{{ asset('frontendIT/assets/images/recent1.jpg') }}" alt="">
+                                                src="{{ asset('frontendIT/assets/images/recent1.jpg') }}"
+                                                alt="">
                                         </a>
                                     </div>
                                     <div class="recent-post-text">
@@ -178,7 +193,8 @@
                                     <div class="recent-post-image mr-3">
                                         <a href="#">
                                             <img width="80" height="80"
-                                                src="{{ asset('frontendIT/assets/images/recent3.jpg') }}" alt="">
+                                                src="{{ asset('frontendIT/assets/images/recent3.jpg') }}"
+                                                alt="">
                                         </a>
                                     </div>
                                     <div class="recent-post-text">
@@ -282,14 +298,17 @@
                 var answerArea = document.getElementById('answerArea');
                 answerArea.style.display = 'block';
             }
+
             function showShortAnswer() {
                 var shortAnswerArea = document.getElementById('shortAnswerArea');
                 shortAnswerArea.style.display = 'block';
             }
+
             function showFullAnswer() {
                 var fullAnswerArea = document.getElementById('fullAnswerArea');
                 fullAnswerArea.style.display = 'block';
             }
+
             function showAnswerResource() {
                 var answerResourceArea = document.getElementById('answerResourceArea');
                 answerResourceArea.style.display = 'block';
@@ -308,10 +327,7 @@
             add_chatinline();
         </script>
 
+        @livewireScripts
+</body>
 
-    </body>
-
-    </html>
-
-
-
+</html>

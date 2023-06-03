@@ -2,49 +2,66 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\SendTestTrialReport;
 use Livewire\Component;
 use App\Models\Question;
 use App\Models\TrialTestResult;
-use App\Models\StudentResult;
 use App\Models\Test;
+use App\Models\TestTrial;
+use App\Models\TrialTestQuestionResult;
 
 class TestTrialExam extends Component
 {
     public $currentStep = 1;
     public $questions = [];
     public $answers = [];
-    public $studentTestID;
+    public $studentTrialTestID;
     public $testID;
 
-    public function mount($id)
-    {
-        // // Retrieve questions from the database
-         $test = Test::findOrFail($id);
+    public $test_id;
+    public $email;
+    public $ip;
 
-       // Session Test to on page Refresh
-        if (session()->has('student_test_id')) {
-            $studentTestID = session('student_test_id');
+    public function mount($test_id, $email, $ip)
+    {
+        $this->test_id = $test_id;
+        $this->email = $email;
+        $this->ip = $ip;
+        //Check if User already has a trial Test
+        // $userTrialTest = TrialTestResult::where('visitor_ip_address', $this->ip)->whereOr('visitor_email', $this->email)->whereNotNull('visitor_score')->first();
+        // if ($userTrialTest) {
+        //     if ($userTrialTest->visitor_email == $email || $userTrialTest->visitor_ip_address == $ip) {
+        //         $this->currentStep = -1;
+        //     }
+        // }
+
+        $test = Test::findOrFail($test_id);
+
+        // Session Test to on page Refresh
+        if (session()->has('student_trial_test_id')) {
+            $studentTrialTestID = session('student_trial_test_id');
         } else {
             // Create a new StudentResult
-            $studentTestID = StudentResult::create([
-                'test_id' => $test->id ?? null,
-                'user_id' => auth()->user()->id ?? null,
+            $studentTrialTestID = TrialTestResult::create([
+                'test_trial_id' => $this->test_id ?? null,
+                'visitor_email' => $this->email ?? null,
+                'visitor_ip_address' => $ip ?? null
             ])->id;
 
             // Store the StudentResult ID in the session
-            session(['student_test_id' => $studentTestID]);
+            session(['student__trial_test_id' => $studentTrialTestID]);
         }
 
         // Assign the StudentResult ID to the component property
-        $this->studentTestID = $studentTestID;
+        $this->studentTrialTestID = $studentTrialTestID;
 
         // Retrieve the questions for the test
         $this->questions = Question::where('test_id', $test->id)
             ->inRandomOrder()
-            ->take($test->max_number_of_questions)
+            ->take(2)
             ->get();
 
-        $this->testID = $id;
+        $this->testID = $test_id;
     }
 
 
@@ -53,9 +70,8 @@ class TestTrialExam extends Component
         return view('livewire.test-trial-exam');
     }
 
-    public function submit($questions, $studentTestID)
+    public function submit($questions, $studentTrialTestID)
     {
-
         $testsQuestionsResults = [];
         foreach ($questions as $question) {
             $choice = 'wrong';
@@ -64,12 +80,13 @@ class TestTrialExam extends Component
                     $choice = str_replace('choice_', '', $answer);
                 }
             }
-            $testStudent =  TrialTestResult::create([
+
+            $testStudent =  TrialTestQuestionResult::create([
                 'question_id' => $question['id'] ?? null,
                 'test_id' => $question['test_id'] ?? null,
-                'user_id' => auth()->user()->id ?? null,
-                'student_result_id' => $studentTestID,
-                'answer' => $choice == $question['answer'] ? 'correct' : 'wrong',
+                'visitor_email' => $email ?? null,
+                'trial_test_id' =>  $studentTrialTestID,
+                'trial_answer' => $choice == $question['answer'] ? 'correct' : 'wrong',
             ]);
             $testsQuestionsResults[] = $testStudent;
         }
@@ -78,25 +95,40 @@ class TestTrialExam extends Component
 
 
         foreach ($testsQuestionsResults as $result) {
-            if ($result['answer'] == 'correct') {
+            if ($result['trial_answer'] == 'correct') {
                 $score += 1;
             }
             continue;
         }
 
 
-
         //Save test scores
-        $studentTestResult = StudentResult::findOrFail($studentTestID);
+        $studentTestResult = TrialTestResult::findOrFail($studentTrialTestID);
         $studentTestResult->update([
-            'score' => $score . ' out of ' . $numberQuestions . ' => ' . number_format((($score / $numberQuestions) * 100), 2) . '%',
+            'visitor_score' => $score . ' out of ' . $numberQuestions . ' => ' . number_format((($score / $numberQuestions) * 100), 2) . '%',
         ]);
 
         // You can access the submitted answers using $this->answers array
         $this->answers = [];
         $this->currentStep = $numberQuestions + 1;
+
+
+
+        //Trigger Send Result Email Report
+        info($this->email);
+        //check if email is not null
+        if ($this->email != null) {
+            $details = [
+                'trial_test_id' => $studentTrialTestID,
+                'email' => $this->email,
+            ];
+
+            SendTestTrialReport::dispatch($details);
+        }
+
+
         //Destroy Session After Submitting
-        session()->forget('student_test_id');
+        session()->forget('student_trial_test_id');
     }
 
     public function updated($propertyName)

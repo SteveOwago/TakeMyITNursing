@@ -23,6 +23,7 @@ class CreateTrialTestQuestionResultsTable extends Migration
             $table->foreignIdFor(TrialTestResult::class, 'trial_test_id')->nullable()->constrained();
             $table->string('visitor_email')->nullable();
             $table->enum('trial_answer',['correct','wrong'])->nullable();
+            $table->timestamps();
         });
     }
 
