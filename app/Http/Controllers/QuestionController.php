@@ -162,8 +162,8 @@ class QuestionController extends Controller
     {
         $test = Test::findOrFail($testID);
         $answers = AnswerChoice::all();
-
-        return view('admin.questions.test-questions', compact('test','answers'));
+        $topics = Topic::wheretest_id($testID)->cursor();
+        return view('admin.questions.test-questions', compact('test','answers','topics'));
     }
 
     /**

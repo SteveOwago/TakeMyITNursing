@@ -37,6 +37,32 @@ class SubjectCategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+
+            //IT and Computer Science
+
+            [
+                'id' => '4',
+                'name' => 'IT and Networking',
+                'subject_domain_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'id' => '5',
+                'name' => 'Computer Science',
+                'subject_domain_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+            [
+                'id' => '6',
+                'name' => 'Software Development & Engineering',
+                'subject_domain_id' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ];
         SubjectCategory::insert($subjectCats);
     }

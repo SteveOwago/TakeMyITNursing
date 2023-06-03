@@ -9,40 +9,7 @@
         <meta name="description" content="Take My IT Class, programming, exams ranging form assignment, online semester class, discussions, proctored exams, and programing quiz with our professional team.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="frontendIT/assets/images/fav-icon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="frontendIT/assets/images/fav-icon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="frontendIT/assets/images/fav-icon/favicon-16x16.png">
-        <link rel="manifest" href="frontendIT/assets/images/fav-icon/site.webmanifest">
-        <!-- bootstrap CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/bootstrap.min.css" type="text/css" media="all" />
-        <!-- carousel CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/owl.carousel.min.css" type="text/css" media="all" />
-        <!-- responsive CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/responsive.css" type="text/css" media="all" />
-        <!-- nivo-slider CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/nivo-slider.css" type="text/css" media="all" />
-        <!-- animate CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/animate.css" type="text/css" media="all" />
-        <!-- animated-text CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/animated-text.css" type="text/css" media="all" />
-        <!-- font-awesome CSS -->
-        <link type="text/css" rel="stylesheet" href="frontendIT/assets/fonts/font-awesome/css/font-awesome.min.css">
-        <!-- font-flaticon CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/flaticon.css" type="text/css" media="all" />
-        <!-- theme-default CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/theme-default.css" type="text/css" media="all" />
-        <!-- meanmenu CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/meanmenu.min.css" type="text/css" media="all" />
-        <!-- Main Style CSS -->
-        <link rel="stylesheet"  href="frontendIT/style.css" type="text/css" media="all" />
-        <!-- transitions CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/owl.transitions.css" type="text/css" media="all" />
-        <!-- venobox CSS -->
-        <link rel="stylesheet" href="frontendIT/venobox/venobox.css" type="text/css" media="all" />
-        <!-- widget CSS -->
-        <link rel="stylesheet" href="frontendIT/assets/css/widget.css" type="text/css" media="all" />
-        <!-- modernizr js -->
-        <script type="text/javascript" src="frontendIT/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+        @include('layouts.partials.styles')
 
     </head>
     <body class="antialiased">
@@ -56,10 +23,10 @@
                 <div class="col-md-3">
                     <div class="logo mt-4">
                         <a class="logo_img" href="{{route('home')}}" title="TakeMyITClass">
-                            <img src="frontendIT/assets/images/fav-icon/logo.jpg" size="56x56" alt="" />
+                            <img src="{{asset('frontendIT/assets/images/fav-icon/logo.jpg')}}" size="56x56" alt="" />
                         </a>
                         <a class="main_sticky" href="{{route('home')}}" title="TakeMyITClass">
-                            <img src="frontendIT/assets/images/fav-icon/logo-white.jpg" alt="astute" />
+                            <img src="{{asset('frontendIT/assets/images/fav-icon/logo-white.jpg')}}" alt="astute" />
                         </a>
                     </div>
                 </div>
@@ -113,7 +80,7 @@
                         <div class="slider_content text-center">
                             <div class="slider_text">
                                 <div class="slider_text_inner">
-                                    <h1>Take My Nursing and IT Class</h1>
+                                    <h1>Take My Nursing and IT Exam Tests</h1>
 
                                 </div>
                                 @if (\Session::has('message'))
@@ -123,12 +90,15 @@
                                     </div>
                                 @endif
                                 <div class="slider_text_desc pt-4">
-                                    <p>We are a Specialised Team to Help You With all your Online Course work Needs.
-                                        We cover and handle  Online Courses, Exams, Proctored exams in Medical and Nursing Courses, Programming Projects, Essays,assignments, Thesis, and Research papers in the Field of Technology, Programming, and Coding.</p>
+                                    <p>Our specialised Team of Examiners in Different Subject Domains have Created Tests
+                                        Our Tests Covers Examinations in Medical & Nursing Courses and IT & Computer Science Courses.
+                                        Click on the button below to get started.
+                                        {{-- We Cover and Handle  Online Courses, Exams, Proctored exams in Medical and Nursing Courses, Programming Projects, Essays,assignments, Thesis, and Research papers in the Field of Technology, Programming, and Coding.--}}
+                                    </p>
                                 </div>
                                 <div class="slider_button pt-5 d-flex">
                                     <div class="button">
-                                        <a href="{{route('home')}}#how-it-works">How IT Work <i class="fa fa-long-arrow-right"></i></a>
+                                        <a href="{{route('register')}}">Get Started Now<i class="fa fa-long-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -161,17 +131,17 @@
                                     </div>
                                 </div>
                                 <div class="flipbox_title">
-                                    <h3>Online Courses</h3>
+                                    <h3>Online Medical & Nursing Exam Tests</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="techno_flipbox_back">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
-                                    <h3>Medical & IT Online Courses</h3>
+                                    <h3>Online Medical & Nursing Tests</h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>We Handle Medical and IT related Online Courses. We guarantee to take care of your entire online course.</p>
+                                    <p>The System has unlimited Test attempts for our Students. The Tests provides a Full Report and Analysis of the Test.</p>
                                 </div>
                             </div>
                         </div>
@@ -187,17 +157,17 @@
                                     </div>
                                 </div>
                                 <div class="flipbox_title">
-                                    <h3>Solution For Assignments and Quiz</h3>
+                                    <h3>Solution For Tests and Quiz</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="techno_flipbox_back">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
-                                    <h3>Solution For Assignments and Quiz</h3>
+                                    <h3>Test Answers & Explanation</h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>We will handle all your Assignment, quiz, and tests needs</p>
+                                    <p>Each Question answer is explanined fully, Additional revisions resource is also included in the Tests report for each question</p>
                                 </div>
                             </div>
                         </div>
@@ -213,17 +183,17 @@
                                     </div>
                                 </div>
                                 <div class="flipbox_title">
-                                    <h3>Continuous Communication with Our Team</h3>
+                                    <h3>Continuous Evaluation</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="techno_flipbox_back">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
-                                    <h3>Continuous Communication with Our Team</h3>
+                                    <h3>Continous Evaluation and Assessment</h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>Provide explanations and a detailed approach in handling your Assignments and Quiz</p>
+                                    <p>Student can reevaluate themselves on a Test by doing unlimited tests to get better with time.</p>
                                 </div>
                             </div>
                         </div>
@@ -246,10 +216,10 @@
                         <div class="techno_flipbox_back">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
-                                    <h3>Doctors & IT Experts in The Field </h3>
+                                    <h3>Our Examiners</h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>Get to Work with the Best Medical Practitioners,Proffessors and Software Engineers to handle your Assignment</p>
+                                    <p>Our Examiners guarantees passing on first attempt in actual Exams. The Examiners aim to achieve the best out come in preparedness of the Student</p>
                                 </div>
                             </div>
                         </div>
@@ -341,7 +311,7 @@
     <!----- Start Techno Flipbox Area ----->
     <!--==================================================-->
 
-    <div class="flipbox_area pt-85 pb-70" id="services" style="background-image:url(frontendIT/assets/images/slider/slider-4.jpg)"; >
+    <div class="flipbox_area pt-85 pb-70" id="services" style="background-image:url({{asset('frontendIT/assets/images/slider/slider-4.jpg')}})"; >
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -369,23 +339,24 @@
                                     </div>
                                 </div>
                                 <div class="flipbox_title">
-                                    <h3>Proctored Exams, Tests and Quiz</h3>
+                                    <h3>Nursing School Test Examinations</h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>Our Experts in Various fields will Help you bag good grades from your exams</p>
+                                    <p>There are Various Test Evaluation for Nursing School.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="techno_flipbox_back " style="background-image:url(frontendIT/assets/images/feature1.jpg);">
+                        <div class="techno_flipbox_back " style="background-image:url({{asset('frontendIT/assets/images/feature1.jpg')}});">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
-                                    <h3>Proctored Exams</h3>
+                                    <h3>TEAS, HESI, NLN PAX & ACT and SAT</h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>We use software to access your laptop during the exam time you only sit in front of your laptop. Can we discuss this on WhatsApp?</p>
+                                    <p>The System Unlimited Tests and Exam Questions for TEAS, HESI,  NLN PAX and ACT & SAT  Exams</p>
                                 </div>
                                 <div class="flipbox_button">
-                                    <a  href="https://web.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">Chat on WhatsApp<i class="fa fa-angle-double-right"></i></a>
+                                    <a  href="#https://web.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">Learn More<i class="fa fa-angle-double-right"></i></a>
+                                    {{-- <a  href="https://web.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">Chat on WhatsApp<i class="fa fa-angle-double-right"></i></a> --}}
                                 </div>
                             </div>
                         </div>
@@ -401,24 +372,24 @@
                                     </div>
                                 </div>
                                 <div class="flipbox_title">
-                                    <h3>Software Use and Certification</h3>
+                                    <h3>Medical School Test Examinations</h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>We handle online courses dealing with operating systems such as Windows, MacOs, and Linux. Medical Courses and exams such as ATI and NCLEX Exams</p>
+                                    <p>There are Various Test Evaluation for Nursing School.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="techno_flipbox_back " style="background-image:url(frontendIT/assets/images/feature2.jpg);">
+                        <div class="techno_flipbox_back " style="background-image:url({{asset('frontendIT/assets/images/feature2.jpg')}});">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
-                                    <h3>Software Application</h3>
+                                    <h3>MCAT, DAT and GRE </h3>
                                 </div>
                                 <div class="flipbox_desc">
-                                    <p>We Cover Windows online course on application use such as Microsoft office packages (Word, Excel, Access, Publisher).</p>
+                                    <p>The System Unlimited Tests and Exam Questions for MCAT, MCAT - Orthopedic, GRE and Dental Admission Test (DAT)</p>
                                 </div>
                                 <div class="flipbox_button">
-                                    <a  href="https://web.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">Chat on WhatsApp<i class="fa fa-angle-double-right"></i></a>
-                                </div>
+                                    <a  href="#https://web.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">Learn More<i class="fa fa-angle-double-right"></i></a>
+                                   </div>
                             </div>
                         </div>
                     </div>
@@ -440,7 +411,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="techno_flipbox_back " style="background-image:url(frontendIT/assets/images/feature3.jpg);">
+                        <div class="techno_flipbox_back " style="background-image:url(frontendIT/assets/images/feature3.jpg')}});">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
                                     <h3>Web Development Projects</h3>
@@ -472,7 +443,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="techno_flipbox_back " style="background-image:url(frontendIT/assets/images/feature3.jpg);">
+                        <div class="techno_flipbox_back " style="background-image:url({{asset('frontendIT/assets/images/feature3.jpg')}});">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
                                     <h3>Essays and Assignment</h3>
@@ -504,7 +475,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="techno_flipbox_back " style="background-image:url(frontendIT/assets/images/feature1.jpg);">
+                        <div class="techno_flipbox_back " style="background-image:url({{asset('frontendIT/assets/images/feature1.jpg')}});">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
                                     <h3>Boost Your Grades</h3>
@@ -536,7 +507,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="techno_flipbox_back " style="background-image:url(frontendIT/assets/images/feature2.jpg);">
+                        <div class="techno_flipbox_back " style="background-image:url({{asset('frontendIT/assets/images/feature2.jpg')}});">
                             <div class="techno_flipbox_inner">
                                 <div class="flipbox_title">
                                     <h3>Database Design</h3>
@@ -599,7 +570,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-6">
                     <div class="single_about_thumb mb-3">
                         <div class="single_about_thumb_inner">
-                            <img src="frontendIT/assets/images/about-img2.png" alt="" />
+                            <img src="{{asset('frontendIT/assets/images/about-img2.png')}}" alt="" />
                         </div>
                     </div>
                 </div>
@@ -663,12 +634,12 @@
                     <div class="single_portfolio">
                         <div class="single_portfolio_inner">
                             <div class="single_portfolio_thumb">
-                                <a href="#"><img src="frontendIT/assets/images/portfolio/p1.jpg" alt="" /></a>
+                                <a href="#"><img src="{{asset('frontendIT/assets/images/portfolio/p1.jpg')}}" alt="" /></a>
                             </div>
                         </div>
                         <div class="single_portfolio_content">
                             <div class="single_portfolio_icon">
-                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="frontendIT/assets/images/portfolio/p1.jpg"><i class="fa fa-search-plus"></i></a>
+                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{asset('frontendIT/assets/images/portfolio/p1.jpg')}}"><i class="fa fa-search-plus"></i></a>
                             </div>
                             <div class="single_portfolio_content_inner">
                                 <span>Online Course and Exams</span>
@@ -682,12 +653,12 @@
                     <div class="single_portfolio">
                         <div class="single_portfolio_inner">
                             <div class="single_portfolio_thumb">
-                                <a href="#"><img src="frontendIT/assets/images/portfolio/p2.jpg" alt="" /></a>
+                                <a href="#"><img src="{{asset('frontendIT/assets/images/portfolio/p2.jpg')}}" alt="" /></a>
                             </div>
                         </div>
                         <div class="single_portfolio_content">
                             <div class="single_portfolio_icon">
-                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="frontendIT/assets/images/portfolio/p2.jpg"><i class="fa fa-search-plus"></i></a>
+                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{asset('frontendIT/assets/images/portfolio/p2.jpg')}}"><i class="fa fa-search-plus"></i></a>
                             </div>
                             <div class="single_portfolio_content_inner">
                                 <span>Project Management</span>
@@ -701,12 +672,12 @@
                     <div class="single_portfolio">
                         <div class="single_portfolio_inner">
                             <div class="single_portfolio_thumb">
-                                <a href="#"><img src="frontendIT/assets/images/portfolio/p3.jpg" alt="" /></a>
+                                <a href="#"><img src="{{asset('frontendIT/assets/images/portfolio/p3.jpg')}}" alt="" /></a>
                             </div>
                         </div>
                         <div class="single_portfolio_content">
                             <div class="single_portfolio_icon">
-                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="frontendIT/assets/images/portfolio/p3.jpg"><i class="fa fa-search-plus"></i></a>
+                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{asset('frontendIT/assets/images/portfolio/p3.jpg')}}"><i class="fa fa-search-plus"></i></a>
                             </div>
                             <div class="single_portfolio_content_inner">
                                 <span>Assignment Essay</span>
@@ -720,12 +691,12 @@
                     <div class="single_portfolio">
                         <div class="single_portfolio_inner">
                             <div class="single_portfolio_thumb">
-                                <a href="#"><img src="frontendIT/assets/images/portfolio/p4.jpg" alt="" /></a>
+                                <a href="#"><img src="{{asset('frontendIT/assets/images/portfolio/p4.jpg')}}" alt="" /></a>
                             </div>
                         </div>
                         <div class="single_portfolio_content">
                             <div class="single_portfolio_icon">
-                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="frontendIT/assets/images/portfolio/p4.jpg"><i class="fa fa-search-plus"></i></a>
+                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{asset('frontendIT/assets/images/portfolio/p4.jpg')}}"><i class="fa fa-search-plus"></i></a>
                             </div>
                             <div class="single_portfolio_content_inner">
                                 <span>Writing Projects</span>
@@ -739,12 +710,12 @@
                     <div class="single_portfolio admin">
                         <div class="single_portfolio_inner">
                             <div class="single_portfolio_thumb">
-                                <a href="#"><img src="frontendIT/assets/images/portfolio/p5.jpg" alt="" /></a>
+                                <a href="#"><img src="{{asset('frontendIT/assets/images/portfolio/p5.jpg')}}" alt="" /></a>
                             </div>
                         </div>
                         <div class="single_portfolio_content">
                             <div class="single_portfolio_icon">
-                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="frontendIT/assets/images/portfolio/p5.jpg"><i class="fa fa-search-plus"></i></a>
+                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{asset('frontendIT/assets/images/portfolio/p5.jpg')}}"><i class="fa fa-search-plus"></i></a>
                             </div>
                             <div class="single_portfolio_content_inner">
                                 <span>Online Proctored Exam</span>
@@ -758,12 +729,12 @@
                     <div class="single_portfolio admin">
                         <div class="single_portfolio_inner">
                             <div class="single_portfolio_thumb">
-                                <a href="#"><img src="frontendIT/assets/images/portfolio/p6.jpg" alt="" /></a>
+                                <a href="#"><img src="{{asset('frontendIT/assets/images/portfolio/p6.jpg')}}" alt="" /></a>
                             </div>
                         </div>
                         <div class="single_portfolio_content">
                             <div class="single_portfolio_icon">
-                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="frontendIT/assets/images/portfolio/p6.jpg"><i class="fa fa-search-plus"></i></a>
+                                <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{asset('frontendIT/assets/images/portfolio/p6.jpg')}}"><i class="fa fa-search-plus"></i></a>
                             </div>
                             <div class="single_portfolio_content_inner">
                                 <span>Discussion Posts</span>
@@ -781,7 +752,7 @@
     <!--==================================================-->
     <!----- Start Techno Video Area ----->
     <!--==================================================-->
-    <div class="video_area pt-100 pb-200"style="background-image:url(frontendIT/assets/images/slider/bg.jpg)">
+    <div class="video_area pt-100 pb-200"style="background-image:url(frontendIT/assets/images/slider/bg.jpg')}})">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -804,7 +775,7 @@
                 <div class="col-lg-12">
                     <div class="single_video">
                         <div class="single_video_thumb">
-                            <img src="frontendIT/assets/images/slider/nurses.jpg" alt="" />
+                            <img src="{{asset('frontendIT/assets/images/slider/nurses.jpg')}}" alt="" />
                         </div>
                     </div>
                     <div class="single-video text-center">
@@ -1005,7 +976,7 @@
     <!--==================================================-->
     <!----- Start Techno Contact Area ----->
     <!--==================================================-->
-    <div class="contact_area pt-85 pb-90" style="background-image:url(frontendIT/assets/images/bg-cnt.jpg)" id="contact">
+    <div class="contact_area pt-85 pb-90" style="background-image:url({{asset('frontendIT/assets/images/bg-cnt.jpg')}})" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -1086,7 +1057,7 @@
                             <div class="col-lg-12">
                                 <div class="single_brand mt-3 mb-5">
                                     <div class="single_brand_thumb">
-                                        <img src="frontendIT/assets/images/brand/1.png" alt="" />
+                                        <img src="{{asset('frontendIT/assets/images/brand/1.png')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -1094,7 +1065,7 @@
                             <div class="col-lg-12">
                                 <div class="single_brand mt-3 mb-5">
                                     <div class="single_brand_thumb">
-                                        <img src="frontendIT/assets/images/brand/2.png" alt="" />
+                                        <img src="{{asset('frontendIT/assets/images/brand/2.png')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -1102,7 +1073,7 @@
                             <div class="col-lg-12">
                                 <div class="single_brand mt-3 mb-5">
                                     <div class="single_brand_thumb">
-                                        <img src="frontendIT/assets/images/brand/3.png" alt="" />
+                                        <img src="{{asset('frontendIT/assets/images/brand/3.png')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -1110,7 +1081,7 @@
                             <div class="col-lg-12">
                                 <div class="single_brand mt-3 mb-5">
                                     <div class="single_brand_thumb">
-                                        <img src="frontendIT/assets/images/brand/4.png" alt="" />
+                                        <img src="{{asset('frontendIT/assets/images/brand/4.png')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -1118,7 +1089,7 @@
                             <div class="col-lg-12">
                                 <div class="single_brand mt-3 mb-5">
                                     <div class="single_brand_thumb">
-                                        <img src="frontendIT/assets/images/brand/5.png" alt="" />
+                                        <img src="{{asset('frontendIT/assets/images/brand/5.png')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -1141,7 +1112,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="widget widgets-company-info">
                         <div class="footer-bottom-logo pb-40">
-                            <img src="frontendIT/assets/images/fav-icon/logo-white.jpg" alt="" />
+                            <img src="{{asset('frontendIT/assets/images/fav-icon/logo-white.jpg')}}" alt="" />
                         </div>
                         <div class="company-info-desc">
                             <p>We are a team of professional experts in the IT, and Software engineering industry who are passionate and here to help you out to balance between work, online course and family time
@@ -1197,7 +1168,7 @@
                             <div class="recent-post-item active pb-3">
                                 <div class="recent-post-image mr-3">
                                     <a href="#">
-                                        <img width="80" height="80" src="frontendIT/assets/images/recent1.jpg" alt="">
+                                        <img width="80" height="80" src="{{asset('frontendIT/assets/images/recent1.jpg')}}" alt="">
                                     </a>
                                 </div>
                                 <div class="recent-post-text">
@@ -1211,7 +1182,7 @@
                             <div class="recent-post-item pt-1">
                                 <div class="recent-post-image mr-3">
                                     <a href="#">
-                                        <img width="80" height="80" src="frontendIT/assets/images/recent3.jpg" alt="">
+                                        <img width="80" height="80" src="{{asset('frontendIT/assets/images/recent3.jpg')}}" alt="">
                                     </a>
                                 </div>
                                 <div class="recent-post-text">
@@ -1300,42 +1271,7 @@
     <a class="visible-xs" id="whatsAppLink" href="https://api.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">
         <i class="fa fa-whatsapp"></i>&nbsp;&nbsp; WhatsApp Us
     </a>
-    <!-- jquery js -->
-    <script type="text/javascript" src="frontendIT/assets/js/vendor/jquery-3.2.1.min.js"></script>
-    <!-- bootstrap js -->
-    <script type="text/javascript" src="frontendIT/assets/js/bootstrap.min.js"></script>
-    <!-- carousel js -->
-    <script type="text/javascript" src="frontendIT/assets/js/owl.carousel.min.js"></script>
-    <!-- counterup js -->
-    <script type="text/javascript" src="frontendIT/assets/js/jquery.counterup.min.js"></script>
-    <!-- waypoints js -->
-    <script type="text/javascript" src="frontendIT/assets/js/waypoints.min.js"></script>
-    <!-- wow js -->
-    <script type="text/javascript" src="frontendIT/assets/js/wow.js"></script>
-    <!-- imagesloaded js -->
-    <script type="text/javascript" src="frontendIT/assets/js/imagesloaded.pkgd.min.js"></script>
-    <!-- venobox js -->
-    <script type="text/javascript" src="frontendIT/venobox/venobox.js"></script>
-    <!-- OnePage Nav js -->
-    <script type="text/javascript" src="frontendIT/assets/js/jquery.nav.js"></script>
-    <!-- ajax mail js -->
-    <script type="text/javascript" src="frontendIT/assets/ajax-mail.html"></script>
-    <!--  testimonial js -->
-    <script type="text/javascript" src="frontendIT/assets/js/testimonial.js"></script>
-    <!--  animated-text js -->
-    <script type="text/javascript" src="frontendIT/assets/js/animated-text.js"></script>
-    <!-- venobox min js -->
-    <script type="text/javascript" src="frontendIT/venobox/venobox.min.js"></script>
-    <!-- isotope js -->
-    <script type="text/javascript" src="frontendIT/assets/js/isotope.pkgd.min.js"></script>
-    <!-- jquery nivo slider pack js -->
-    <script type="text/javascript" src="frontendIT/assets/js/jquery.nivo.slider.pack.js"></script>
-    <!-- jquery meanmenu js -->
-    <script type="text/javascript" src="frontendIT/assets/js/jquery.meanmenu.js"></script>
-    <!-- jquery scrollup js -->
-    <script type="text/javascript" src="frontendIT/assets/js/jquery.scrollUp.js"></script>
-    <!-- theme js -->
-    <script type="text/javascript" src="frontendIT/assets/js/theme.js"></script>
+    @include('layouts.partials.scripts')
     <!-- jquery js -->
     <!--<script src="//code.tidio.co/odd0ytvu6qwx3o4gjr8j44w4ogftxlzr.js" async></script>-->
     <!--Start of Tawk.to Script

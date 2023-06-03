@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SubjectDomainSeeder::class,
             SubjectCategorySeeder::class,
+            TestSeeder::class,
             AnswerChoicesTableSeeder::class,
             PermissionsTableSeeder::class,
             UsersTableSeeder::class,

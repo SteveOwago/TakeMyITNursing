@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\TestTrialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('tests', TestController::class);
     // Questions
     Route::get('questions/test_questions/{testID}', [QuestionController::class, 'createTestQuestion'])->name('tests.question.create');
+    Route::post('questions/test_questions/{testID}', [QuestionController::class, 'storeTestQuestion'])->name('tests.question.store');
+
 
     Route::resource('questions', QuestionController::class);
     //Test
@@ -72,3 +75,9 @@ Route::post('/subscription/process', [SubscriptionController::class, 'processSub
 Route::get('/subscription/cancel', [SubscriptionController::class, 'cancelSubscription'])->name('subscription.cancel');
 // welcome page only for subscribed users
 // Route::get('/welcome', [SubscriptionController::class,''])->middleware('subscribed');
+
+
+//Test Trial routes
+Route::get('/tests/trial', [TestTrialController::class,'index'])->name('tests.trial');
+Route::post('/tests/trial/take', [TestTrialController::class,'store'])->name('trial.test.take');
+Route::post('fetch/tests',[TestTrialController::class, 'fetchTests'])->name('fetch.tests');

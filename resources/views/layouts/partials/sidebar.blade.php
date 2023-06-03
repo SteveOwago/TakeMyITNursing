@@ -6,7 +6,7 @@
                     <a href="{{route('home')}}"><i class="fa fa-user"></i> {{auth()->user()->name}}</a>
                 </div> --}}
                 <div>
-                    <h4><a href="{{ route('home') }}"><i class="fa fa-user"></i> {{ auth()->user()->name }}</a></h4>
+                    <h4><a href="{{ route('dashboard') }}"><i class="fa fa-user"></i> {{ auth()->user()->name }}</a></h4>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -46,7 +46,7 @@
                 <li class="sidebar-title">Menu</li>
 
                 <li class="sidebar-item active ">
-                    <a href="{{ route('home') }}" class='sidebar-link'>
+                    <a href="{{ route('dashboard') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
