@@ -51,17 +51,15 @@ class SendTetsTrialReportListener
             // Generate the PDF content
 
             $pdf = Pdf::loadView('reports.pdf.trial_test_result', $data);
-            //$pdf->download($email . '-' . $test->name . '-' . Carbon::now()->format('Y-m-d H:i') . '.pdf');
             // Generate a unique filename for the PDF
             $filename = $email . '-' . $test->name . '-' . now()->format('Y-m-d H:i') . '.pdf';
-            //
-            $pdf->save(public_path('pdf/' . $filename));
-
             // Build the email with the attached PDF
-            $email = new TrialTestReportEmail($email, $filename, $pdf->output());
 
             // Send the email
-            Mail::to($details['email'])->send($email);
+
+            Mail::to($details['email'])
+                ->send(new TrialTestReportEmail($email, $filename, $pdf->output()));
+            return true;
         }
     }
 }

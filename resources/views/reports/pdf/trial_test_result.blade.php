@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -310,36 +310,54 @@
     <br>
 
     <div class="chapterPage">
-        @foreach ($testTrialQuestions as $question)
+        @foreach ($testTrialQuestions as $key => $question)
             <div class="card mt-2">
                 <div class="card-body">
                     <div class="row">
-                        <p class="highlight"><strong>Question:</strong> {!! $question->question ?? 'Question Not Set' !!}</p>
+                        <p class="highlight"><strong>Question {{$key+1}}</strong> {!! $question->question->question ?? 'Question Not Set' !!}</p>
                     </div>
                     <div class="row">
                         <div class="container">
-                            <div class="col md-6">
+                            <div class="col-md-12">
+                                <div class="answer-area" id="answerArea">
+                                    @php $choices = $question->question->choices; @endphp
+                                    <ul class="list-unstyled">
+                                        @foreach ($choices as $key => $value)
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>
+                                                        {{ str_replace('choice_', '', $key) }}&nbsp;:&nbsp;
+                                                        {{ $value }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col-md-6">
                                 <strong>Answer</strong>
                                 <div class="answer-area" id="answerArea">
-                                    <p class="highlightLight">{!! $question->answer !!}</p>
+                                    <p class="highlightLight">{!! $question->question->answer !!}</p>
                                 </div>
                                 <br>
                                 <strong>Short Answer Explanation</strong>
                                 <div class="answer-area" id="shortAnswerArea">
-                                    <p class="highlightLight">{!! $question->short_answer !!}</p>
+                                    <p class="highlightLight">{!! $question->question->short_answer !!}</p>
                                 </div>
                                 <br>
                             </div>
-                            <div class="col md-6">
+                            <div class="col-md-6">
                                 <strong>Full Answer Explanation</strong>
                                 <div class="answer-area" id="fullAnswerArea">
-                                    <p class="highlightLight">{!! $question->full_answer !!}</p>
+                                    <p class="highlightLight">{!! $question->question->full_answer !!}</p>
                                 </div>
                                 <br>
                                 <strong>Answer Resource Link</strong>
                                 <div class="answer-area" id="answerResourceArea">
-                                    <a href="{{ $question->answer_resource }}" target="_blank"
-                                        rel="noopener noreferrer">{{ $question->answer_resource }}</a>
+                                    <a href="{{ $question->question->answer_resource }}" target="_blank"
+                                        rel="noopener noreferrer">{{ $question->question->answer_resource }}</a>
                                 </div>
                                 <br>
                             </div>
@@ -355,8 +373,4 @@
     </script>
 </body>
 
-</html> --}}
-
-
-
-<H1>Hello</H1>
+</html>
