@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="{{ asset('backendIT/assets/css/main/app.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
@@ -308,13 +309,14 @@
         </footer>
     </div>
     <br>
-
+    <p class="highlight"><strong>Score</strong> {{$test_result}}</p>
     <div class="chapterPage">
         @foreach ($testTrialQuestions as $key => $question)
             <div class="card mt-2">
                 <div class="card-body">
                     <div class="row">
-                        <p class="highlight"><strong>Question {{$key+1}}</strong> {!! $question->question->question ?? 'Question Not Set' !!}</p>
+                        <p class="highlight"><strong>Question {{$key+1}}</strong> <span class="{{ $question->trial_answer == 'correct'?'text-success':'text-danger' }}"> {{ $question->trial_answer == 'correct'?'1 point of 1':'0 point of 1'; }} </span></p>
+                             {!! $question->question->question ?? 'Question Not Set' !!}
                     </div>
                     <div class="row">
                         <div class="container">
@@ -341,14 +343,23 @@
                                 <div class="answer-area" id="answerArea">
                                     <p class="highlightLight">{!! $question->question->answer !!}</p>
                                 </div>
+                                <strong>My Answer</strong>
+                                <div class="answer-area" id="answerArea">
+                                    <p class="highlightLight">{!! $question->trial_choice !!}</p>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Test Topic & Concept</strong>
+                                <div class="answer-area" id="shortAnswerArea">
+                                    <p class="highlightLight">{!! $question->question->topic->name !!}</p>
+                                </div>
                                 <br>
                                 <strong>Short Answer Explanation</strong>
                                 <div class="answer-area" id="shortAnswerArea">
                                     <p class="highlightLight">{!! $question->question->short_answer !!}</p>
                                 </div>
                                 <br>
-                            </div>
-                            <div class="col-md-6">
                                 <strong>Full Answer Explanation</strong>
                                 <div class="answer-area" id="fullAnswerArea">
                                     <p class="highlightLight">{!! $question->question->full_answer !!}</p>

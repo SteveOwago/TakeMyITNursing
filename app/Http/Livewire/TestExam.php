@@ -70,6 +70,7 @@ class TestExam extends Component
                 'user_id' => auth()->user()->id ?? null,
                 'student_result_id' => $studentTestID,
                 'answer' => $choice == $question['answer'] ? 'correct' : 'wrong',
+                'student_choice' => $choice
             ]);
             $testsQuestionsResults[] = $testStudent;
         }

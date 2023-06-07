@@ -47,7 +47,7 @@ class SendTetsTrialReportListener
             $test = $testTrialResult->test;
 
             $report = new \App\Services\TestTrialService();
-            $data = $report->getTestQuestion($testTrialResult, $test);
+            $data = $report->getTestQuestion($testTrialResult, $test,$email);
             // Generate the PDF content
 
             $pdf = Pdf::loadView('reports.pdf.trial_test_result', $data);

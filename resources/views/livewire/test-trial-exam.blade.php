@@ -10,9 +10,9 @@
         @elseif ($currentStep == -1)
             <div class="text-center card col-md-8 offset-2">
                 <h2>Thank you. You have already completed a Test!</h2>
-                <p><span class="text-success">Test Aready Taken. Kindly Create an Acount to Take More Exiting and Challenging Test Questions</span></p>
-                <a href="{{ route('register') }}"
-                    class="btn btn-sm btn-success">Create Account</a>
+                <p><span class="text-success">Test Aready Taken. Kindly Create an Acount to Take More Exiting and
+                        Challenging Test Questions</span></p>
+                <a href="{{ route('register') }}" class="btn btn-sm btn-success">Create Account</a>
             </div>
         @else
             <div class="card">
@@ -95,7 +95,8 @@
                         @endif
                         @if ($currentStep == count($questions))
                             <button class="btn btn-success"
-                                wire:click="submit({{ $questions }},{{ $studentTrialTestID }})">Submit</button>
+                                wire:click="submit({{ $questions }},{{ $studentTrialTestID }})"
+                                wire:loading.attr="disabled" wire:target="submit">Submit</button>
                         @endif
                     </div>
                 </div>

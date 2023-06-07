@@ -22,6 +22,8 @@ class TestTrialExam extends Component
     public $email;
     public $ip;
 
+    public $submitting = false;
+
     public function mount($test_id, $email, $ip)
     {
         $this->test_id = $test_id;
@@ -72,6 +74,12 @@ class TestTrialExam extends Component
 
     public function submit($questions, $studentTrialTestID)
     {
+        // Check if already submitting
+        if ($this->submitting) {
+            return;
+        }
+        // Set submitting flag to true
+        $this->submitting = true;
         $testsQuestionsResults = [];
         foreach ($questions as $question) {
             $choice = 'wrong';
@@ -87,6 +95,7 @@ class TestTrialExam extends Component
                 'visitor_email' => $email ?? null,
                 'trial_test_id' =>  $studentTrialTestID,
                 'trial_answer' => $choice == $question['answer'] ? 'correct' : 'wrong',
+                'trial_choice' => $choice
             ]);
             $testsQuestionsResults[] = $testStudent;
         }
@@ -129,6 +138,8 @@ class TestTrialExam extends Component
 
         //Destroy Session After Submitting
         session()->forget('student_trial_test_id');
+        // After completing the submission process, reset the submitting flag
+        $this->submitting = false;
     }
 
     public function updated($propertyName)
