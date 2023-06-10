@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>All Available Tests</h3>
-                    <p class="text-subtitle text-muted">Click on eye icon to View & Take Tests</p>
+                    <p class="text-subtitle text-muted">Click on Test Name to View Entire Details</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -54,9 +54,8 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Subject Category</th>
-                                @if (auth()->user()->hasRole('Admin'))
-                                <th>Date Created</th>
-                                @endif
+                                <th>Score</th>
+                                <th>Test Taken Date</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -78,25 +77,29 @@
                     processing: true,
                     method: 'GET',
                     serverSide: true,
-                    ajax: "{{ route('admin.tests.index') }}",
+                    ajax: "{{ route('admin.tests.students.results',[auth()->user()->id]) }}",
                     columns: [{
                             data: 'id',
                             name: 'id'
                         },
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: 'test',
+                            name: 'test'
                         },
                         {
                             data: 'subjectCategory',
                             name: 'subjectCategory'
                         },
-                        @if (auth()->user()->hasRole('Admin'))
+
+                        {
+                            data: 'score',
+                            name: 'score'
+                        },
+
                         {
                             data: 'created_at',
                             name: 'created_at'
                         },
-                        @endif
                         {
                             data: 'actions',
                             name: 'actions'
@@ -108,7 +111,7 @@
                         'copy',
                         {
                             extend: 'excelHtml5',
-                            title: 'Contact_list',
+                            title: 'Result_list',
                             exportOptions: {
                                 exportOptions: {
                                     columns: [0, 1, 2, ':visible']
@@ -117,7 +120,7 @@
                         },
                         {
                             extend: 'pdfHtml5',
-                            title: 'Contact_list',
+                            title: 'Result_list',
                             exportOptions: {
                                 columns: [0, 1, 2]
                             }

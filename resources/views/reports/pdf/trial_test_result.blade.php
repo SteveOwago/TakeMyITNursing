@@ -303,7 +303,7 @@
         <footer class="footerBibliography">
             <div>
                 <a href="{{ url('/') }}">{{ url('/') }}</a>
-                <br />
+                <br/>
                 <p>Talk to Us? <a href="mailto:info@takemyitclass.com">info@takemyitclass.com</a></p>
             </div>
         </footer>

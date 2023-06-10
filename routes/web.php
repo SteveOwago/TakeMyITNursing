@@ -48,8 +48,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::post('questions/test_questions/{testID}', [QuestionController::class, 'storeTestQuestion'])->name('tests.question.store');
 
 
+   //Test Results
+    Route::get('get/test/result/{id}', [StudentResultController::class, 'getStudentResults'])->name('tests.result');
+    Route::get('get/test/results/{id}', [StudentResultController::class, 'downloadTestResult'])->name('tests.result');
+    Route::get('get/test/students/results/{id}', [StudentResultController::class, 'studentTests'])->name('tests.students.results');
+    Route::get('get/students/tests/{id}', [StudentResultController::class, 'testResult'])->name('tests.students.result.show');
+
+
     Route::resource('questions', QuestionController::class);
-    //Test
+    //Topics
     Route::resource('topics', TopicController::class);
 
 });
@@ -67,7 +74,17 @@ Route::group(['middleware' => ['auth','subscribed'], 'prefix' => 'student', 'as'
 });
 
 
+
+
+
+
 Route::get('get/test/result/{id}', [StudentResultController::class, 'getStudentResults'])->name('tests.result');
+Route::get('get/test/results/{id}', [StudentResultController::class, 'downloadTestResult'])->name('tests.result');
+
+
+
+
+
 
 //Stripe Subscriptions
 Route::get('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe.create');

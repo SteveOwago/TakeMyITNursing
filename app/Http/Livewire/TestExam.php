@@ -98,6 +98,7 @@ class TestExam extends Component
         $this->currentStep = $numberQuestions + 1;
         //Destroy Session After Submitting
         session()->forget('student_test_id');
+
     }
 
     public function updated($propertyName)

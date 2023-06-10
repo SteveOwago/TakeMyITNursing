@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\SubjectDomain;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Question;
+use App\Models\StudentResult;
 use App\Models\SubjectCategory;
 use App\Services\SubjectDomainService;
 
@@ -267,4 +268,5 @@ class TestController extends Controller
         }
         return view('students.tests.choose-test');
     }
+
 }

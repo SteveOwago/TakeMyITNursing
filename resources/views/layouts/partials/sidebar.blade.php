@@ -51,7 +51,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="sidebar-title">My Tests</li>
+                <li class="sidebar-title">Tests</li>
 
                 <li class="sidebar-item  has-sub">
                     <a href="{{ route('student.tests.index') }}" class='sidebar-link'>
@@ -60,10 +60,10 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="{{ route('student.tests.index') }}">All Tests</a>
+                            <a href="{{ route('student.tests.index') }}">All Available Tests</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="{{ route('student.tests.take') }}">Take A Test</a>
+                            <a href="{{ route('admin.tests.students.results',[auth()->user()->id]) }}">My Tests</a>
                         </li>
                     </ul>
                 </li>
