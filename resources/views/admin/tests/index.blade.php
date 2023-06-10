@@ -126,6 +126,7 @@
                     ]
                 });
             });
+            $('#showButton').tooltip('show')
         </script>
         <script>
             var minDate, maxDate;

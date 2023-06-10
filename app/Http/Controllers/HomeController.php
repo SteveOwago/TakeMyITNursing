@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use App\Services\DashboardService;
 class HomeController extends Controller
 {
     /**
@@ -12,9 +12,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public $dashboardService;
+    public function __construct(DashboardService $dashboardService)
     {
         $this->middleware('auth');
+        $this->dashboardService = $dashboardService;
     }
 
     /**
@@ -25,6 +27,10 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id', 'desc')->paginate(10);
-        return view('home', compact('posts'));
+
+        //Define Dashboard Statistics
+        $dashboardStatistics = $this->dashboardService->getDashboardStatistics();
+        $topCategories = $this->dashboardService->getTestCategories();
+        return view('home', compact('posts','dashboardStatistics','topCategories'));
     }
 }

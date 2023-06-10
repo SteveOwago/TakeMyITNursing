@@ -4,7 +4,7 @@
             <i class="bi-eye"></i>
         </a>
     @endif --}}
-    <a class="btn btn-xs btn-primary" href="{{ route($routePart . '.show', $row->id) }}">
+    <a class="btn btn-xs btn-primary" id="showButton" data-toggle="tooltip" data-placement="bottom" title="Take Test or View" href="{{ route($routePart . '.show', $row->id) }}">
         <i class="bi-eye"></i>
     </a>
 @endif

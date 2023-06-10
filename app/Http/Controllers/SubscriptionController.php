@@ -67,10 +67,10 @@ class SubscriptionController extends Controller
     public function subscribe(Request $request)
     {
         // $plans = Plan::all();
-        if($request->user()->subscribed('default')){
+        if ($request->user()->subscribed('default')) {
             $plan = new PaymentService();
             $planName = $plan->getCurrentUserSubscriptionPlan();
-            return redirect()->route('dashboard')->with('success', 'You are subscribed to ' .strtoupper($planName));
+            return redirect()->route('dashboard')->with('success', 'You are subscribed to ' . strtoupper($planName));
         }
         $key = \config('services.stripe.secret');
         $stripe = new \Stripe\StripeClient($key);
@@ -101,6 +101,16 @@ class SubscriptionController extends Controller
         // Subscribe the customer to the selected plan
         $subscription = $user->newSubscription('default', $planId)->create($paymentMethod->id);
         $subscription->update(['default_payment_method' => $paymentMethod->id]);
+        // Replace with your subscription ID
+        $subscriptionPlan = new PaymentService();
+        $subscriptionId = $subscriptionPlan->getStripePlanID();
+
+        $subscriptionPlan = Subscription::retrieve($subscriptionId);
+
+        $currentPeriod_end = date('Y-m-d H:i:s', $subscriptionPlan->current_period_end);
+
+        $subscription->update(['ends_at' => $currentPeriod_end]);
+
         // Process any necessary logic after successful subscription
 
         return redirect()->back()->with('success', 'Subscription successful!');

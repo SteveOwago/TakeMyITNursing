@@ -27,9 +27,9 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <h3>Test: {{ $test->name }} Questions: {{ $test->questions->count() }}</h3>
+                    <h4>Test: {{ $test->name }} <span class="float-start float-lg-end">Total Questions: {{ $test->questions->count() }}</span></h4>
                     <a href="{{ route('admin.take.exam', [$test->id]) }}"
-                        class="btn btn-success float-start float-lg-end">Take
+                        class="btn btn-success float-start float-lg-end mt-2">Click To Start
                         Exams</a>
                 </div>
                 <div class="card-body">

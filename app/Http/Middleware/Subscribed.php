@@ -16,7 +16,7 @@ class Subscribed
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && !$request->user()->subscribed('default')){
+        if ($request->user() && !$request->user()->subscribed('default')&& !$request->user()->hasRole('Admin'))	{
             return redirect('subscribe');
         }
         return $next($request);

@@ -6,6 +6,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Price;
 use Stripe\Product;
+
 /**
  * Class PaymentService.
  */
@@ -26,10 +27,15 @@ class PaymentService
             \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
             $price = Price::retrieve($stripePriceId);
             $product = Product::retrieve($price->product);
-
             return $product->name;
         }
 
         return null; // User doesn't have an active subscription
+    }
+    public function getStripePlanID()
+    {
+        $user = Auth::user();
+        $subscription = $user->subscription('default');
+        return $subscription->stripe_id;
     }
 }

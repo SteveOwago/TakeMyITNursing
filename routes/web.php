@@ -21,7 +21,11 @@ use App\Http\Controllers\TestTrialController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (!\Auth::check()) {
+       return view('welcome');
+    }else{
+        return redirect()->route('home');
+    }
 })->name('home');
 
 //Auth::routes(['register' => false]);
