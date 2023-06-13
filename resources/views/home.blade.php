@@ -5,7 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header"><h3> Dashboard <a href="{{route('admin.tests.index')}}" class="btn btn-success float-start float-lg-end">Check All Available Tests</a></h3></div>
+                    <div class="card-header">
+                        <h3> Dashboard <a href="{{ route('admin.tests.index') }}"
+                                class="btn btn-success float-start float-lg-end">Check All Available Tests</a></h3>
+                    </div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -17,47 +20,134 @@
 
                         {{-- Student Dashboard and Home Section --}}
                         @role('Student')
-                        <div class="row">
-                            <div class="card">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <h5>My Tests</h5>
-                                        <p> Total Tests: <span
-                                                class="">{{ number_format($dashboardStatistics['tests_taken']->count(), 0) }}</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>Latest Test:</h5>
-                                          <p> Test Name: <span>{{ $dashboardStatistics['latest_test']->test->name ?? 'No Test Attempted' }}</span>
+                            <div class="row">
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5>My Tests</h5>
+                                            <p> Total Tests: <span
+                                                    class="">{{ number_format($dashboardStatistics['tests_taken']->count(), 0) }}</span>
                                             </p>
-                                        <p> Test Score: <span
-                                                class="">{{ $dashboardStatistics['latest_test']->score ?? 'No Test Attempted' }}</span>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>Subscription Information</h5>
-                                        <p>Subscription Status: <span>{{$dashboardStatistics['subscription_status'] ?? 'INACTIVE'}}</span></p>
-                                        <p>Subscription Plan: <span>{{$dashboardStatistics['subscription_plan'] ?? 'INACTIVE'}}</span></p>
-                                        <p>Subscription End Date: <span>{{$dashboardStatistics['subscription_end_date'] ?? 'INACTIVE'}}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="card">
-                                <div class="row">
-                                    @forelse ($topCategories as $category )
-                                        <div class="col-4">
-                                            <h6>Category: {{$category->name}}</h6>
-                                            <p>Test Exams Available: {{$category->tests->count()}}</p>
                                         </div>
-                                    @empty
-
-                                    @endforelse
+                                        <div class="col-md-4">
+                                            <h5>Latest Test:</h5>
+                                            <p> Test Name:
+                                                <span>{{ $dashboardStatistics['latest_test']->test->name ?? 'No Test Attempted' }}</span>
+                                            </p>
+                                            <p> Test Score: <span
+                                                    class="">{{ $dashboardStatistics['latest_test']->score ?? 'No Test Attempted' }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5>Subscription Information</h5>
+                                            <p>Subscription Status:
+                                                <span>{{ $dashboardStatistics['subscription_status'] ?? 'INACTIVE' }}</span></p>
+                                            <p>Subscription Plan:
+                                                <span>{{ $dashboardStatistics['subscription_plan'] ?? 'INACTIVE' }}</span></p>
+                                            <p>Subscription End Date:
+                                                <span>{{ $dashboardStatistics['subscription_end_date'] ?? 'INACTIVE' }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row mt-5">
+                                <div class="card">
+                                    <div class="row">
+                                        @forelse ($topCategories as $category)
+                                            <div class="col-4">
+                                                <h6>Category: {{ $category->name }}</h6>
+                                                <p>Test Exams Available: {{ $category->tests->count() }}</p>
+                                            </div>
+                                        @empty
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
+                        @endrole
 
+                        {{-- Admin Section --}}
+                        @role('Admin')
+                            <div class="row">
+                                <div class="card">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5>Total Students</h5>
+                                            <p> All Student Count: <span
+                                                    class="">{{ number_format($dashboardStatistics['totalStudents'], 0) }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5>Total Questions</h5>
+                                            <p> All Questions Count: <span
+                                                    class="">{{ number_format($dashboardStatistics['totalQuestions'], 0) }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5>Total Visitors Tests</h5>
+                                            <p> All Student Count: <span
+                                                    class="">{{ number_format($dashboardStatistics['totalVisitors'], 0) }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5>Total Tests</h5>
+                                            <p> All Tests Available Count: <span
+                                                    class="">{{ number_format($dashboardStatistics['totalTests'], 0) }}</span>
+                                            </p>
+                                        </div>
+                                        {{-- <div class="col-md-4">
+                                            <h5>Latest Test:</h5>
+                                            <p> Test Name:
+                                                <span>{{ $dashboardStatistics['latest_test']->test->name ?? 'No Test Attempted' }}</span>
+                                            </p>
+                                            <p> Test Score: <span
+                                                    class="">{{ $dashboardStatistics['latest_test']->score ?? 'No Test Attempted' }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5>Subscription Information</h5>
+                                            <p>Subscription Status:
+                                                <span>{{ $dashboardStatistics['subscription_status'] ?? 'INACTIVE' }}</span>
+                                            </p>
+                                            <p>Subscription Plan:
+                                                <span>{{ $dashboardStatistics['subscription_plan'] ?? 'INACTIVE' }}</span></p>
+                                            <p>Subscription End Date:
+                                                <span>{{ $dashboardStatistics['subscription_end_date'] ?? 'INACTIVE' }}</span>
+                                            </p>
+                                        </div> --}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="card">
+                                    <div class="row">
+                                       <table class="table table-horizontal table-responsive">
+                                            <tr>
+                                                <th>Student Name</th>
+                                                <th>Email</th>
+                                                <th>Subscription Status</th>
+                                                <th>Subsctiption Package</th>
+                                                <th>Date Joined</th>
+                                            </tr>
+                                            @forelse ($dashboardStatistics['students'] as $student)
+                                            <tr>
+                                                <td>{{$student->name}}</td>
+                                                <td>{{$student->email}}</td>
+                                                <td>{{$student->name}}</td>
+                                                <td>{{$student->name}}</td>
+                                                <td>{{$student->created_at}}</td>
+                                            </tr>
+                                            @empty
+                                              <tr>
+                                                <td colspan="5">No Students Yet</td>
+                                              </tr>
+                                            @endforelse
+
+
+                                       </table>
+                                    </div>
+                                </div>
+                            </div>
                         @endrole
                         {{-- End Student Dashboard and Home Section --}}
                         {{-- Posts Section --}}

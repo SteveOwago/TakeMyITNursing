@@ -2,12 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\Question;
 use App\Models\StudentResult;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Services\PaymentService;
 use App\Models\QuestionTestResult;
 use App\Models\SubjectCategory;
+use App\Models\Test;
+use App\Models\TestTrial;
 use Stripe\Subscription;
 
 /**
@@ -59,6 +62,21 @@ class DashboardService
 
         // Define Statistics for Admin
         if ($user->hasRole('Admin')) {
+            $totalStudents = User::role('Student')->count();
+            $allStudents = User::with(['subscriptions'])->role('Student')->get();
+            //dd($allStudents);
+            $questions = Question::count();
+            $visitorsTests = TestTrial::count();
+            $tests = Test::count();
+
+
+            $data = [
+                'totalStudents' => $totalStudents,
+                'students' => $allStudents,
+                'totalQuestions' => $questions,
+                'totalVisitors' => $visitorsTests,
+                'totalTests' => $tests,
+            ];
         }
 
         return $data;
@@ -72,6 +90,8 @@ class DashboardService
 
            $testCategories = SubjectCategory::with(['tests'])->where('subject_domain_id', $subjectDomain)->inRandomOrder()->take(3)->get();
 
+        }else{
+            $testCategories = SubjectCategory::with(['tests'])->cursor();
         }
         return $testCategories;
     }
