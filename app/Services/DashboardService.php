@@ -43,9 +43,11 @@ class DashboardService
             $subscriptionPlan = new PaymentService();
             $subscriptionId = $subscriptionPlan->getStripePlanID();
 
-            $subscriptionPlan = Subscription::retrieve($subscriptionId);
-            $currentPeriod_end = null;
-            if ($subscriptionPlan) {
+            if (!$subscriptionId) {
+                $currentPeriod_end = null;
+            } else {
+                $subscriptionPlan = Subscription::retrieve($subscriptionId);
+
                 $currentPeriod_end = date('Y-m-d H:i:s', $subscriptionPlan->current_period_end);
             }
 
@@ -82,15 +84,15 @@ class DashboardService
         return $data;
     }
 
-    public function getTestCategories(){
+    public function getTestCategories()
+    {
         //Get Student Domain
         $user = User::findOrFail(Auth::id());
         if ($user->hasRole('Student')) {
-           $subjectDomain =  $user->subject_domain_id;
+            $subjectDomain =  $user->subject_domain_id;
 
-           $testCategories = SubjectCategory::with(['tests'])->where('subject_domain_id', $subjectDomain)->inRandomOrder()->take(3)->get();
-
-        }else{
+            $testCategories = SubjectCategory::with(['tests'])->where('subject_domain_id', $subjectDomain)->inRandomOrder()->take(3)->get();
+        } else {
             $testCategories = SubjectCategory::with(['tests'])->cursor();
         }
         return $testCategories;

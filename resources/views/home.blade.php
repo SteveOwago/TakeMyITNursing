@@ -37,13 +37,19 @@
                                             <p> Test Score: <span
                                                     class="">{{ $dashboardStatistics['latest_test']->score ?? 'No Test Attempted' }}</span>
                                             </p>
+                                            <div class="text-center">
+                                                <a href="{{ route('admin.tests.students.results',[auth()->user()->id]) }}" class="btn btn-primary">My Test
+                                                    Results</a>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <h5>Subscription Information</h5>
                                             <p>Subscription Status:
-                                                <span>{{ $dashboardStatistics['subscription_status'] ?? 'INACTIVE' }}</span></p>
+                                                <span>{{ $dashboardStatistics['subscription_status'] ?? 'INACTIVE' }}</span>
+                                            </p>
                                             <p>Subscription Plan:
-                                                <span>{{ $dashboardStatistics['subscription_plan'] ?? 'INACTIVE' }}</span></p>
+                                                <span>{{ $dashboardStatistics['subscription_plan'] ?? 'INACTIVE' }}</span>
+                                            </p>
                                             <p>Subscription End Date:
                                                 <span>{{ $dashboardStatistics['subscription_end_date'] ?? 'INACTIVE' }}</span>
                                             </p>
@@ -121,7 +127,7 @@
                             <div class="row mt-5">
                                 <div class="card">
                                     <div class="row">
-                                       <table class="table table-horizontal table-responsive">
+                                        <table class="table table-horizontal table-responsive">
                                             <tr>
                                                 <th>Student Name</th>
                                                 <th>Email</th>
@@ -130,21 +136,21 @@
                                                 <th>Date Joined</th>
                                             </tr>
                                             @forelse ($dashboardStatistics['students'] as $student)
-                                            <tr>
-                                                <td>{{$student->name}}</td>
-                                                <td>{{$student->email}}</td>
-                                                <td>{{$student->name}}</td>
-                                                <td>{{$student->name}}</td>
-                                                <td>{{$student->created_at}}</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>{{ $student->name }}</td>
+                                                    <td>{{ $student->email }}</td>
+                                                    <td>{{ $student->name }}</td>
+                                                    <td>{{ $student->name }}</td>
+                                                    <td>{{ $student->created_at }}</td>
+                                                </tr>
                                             @empty
-                                              <tr>
-                                                <td colspan="5">No Students Yet</td>
-                                              </tr>
+                                                <tr>
+                                                    <td colspan="5">No Students Yet</td>
+                                                </tr>
                                             @endforelse
 
 
-                                       </table>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

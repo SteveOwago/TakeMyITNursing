@@ -43,6 +43,9 @@
                         <div class="donate-btn-header">
                             <a class="dtbtn" href="{{ route('login') }}">Login</a>
                         </div>
+                        <div class="donate-btn-header">
+                            <a class="dtbtn" href="{{ route('register') }}">Register</a>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -61,6 +64,7 @@
                     <li><a href="{{route('home')}}#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
                 </ul>
             </nav>
         </div>

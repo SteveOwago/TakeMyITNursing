@@ -35,7 +35,10 @@ class PaymentService
     public function getStripePlanID()
     {
         $user = Auth::user();
-        $subscription = $user->subscription('default');
-        return $subscription->stripe_id;
+        if ($user->subscribed('default')) {
+            $subscription = $user->subscription('default');
+            return $subscription->stripe_id;
+        }
+        return null;
     }
 }

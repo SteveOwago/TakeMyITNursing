@@ -22,8 +22,8 @@ use App\Http\Controllers\TestTrialController;
 
 Route::get('/', function () {
     if (!\Auth::check()) {
-       return view('welcome');
-    }else{
+        return view('welcome');
+    } else {
         return redirect()->route('home');
     }
 })->name('home');
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::post('questions/test_questions/{testID}', [QuestionController::class, 'storeTestQuestion'])->name('tests.question.store');
 
 
-   //Test Results
+    //Test Results
     Route::get('get/test/result/{id}', [StudentResultController::class, 'getStudentResults'])->name('tests.result');
     Route::get('get/test/results/{id}', [StudentResultController::class, 'downloadTestResult'])->name('tests.result');
     Route::get('get/test/students/results/{id}', [StudentResultController::class, 'studentTests'])->name('tests.students.results');
@@ -62,28 +62,21 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('questions', QuestionController::class);
     //Topics
     Route::resource('topics', TopicController::class);
-
 });
 
 //Student Route Groups
-Route::group(['middleware' => ['auth','subscribed'], 'prefix' => 'student', 'as' => 'student.'], function () {
+Route::group(['middleware' => ['auth', 'subscribed'], 'prefix' => 'student', 'as' => 'student.'], function () {
     //Tests
     Route::get('tests/take', [TestController::class, 'chooseTest'])->name('tests.take');
     Route::get('take/exams/{test}', [TestController::class, 'takeExam'])->name('take.exam');
     Route::resource('tests', TestController::class);
     // Questions
     Route::get('questions/test_questions/{testID}', [QuestionController::class, 'createTestQuestion'])->name('tests.question.create');
-
-   // Route::resource('questions', QuestionController::class);
+    Route::get('get/test/result/{id}', [StudentResultController::class, 'getStudentResults'])->name('tests.result');
+    Route::get('get/test/results/{id}', [StudentResultController::class, 'downloadTestResult'])->name('tests.result');
+    // Route::resource('questions', QuestionController::class);
 });
 
-
-
-
-
-
-Route::get('get/test/result/{id}', [StudentResultController::class, 'getStudentResults'])->name('tests.result');
-Route::get('get/test/results/{id}', [StudentResultController::class, 'downloadTestResult'])->name('tests.result');
 
 
 
@@ -99,6 +92,6 @@ Route::get('/subscription/cancel', [SubscriptionController::class, 'cancelSubscr
 
 
 //Test Trial routes
-Route::get('/tests/trial', [TestTrialController::class,'index'])->name('tests.trial');
-Route::post('/tests/trial/take', [TestTrialController::class,'store'])->name('trial.test.take');
-Route::post('fetch/tests',[TestTrialController::class, 'fetchTests'])->name('fetch.tests');
+Route::get('/tests/trial', [TestTrialController::class, 'index'])->name('tests.trial');
+Route::post('/tests/trial/take', [TestTrialController::class, 'store'])->name('trial.test.take');
+Route::post('fetch/tests', [TestTrialController::class, 'fetchTests'])->name('fetch.tests');
