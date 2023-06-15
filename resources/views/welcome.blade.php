@@ -1115,7 +1115,7 @@
                             <img src="{{asset('frontendIT/assets/images/fav-icon/logo-white.jpg')}}" alt="" />
                         </div>
                         <div class="company-info-desc">
-                            <p>We are a team of professional experts in the IT, and Software engineering industry who are passionate and here to help you out to balance between work, online course and family time
+                            <p>We are a team of professional experts in the Medical & Nursing and IT & Software Engineering Industry who are passionate and here to help you out to prepare and help you get the best of you.
                             </p>
                         </div>
                         <div class="follow-company-info pt-3">

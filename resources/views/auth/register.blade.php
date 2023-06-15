@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -93,4 +93,107 @@
         </div>
     </div>
 </div>
+@endsection --}}
+
+
+
+@extends('layouts.auth')
+
+@section('content')
+    <div class="row">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="{{ asset('frontendIT/auth/images/img-01.png') }}" alt="IMG">
+            </div>
+
+            <form method="POST" class="login100-form validate-form" action="{{ route('register') }}">
+                @csrf
+                <span class="login100-form-title">
+                    Create Your Account
+                </span>
+                <div class="wrap-input100 validate-input">
+                    <select class="form-control wrap-input100" name="subject_domain_id" id="" required>
+                        <option value="" selected disabled>Click to Select Subject Area</option>
+                        @foreach ($subjectDomains as $subjectDomain)
+                            <option value="{{ $subjectDomain->id }}">{{ $subjectDomain->name }}</option>
+                        @endforeach
+                    </select>
+                    <span class="focus-input100"></span>
+                    @error('subject_domain_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="wrap-input100">
+                    <input class="input100  @error('email') is-invalid @enderror" type="text" name="name"
+                        placeholder="Firstname Lastname">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </span>
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <input class="input100  @error('email') is-invalid @enderror" type="text" name="email"
+                        placeholder="Email">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100  @error('password') is-invalid @enderror" type="password" name="password"
+                        placeholder="Password">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100  @error('password') is-invalid @enderror" type="password"
+                        name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        Submit
+                    </button>
+                </div>
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="{{ route('login') }}">
+                        Have an Acount? Login
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
