@@ -12,75 +12,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     @include('layouts.partials.styles')
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"
-        integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-    <link rel="stylesheet" href="{{ asset('backendIT/assets/css/main/app.css') }}">
+
 </head>
 
 <body class="antialiased">
 
-    <!--==================================================-->
-    <!----- Start Techno Main Menu Area ----->
-    <!--==================================================-->
-    <div id="sticky-header" class="techno_nav_manu_test transparent_menu white d-md-none d-lg-block d-sm-none d-none">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="logo mt-4">
-                        <a class="logo_img" href="{{ route('home') }}" title="TakeMyITClass">
-                            <img src="{{ asset('frontendIT/assets/images/fav-icon/logo.jpg') }}" size="56x56"
-                                alt="" />
-                        </a>
-                        <a class="main_sticky" href="{{ route('home') }}" title="TakeMyITClass">
-                            <img src="{{ asset('frontendIT/assets/images/fav-icon/logo-white.jpg') }}" alt="astute" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <nav class="techno_menu">
-                        <ul class="nav_scroll">
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('home') }}#about">about</a></li>
-                            <li><a href="{{ route('home') }}#services">Service</a></li>
-                            <li><a href="{{ route('home') }}#how-it-works">How it Works</a></li>
-                            <li><a href="{{ route('home') }}#portfolio">Portfolio</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                        <div class="donate-btn-header">
-                            <a class="dtbtn" href="{{ route('login') }}">Login</a>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!----- Techno Mobile Menu Area ----->
-    <div class="mobile-menu-area d-sm-block d-md-block d-lg-none ">
-        <div class="mobile-menu">
-            <nav class="techno_menu">
-                <ul class="nav_scroll">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('home') }}#about">about</a></li>
-                    <li><a href="{{ route('home') }}#services">Service</a></li>
-                    <li><a href="{{ route('home') }}#how-it-works">How it Works</a></li>
-                    <li><a href="{{ route('home') }}#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-    <!--==================================================-->
-    <!----- End Techno Main Menu Area ----->
-    <!--==================================================-->
+    @include('layouts.partials.header-frontend')
 
     <!--==================================================-->
     <!----- Start Techno Slider Area ----->
     <!--==================================================-->
-
-    <div class="about_area pt-70 pb-70 mt-5" id="about">
+    <div class="slider_area d-flex align-items-center slider2 landing" id="home">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -131,9 +73,10 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12">
-                                                            <div class="form_box_test_trial mb-30">
+                                                        <div class="col-8 offset-2 text-center">
+                                                            <div class="input-group mb-30">
                                                                 <input type="email" name="email"
+                                                                    class="form-control"
                                                                     placeholder="Enter Email Address" required>
                                                             </div>
                                                         </div>
@@ -178,8 +121,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="widget widgets-company-info">
                         <div class="footer-bottom-logo pb-40">
-                            <img src="{{ asset('frontendIT/assets/images/fav-icon/logo-white.jpg') }}"
-                                alt="" />
+                            <img src="{{ asset('frontendIT/assets/images/fav-icon/logo-white.jpg') }}" alt="" />
                         </div>
                         <div class="company-info-desc">
                             <p>We are a team of professional experts in the IT, and Software engineering industry who

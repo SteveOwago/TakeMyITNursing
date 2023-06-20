@@ -98,11 +98,14 @@
                                                 </div>
                                                 <div class="row">
                                                     <label for="">Choices</label>
+                                                    @php
+                                                        $data = $question->choices;
+                                                    @endphp
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="first-name-column">A</label>
                                                             <input type="text" id="first-name-column"
-                                                                class="form-control" placeholder="A Answer" name="choice_A">
+                                                                class="form-control" placeholder="A Answer" name="choice_A" value="{{ $data['choice_A'] }}">
                                                         </div>
                                                         @error('choice_A')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -112,7 +115,7 @@
                                                         <div class="form-group">
                                                             <label for="first-name-column">B</label>
                                                             <input type="text" id="first-name-column"
-                                                                class="form-control" placeholder="A Answer" name="choice_B">
+                                                                class="form-control" placeholder="B Answer" name="choice_B" value="{{ $data['choice_B'] }}">
                                                         </div>
                                                         @error('choice_B')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -122,7 +125,7 @@
                                                         <div class="form-group">
                                                             <label for="first-name-column">C</label>
                                                             <input type="text" id="first-name-column"
-                                                                class="form-control" placeholder="A Answer" name="choice_C">
+                                                                class="form-control" placeholder="C Answer" name="choice_C" value="{{ $data['choice_C'] }}">
                                                         </div>
                                                         @error('choice_C')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -133,7 +136,7 @@
                                                             <label for="first-name-column">D</label>
                                                             <input type="text" id="first-name-column"
                                                                 class="form-control" placeholder="D Answer"
-                                                                name="choice_D">
+                                                                name="choice_D" value="{{ $data['choice_D'] }}">
                                                         </div>
                                                         @error('choice_D')
                                                             <p class="text-danger">{{ $message }}</p>
@@ -144,7 +147,7 @@
                                                             <label for="first-name-column">E</label>
                                                             <input type="text" id="first-name-column"
                                                                 class="form-control" placeholder="E Answer"
-                                                                name="choice_E">
+                                                                name="choice_E" value="{{ $data['choice_E'] }}">
                                                         </div>
                                                         @error('choice_E')
                                                             <p class="text-danger">{{ $message }}</p>

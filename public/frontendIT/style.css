@@ -245,6 +245,26 @@ a.dtbtn {
     border: 2px solid #0c5adb;
     font-weight: 600;
 }
+a.dtbtn-register {
+    -moz-user-select: none;
+    background: #298234;
+    border: medium none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 17px;
+    margin-bottom: 0;
+    padding: 10px 30px;
+    text-align: center;
+    text-transform: capitalize;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    vertical-align: middle;
+    border-radius: 5px;
+    border: 2px solid #298234;
+    font-weight: 600;
+}
 a.dtbtn:hover {
     border: 2px solid #00247E;
     background: #00247E;
