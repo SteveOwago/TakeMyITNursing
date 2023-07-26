@@ -56,14 +56,14 @@
                 <li class="sidebar-item  has-sub">
                     <a href="{{ route('student.tests.index') }}" class='sidebar-link'>
                         <i class='bi bi-journal-plus'></i>
-                        <span>View Tests</span>
+                        <span><strong>View Tests</strong></span>
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
                             <a href="{{ route('student.tests.index') }}">All Available Tests</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="{{ route('admin.tests.students.results',[auth()->user()->id]) }}">My Tests</a>
+                            <a href="{{ route('admin.tests.students.results', [auth()->user()->id]) }}">My Tests</a>
                         </li>
                     </ul>
                 </li>

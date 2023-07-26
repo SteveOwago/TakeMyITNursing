@@ -304,7 +304,7 @@
             <div>
                 <a href="{{ url('/') }}">{{ url('/') }}</a>
                 <br/>
-                <p>Talk to Us? <a href="mailto:info@takemyitclass.com">info@takemyitclass.com</a></p>
+                <p>Talk to Us? <a href="mailto:info@{{request()->getHttpHost();}}">info@{{request()->getHttpHost();}}</a></p>
             </div>
         </footer>
     </div>

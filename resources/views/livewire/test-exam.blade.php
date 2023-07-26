@@ -3,8 +3,8 @@
         @if ($currentStep > count($questions))
             <div class="text-center card col-md-8 offset-2">
                 <h2 class="text-center">Thank you for completing the Test!</h2>
-                <a href="{{ route('admin.take.exam', [$testID]) }}" wire:click="$set('currentStep', 1)"
-                    class="btn btn-sm btn-success">Start Over</a>
+                <a href="{{ route('admin.tests.students.results',[auth()->user()->id]) }}" wire:click="$set('currentStep', 1)"
+                    class="btn btn-sm btn-success">Click to Check Your Results</a>
             </div>
         @else
             <div class="card">

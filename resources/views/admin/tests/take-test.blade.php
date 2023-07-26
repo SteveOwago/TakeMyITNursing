@@ -40,7 +40,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <h4>Test: {{ $test->name }} <span class="float-start float-lg-end">Number of Questions:
+                    <h4>Test: {{ $test->name }} <span class="float-start float-lg-end">Total Available Questions (Bank):
                             {{ $test->questions->count() }}</span> </h4>
                 </div>
                 <div class="card-body">

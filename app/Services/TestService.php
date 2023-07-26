@@ -13,7 +13,8 @@ class TestService
 {
     public function getResult($studentResult)
     {
-        $testQuestions = QuestionTestResult::with(['question'])->where('test_id', $studentResult->test->id)->cursor();
+       // dd($studentResult);
+        $testQuestions = QuestionTestResult::with(['question'])->where('test_id', $studentResult->test->id)->where('user_id', auth()->user()->id)->where('student_result_id',$studentResult->id)->cursor();
         $testResult = StudentResult::where('user_id', $studentResult->user->id)->where('test_id', $studentResult->test->id)->latest()->value('score');
         return [
             'testQuestions' => $testQuestions,

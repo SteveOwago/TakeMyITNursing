@@ -11,14 +11,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>All Available Tests</h3>
+                    <h3>My Test Results</h3>
                     <p class="text-subtitle text-muted">Click on Test Name to View Entire Details</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tests</li>
+                            <li class="breadcrumb-item active" aria-current="page">Test Results</li>
                         </ol>
                     </nav>
                 </div>

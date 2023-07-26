@@ -5,7 +5,7 @@
         </div>
         <div class="float-end">
             <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                    href="https://takemyitclass.com" target="_blank">TakeMyIT & Nursing Class</a></p>
+                    href="{{ env('APP_URL')}} " target="_blank">{{ env('APP_NAME')}} </a></p>
         </div>
     </div>
 </footer>

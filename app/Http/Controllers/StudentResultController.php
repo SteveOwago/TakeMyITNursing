@@ -119,7 +119,7 @@ class StudentResultController extends Controller
             $query = StudentResult::with(['test','test.subjectCategory'])->where('user_id',$studentID)->where('score');
             //User Is not Administrator
             if (!auth()->user()->hasRole('Admin')) {
-                $query = StudentResult::with(['test'])->where('user_id',$studentID)->whereNotNull('score');
+                $query = StudentResult::with(['test'])->where('user_id',$studentID)->whereNotNull('score')->latest();
             }
 
 

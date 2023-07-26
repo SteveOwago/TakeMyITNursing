@@ -17,7 +17,8 @@ class TestController extends Controller
 {
     public $subjectDomain;
 
-    public function __construct(SubjectDomainService $subjectDomain){
+    public function __construct(SubjectDomainService $subjectDomain)
+    {
         $this->subjectDomain = $subjectDomain;
     }
     /**
@@ -27,12 +28,18 @@ class TestController extends Controller
      */
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             $query = Test::with(['subjectCategory']);
             //User Is not Administrator
             if (!auth()->user()->hasRole('Admin')) {
-                $categories = SubjectCategory::select('id')->where('subject_domain_id',$this->subjectDomain->getUserSubjectDomain())->cursor();
-                $query = Test::with(['subjectCategory'])->whereIn('subject_category_id',$categories);
+                $categories = SubjectCategory::select('id')->where('subject_domain_id', $this->subjectDomain->getUserSubjectDomain())->cursor();
+                $query =  Test::with(['subjectCategory'])
+                    ->withCount('questions')
+                    ->whereHas('subjectCategory', function ($query) use ($categories) {
+                        $query->whereIn('subject_category_id', $categories);
+                    })
+                    ->having('questions_count', '>', 'max_number_of_questions');
             }
 
 
@@ -268,5 +275,4 @@ class TestController extends Controller
         }
         return view('students.tests.choose-test');
     }
-
 }

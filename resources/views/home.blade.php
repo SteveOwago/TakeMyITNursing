@@ -28,6 +28,9 @@
                                             <p> Total Tests: <span
                                                     class="">{{ number_format($dashboardStatistics['tests_taken']->count(), 0) }}</span>
                                             </p>
+
+                                            <a href="{{ route('admin.tests.index') }}" class="btn btn-success">Take Exam
+                                                Tests</a>
                                         </div>
                                         <div class="col-md-4">
                                             <h5>Latest Test:</h5>
@@ -38,7 +41,8 @@
                                                     class="">{{ $dashboardStatistics['latest_test']->score ?? 'No Test Attempted' }}</span>
                                             </p>
                                             <div class="text-center">
-                                                <a href="{{ route('admin.tests.students.results',[auth()->user()->id]) }}" class="btn btn-primary">My Test
+                                                <a href="{{ route('admin.tests.students.results', [auth()->user()->id]) }}"
+                                                    class="btn btn-primary">My Test
                                                     Results</a>
                                             </div>
                                         </div>
@@ -64,9 +68,26 @@
                                             <div class="col-4">
                                                 <h6>Category: {{ $category->name }}</h6>
                                                 <p>Test Exams Available: {{ $category->tests->count() }}</p>
+                                                @php
+                                                    $items = $category->tests->shuffle()->take(3);
+                                                @endphp
+
+                                                @forelse ($items as $item)
+                                                    <p>Test Exam: Click <a
+                                                            href="{{ route('student.tests.show', $item->id) }}">{{ $item->name }}</a>
+                                                        To Take This Exams</p>
+                                                @empty
+                                                    <p>No Exams in Section</p>
+                                                @endforelse
                                             </div>
                                         @empty
                                         @endforelse
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="text-center">
+                                            <p class="lead">Click <a href="{{ route('admin.tests.index') }}">here</a> to Explore
+                                                More Exams</a></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -101,26 +122,32 @@
                                                     class="">{{ number_format($dashboardStatistics['totalTests'], 0) }}</span>
                                             </p>
                                         </div>
-                                        {{-- <div class="col-md-4">
-                                            <h5>Latest Test:</h5>
-                                            <p> Test Name:
-                                                <span>{{ $dashboardStatistics['latest_test']->test->name ?? 'No Test Attempted' }}</span>
-                                            </p>
-                                            <p> Test Score: <span
-                                                    class="">{{ $dashboardStatistics['latest_test']->score ?? 'No Test Attempted' }}</span>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-3">
+                                            <h5>Total Amount</h5>
+                                            <p> All Amount: <span
+                                                    class="">$ {{ number_format($dashboardStatistics['totalAmount'], 0) }}</span>
                                             </p>
                                         </div>
-                                        <div class="col-md-4">
-                                            <h5>Subscription Information</h5>
-                                            <p>Subscription Status:
-                                                <span>{{ $dashboardStatistics['subscription_status'] ?? 'INACTIVE' }}</span>
+                                        <div class="col-md-3">
+                                            <h5>Amount Today</h5>
+                                            <p> Today: <span
+                                                    class="">$ {{ number_format($dashboardStatistics['totalAmountToday'], 0) }}</span>
                                             </p>
-                                            <p>Subscription Plan:
-                                                <span>{{ $dashboardStatistics['subscription_plan'] ?? 'INACTIVE' }}</span></p>
-                                            <p>Subscription End Date:
-                                                <span>{{ $dashboardStatistics['subscription_end_date'] ?? 'INACTIVE' }}</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5>Amount This Week</h5>
+                                            <p> Week: <span
+                                                    class="">$ {{ number_format($dashboardStatistics['totalAmountWeek'], 0) }}</span>
                                             </p>
-                                        </div> --}}
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5>Amount This Month</h5>
+                                            <p> Month: <span
+                                                    class="">$ {{ number_format($dashboardStatistics['totalAmountMonth'], 0) }}</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

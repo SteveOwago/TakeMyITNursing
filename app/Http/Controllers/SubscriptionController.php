@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use Stripe\Stripe;
@@ -112,6 +113,13 @@ class SubscriptionController extends Controller
         $subscription->update(['ends_at' => $currentPeriod_end]);
 
         // Process any necessary logic after successful subscription
+        //Payment Update
+        $subscriptionAmount = $subscriptionPlan->items->data[0]->plan->amount;
+        Payment::create([
+            'user_id' => $user->id,
+            'subscription_id' => $subscription->id,
+            'amount' => $subscriptionAmount,
+        ]);
 
         return redirect()->back()->with('success', 'Subscription successful!');
     }

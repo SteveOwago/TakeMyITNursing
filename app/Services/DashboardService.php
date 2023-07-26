@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Payment;
 use App\Models\Question;
 use App\Models\StudentResult;
 use App\Models\User;
@@ -12,6 +13,7 @@ use App\Models\SubjectCategory;
 use App\Models\Test;
 use App\Models\TestTrial;
 use Stripe\Subscription;
+use Carbon\Carbon;
 
 /**
  * Class DashboardService.
@@ -71,6 +73,18 @@ class DashboardService
             $visitorsTests = TestTrial::count();
             $tests = Test::count();
 
+            $startOfWeek = Carbon::now()->startOfWeek();
+            $endOfWeek = Carbon::now()->endOfWeek();
+            $currentMonth = Carbon::now()->format('m');
+            $currentDate = Carbon::now()->toDateString();
+
+
+            $payments = Payment::count();
+            $totalAmount = (Payment::sum('amount')) / 100;
+            $totalAmountToday = (Payment::whereDate('created_at', $currentDate)->sum('amount')) / 100;
+            $totalAmountWeek = (Payment::whereBetween('created_at', [$startOfWeek, $endOfWeek])->sum('amount')) / 100;
+            $totalAmountMonth = (Payment::whereMonth('created_at', $currentMonth)->sum('amount')) / 100;
+
 
             $data = [
                 'totalStudents' => $totalStudents,
@@ -78,6 +92,11 @@ class DashboardService
                 'totalQuestions' => $questions,
                 'totalVisitors' => $visitorsTests,
                 'totalTests' => $tests,
+                'totalAmountToday' => $totalAmountToday,
+                'totalAmountWeek' => $totalAmountWeek,
+                'totalAmountMonth' => $totalAmountMonth,
+                'totalAmount' => $totalAmount,
+                'payments' => $payments
             ];
         }
 
