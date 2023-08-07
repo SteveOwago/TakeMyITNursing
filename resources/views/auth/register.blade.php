@@ -112,7 +112,7 @@
                     Create Your Account
                 </span>
                 <div class="wrap-input100 validate-input">
-                    <select class="form-control wrap-input100" name="subject_domain_id" id="" required>
+                    <select class="input100" name="subject_domain_id" id="" required>
                         <option value="" selected disabled>Click to Select Subject Area</option>
                         @foreach ($subjectDomains as $subjectDomain)
                             <option value="{{ $subjectDomain->id }}">{{ $subjectDomain->name }}</option>
