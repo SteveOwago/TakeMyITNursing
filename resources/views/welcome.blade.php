@@ -27,7 +27,7 @@
                         <div class="slider_content text-center">
                             <div class="slider_text">
                                 <div class="slider_text_inner">
-                                    <h1>Take My Nursing and IT Exam Tests</h1>
+                                    <h1>Nursing and IT Exam Tests</h1>
 
                                 </div>
                                 @if (\Session::has('message'))
@@ -1083,7 +1083,7 @@
                         <h4 class="widget-title pb-4">Our Services</h4>
                         <div class="menu-quick-link-container ml-4">
                             <ul id="menu-quick-link" class="menu">
-                                <li><a href="#">Online IT Courses</a></li>
+                                <li><a href="#">Online Tests</a></li>
                                 <li><a href="#">Final Course Projects</a></li>
                                 <li><a href="#">Custom Essays</a></li>
                                 <li><a href="#">Proctored Exams and Quiz</a></li>
@@ -1100,7 +1100,7 @@
                             <p>Quality Above Everything</p>
                         </div>
                         <div class="footer-social-info">
-                            <p><span>Phone :</span>254718614983</p>
+                            <p><span>Phone :</span>+254708444398</p>
                         </div>
                         <div class="footer-social-info">
                             <p><span>Email:</span>excellentessayprof@gmail.com</p>
@@ -1211,11 +1211,11 @@
     <!--==================================================-->
     <!----- End Techno Footer Middle Area ----->
     <!--==================================================-->
-    <a class="visible-lg" id="whatsAppLink" href="https://web.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">
+    <a class="visible-lg" id="whatsAppLink" href="https://web.whatsapp.com/send?phone=254708444398&amp;text=Hello, I need some help with my online course"  target="_blank">
         <i class="fa fa-whatsapp"></i>&nbsp;&nbsp; WhatsApp Us
     </a>
 
-    <a class="visible-xs" id="whatsAppLink" href="https://api.whatsapp.com/send?phone=254718614983&amp;text=Hello, I need some help with my online course"  target="_blank">
+    <a class="visible-xs" id="whatsAppLink" href="https://api.whatsapp.com/send?phone=254708444398&amp;text=Hello, I need some help with my online course"  target="_blank">
         <i class="fa fa-whatsapp"></i>&nbsp;&nbsp; WhatsApp Us
     </a>
     @include('layouts.partials.scripts')

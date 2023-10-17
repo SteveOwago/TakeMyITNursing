@@ -240,7 +240,6 @@ class QuestionController extends Controller
             'test_id' => $request->test_id,
             'topic_id' => $request->topic_id,
             'answer_resource' => $request->answer_resource,
-            'question_image_path' => $request->question_image_path
         ]);
         return back()->with('success', 'Question  is Updated Successfully!');
     }

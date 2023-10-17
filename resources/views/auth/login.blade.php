@@ -144,7 +144,7 @@
                     Forgot
                 </span>
                 <a class="txt2" href="{{ route('password.request') }}">
-                    Username / Password?
+                    Email / Password?
                 </a>
             </div>
 

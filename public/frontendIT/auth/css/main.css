@@ -169,16 +169,16 @@ iframe {
 [ Utility ]*/
 .txt1 {
     font-family: Poppins-Regular;
-    font-size: 13px;
+    font-size: 20px;
     line-height: 1.5;
     color: #999999;
 }
 
 .txt2 {
     font-family: Poppins-Regular;
-    font-size: 13px;
+    font-size: 20px;
     line-height: 1.5;
-    color: #666666;
+    color: #100d0d;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -201,7 +201,7 @@ iframe {
     justify-content: right;
     align-items: center;
     padding: 15px;
-    background: url("../images/takemyitAuth.jpg");
+    background: url("../../assets/images/new/new-about.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     /* background: #9053c7;
@@ -213,7 +213,7 @@ iframe {
 
 .wrap-login100 {
     width: 1000px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(72, 90, 129, 0.6);
     border-radius: 10px;
     overflow: hidden;
 

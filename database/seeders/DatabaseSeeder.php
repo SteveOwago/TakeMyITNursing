@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             AnswerChoicesTableSeeder::class,
             PermissionsTableSeeder::class,
             UsersTableSeeder::class,
-
+            OrderTypeSeeder::class,
+            OrderSubjectSeeder::class,
         ]);
     }
 }
