@@ -18,9 +18,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_type_id', OrderType::class);
-            $table->foreignId('order_level_id', OrderLevel::class);
-            $table->foreignId('order_subject_id', OrderSubject::class);
+            $table->foreignIdFor(OrderType::class,'order_type_id')->nullable()->constrained();
+            $table->foreignIdFor(OrderLevel::class,'order_level_id')->nullable()->constrained();
+            $table->foreignIdFor(OrderSubject::class,'order_subject_id')->nullable()->constrained();
             $table->string('order_end_date')->nullable();
             $table->string('attachments')->nullable();
             $table->string('order_pages')->nullable();
