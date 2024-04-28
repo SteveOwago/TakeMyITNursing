@@ -16,7 +16,7 @@ class CreateOrderPaymentsTable extends Migration
     {
         Schema::create('order_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id',Order::class)->nullable()->constrained();
+            $table->foreignIdFor(Order::class,'order_id')->nullable()->constrained();
             $table->string('amount')->nullable();
             $table->string('payment_gateway')->nullable();
             $table->timestamps();
