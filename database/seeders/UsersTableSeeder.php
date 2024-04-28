@@ -63,6 +63,9 @@ class UsersTableSeeder extends Seeder
         $student = User::findOrFail(2);
         $student->assignRole('Student');
 
+        $student = User::findOrFail(3);
+        $student->assignRole('Student');
+
         //Assign the User Accountant Role
         $accountant = User::findOrFail(3);
         $accountant->assignRole('Accountant');

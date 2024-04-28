@@ -29,7 +29,7 @@
                         <ul class="list-unstyled text-primary">
                             @foreach ($choices as $key => $value)
                                 <li>
-                                    <div class="form-group">
+                                    <div class="input-group">
                                         <label style="color: black;">
                                             {{ str_replace('choice_', '', $key) }}&nbsp;:&nbsp; <input type="radio"
                                                 name="choices" value="{{ $key }}"

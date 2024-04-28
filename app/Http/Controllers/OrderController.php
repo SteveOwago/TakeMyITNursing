@@ -8,7 +8,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class OrderController extends Controller
 {
-    public function index(Request $request)
+    public function indexStudent(Request $request)
     {
         if ($request->ajax()) {
             $query = Order::all();
@@ -62,6 +62,30 @@ class OrderController extends Controller
 
             return $table->make(true);
         }
+        if (!auth()->user()->hasRole('Admin')) {
+
+            return view('students.orders.index');
+
+        }
         return view('admin.orders.index');
+    }
+
+    public function create(){
+
+    }
+
+    public function progress(Request $request){
+
+    }
+    public function store(Request $request){
+
+    }
+
+    public function completed(Request $request){
+
+    }
+
+    public function cancelled(Request $request){
+
     }
 }

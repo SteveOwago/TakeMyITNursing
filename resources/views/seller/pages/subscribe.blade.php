@@ -5,7 +5,7 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Subscribe</div>
+                    <div class="card-header text-success text-center"><h5>Subscribe To Access Subject Exam Services</h5></div>
 
                     <div class="card-body">
                         @if (session('success'))
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <label><strong>Enter Card Details:</strong></label>
-                            <div id="card-element" class="card form-group mt-3 mb-3 font-weight-bold">
+                            <div id="card-element" class="form-group mt-3 mb-3 font-weight-bold" style="min-height: 20px;">
 
                                 <!-- Stripe.js will inject the card elements here -->
                             </div>

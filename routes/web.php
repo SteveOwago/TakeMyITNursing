@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiDataController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StudentResultController;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,17 @@ Route::group(['middleware' => ['auth', 'subscribed'], 'prefix' => 'student', 'as
     Route::get('get/test/result/{id}', [StudentResultController::class, 'getStudentResults'])->name('tests.result');
     Route::get('get/test/results/{id}', [StudentResultController::class, 'downloadTestResult'])->name('tests.result');
     // Route::resource('questions', QuestionController::class);
+});
+
+
+
+//Orders Student
+Route::group(['middleware' => ['auth'], 'prefix' => 'student', 'as' => 'student.'], function () {
+    Route::get('orders/student/index',[OrderController::class,'indexStudent'])->name('orders');
+    Route::get('orders/student/create',[OrderController::class,'create'])->name('orders.create');
+    Route::get('orders/student/completed',[OrderController::class,'completed'])->name('orders.completed');
+    Route::get('orders/student/progress',[OrderController::class,'progress'])->name('orders.progress');
+    Route::get('orders/student/cancelled',[OrderController::class,'cancelled'])->name('orders.cancelled');
 });
 
 

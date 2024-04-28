@@ -67,6 +67,34 @@
                         </li>
                     </ul>
                 </li>
+
+
+                {{-- <li class="sidebar-title">Orders/Assignments</li>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="{{ route('student.orders') }}" class='sidebar-link'>
+                        <i class='bi bi-book'></i>
+                        <span><strong>My Orders</strong></span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('student.orders.create') }}">Add Order</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('student.orders') }}">All Orders</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('student.orders.progress') }}">Orders In Progress</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('student.orders.completed') }}">Completed Orders</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('student.orders.cancelled') }}">Cancelled Orders</a>
+                        </li>
+                    </ul>
+                </li> --}}
+
                 @if (auth()->user()->hasrole('Admin') ||
                         auth()->user()->can('admin_management'))
                     <li class="sidebar-title">Test Management</li>

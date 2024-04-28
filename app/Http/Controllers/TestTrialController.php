@@ -44,7 +44,7 @@ class TestTrialController extends Controller
     {
         //dd($request->all());
 
-        //Create trial Test 
+        //Create trial Test
         $trialTest = TestTrial::create([
             'test_id' => $request->test_id,
             'visitor_email' => $request->email??null,

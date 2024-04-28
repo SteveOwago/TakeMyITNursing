@@ -27,6 +27,7 @@ class DashboardService
 
         // Define Dashboard Statistics for Student
         $user = User::findOrFail(Auth::id());
+        $data = [];
         if ($user->hasRole('Student')) {
             $testsTaken = StudentResult::where('user_id', $user->id)->orderBy('id', 'DESC')->whereNotNull('score')->cursor();
             $latestTest = StudentResult::with(['test'])->where('user_id', $user->id)->whereNotNull('score')->latest()->first();
